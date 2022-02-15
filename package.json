@@ -18,10 +18,18 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mdx-js/mdx": "v1",
+    "@mdx-js/react": "v1",
+    "flexsearch": "0.6.32",
     "gatsby": "^4.8.0",
     "gatsby-plugin-emotion": "^7.8.0",
+    "gatsby-plugin-local-search": "^2.0.1",
+    "gatsby-plugin-mdx": "^3.8.1",
+    "gatsby-plugin-root-import": "^2.0.8",
+    "gatsby-source-filesystem": "^4.8.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-use-flexsearch": "^0.1.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",
