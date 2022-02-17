@@ -35,18 +35,30 @@ export const parseUrlSearchParams = (searchParams: string) => {
   return result;
 };
 
-export const getStorageItem = <T=any>(key: string, storage = localStorage): T => {
+export const getStorageItem = <T = any>(
+  key: string,
+  storage = localStorage
+): T => {
   return JSON.parse(`${storage.getItem(key)}`);
-}
+};
 
-export const setStorageItem = (key: string, data: any, storage = localStorage) => {
+export const setStorageItem = (
+  key: string,
+  data: any,
+  storage = localStorage
+) => {
   storage.setItem(key, JSON.stringify(data));
-}
+};
 
-export const getDeepItem = (query: string[], obj: any): any => {
+export const getProperty = (
+  query: string | string[],
+  obj: any,
+  separator = '.'
+): any => {
+  if (typeof query === 'string') query = query.split(separator);
   const nextKey = query.shift();
   if (!nextKey || !obj) return obj;
-  return getDeepItem(query, obj[nextKey]);
+  return getProperty(query, obj[nextKey]);
 };
 
 export const escapedRegExp = (str: string, flags?: string) => {
