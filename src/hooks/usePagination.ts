@@ -5,7 +5,7 @@ interface Options {
   initialPage?: number;
 }
 
-const usePagination = <T>(
+export const usePagination = <T>(
   data: T[],
   {itemsPerPage = 10, initialPage}: Options = {}
 ) => {
@@ -31,5 +31,3 @@ const usePagination = <T>(
 
   return {paginatedData, currPage, setPage, lastPage};
 };
-
-export default usePagination;

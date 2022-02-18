@@ -1,6 +1,6 @@
 import React from 'react';
 import {graphql, Link, PageProps} from 'gatsby';
-import Layout from 'src/views/layout';
+import {Layout} from 'src/views/layout';
 import {MdxNode} from 'src/types';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {graphql, Link, navigate, PageProps} from 'gatsby';
-import Layout from 'src/views/layout';
+import {Layout} from 'src/views/layout';
 import {MdxNode} from 'src/types';
-import PostList from 'src/components/postList';
-import usePagination from 'src/hooks/usePagination';
-import PageNav from 'src/components/pageNav';
-import SearchModal from 'src/views/searchModal';
+import {PostList} from 'src/views/postList';
+import {usePagination} from 'src/hooks/usePagination';
+import {PageNav} from 'src/views/pageNav';
 import _ from 'lodash';
+import {HeadingTitle} from 'src/components/typography';
 
 interface DataType {
   allMdx: {
@@ -33,14 +33,12 @@ export const pageQuery = graphql`
 
 const BlogPage = ({data: {allMdx}}: PageProps<DataType>) => {
   const {paginatedData, currPage, lastPage, setPage} = usePagination(
-    allMdx.nodes
+    allMdx.nodes, { itemsPerPage: 3}
   );
 
   return (
     <Layout>
-      <SearchModal />
-      <Link to='tags'>tags</Link>
-      <h1>Posts</h1>
+      <HeadingTitle>전체 글 (총 {allMdx.nodes.length}건)</HeadingTitle>
       <PostList nodes={paginatedData} />
       <PageNav currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {BREAKPOINT_TABLET} from 'src/styles/constants';
 
 export const LayoutWrapper = styled.div`
   display: flex;
@@ -18,6 +19,11 @@ export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${BREAKPOINT_TABLET} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `;
 
 export const NavWrapper = styled.nav`
@@ -32,8 +38,17 @@ export const MainWrapper = styled.main`
 export const MainInner = styled.div`
   position: relative;
   margin: 0 auto;
+  padding: 48px 0 72px 0;
   width: var(--page-width);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 36px;
+
+  ${BREAKPOINT_TABLET} {
+    padding: 16px 16px 36px 16px;
+    row-gap: 24px;
+  }
 `;
 
 export const FooterWrapper = styled.footer`
@@ -43,6 +58,6 @@ export const FooterWrapper = styled.footer`
   justify-content: center;
   color: var(--color-text-footer);
   background-color: var(--color-bg-footer);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-thin);
 `;

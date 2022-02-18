@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {range} from 'src/utils/common';
-import PageButton from './pageButton';
+import {PageButton} from './pageButton';
+import {PageNavWrapper} from './styled';
 
 interface Props {
   currPage: number;
@@ -12,7 +13,7 @@ interface Props {
 
 type NavDisplayType = 'fixed' | 'centered';
 
-const PageNav = ({
+export const PageNav = ({
   currPage,
   lastPage,
   setPage,
@@ -22,7 +23,7 @@ const PageNav = ({
   const {pageList} = usePageNav(currPage, lastPage, navLength, navDisPlayType);
 
   return (
-    <div>
+    <PageNavWrapper>
       <PageButton
         label='<'
         page={pageList[0] - 1}
@@ -43,7 +44,7 @@ const PageNav = ({
         setPage={setPage}
         disabled={pageList[pageList.length - 1] === lastPage}
       />
-    </div>
+    </PageNavWrapper>
   );
 };
 
@@ -76,5 +77,3 @@ const usePageNav = (
 
   return {pageList};
 };
-
-export default PageNav;

@@ -64,3 +64,12 @@ export const getProperty = (
 export const escapedRegExp = (str: string, flags?: string) => {
   return new RegExp(_.escapeRegExp(str), flags);
 };
+
+export const extractContentFromMarkdown = (markdown: string) => {
+  const yamlRegex = /(\-\-\-[\s\S]+\-\-\-)/;
+  const headingRegex = /(^[#]+ .+)\n/gm;
+  return markdown
+    .replace(yamlRegex, '')
+    .replace(headingRegex, '')
+    .slice(0, 200);
+};

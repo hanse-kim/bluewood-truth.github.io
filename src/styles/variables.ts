@@ -1,7 +1,7 @@
 import {css} from '@emotion/react';
 import {BREAKPOINT_TABLET} from './constants';
 
-const variables = css`
+export const variables = css`
   :root {
     --page-width: 720px;
     --header-height: 72px;
@@ -18,8 +18,10 @@ const variables = css`
     --font-weight-light: 300;
     --font-weight-regular: 400;
 
-    --font-size-small: 14px;
-    --font-size-default: 16px;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
     --font-size-h4: 18px;
     --font-size-h3: 20px;
     --font-size-h2: 24px;
@@ -43,8 +45,14 @@ const variables = css`
     }
 
     :root {
-      --font-size-small: 12px;
-      --font-size-default: 14px;
+      --page-width: 100%;
+      --header-height: 45px;
+      --footer-height: 72px;
+
+      --font-size-xs: 10px;
+      --font-size-sm: 12px;
+      --font-size-md: 14px;
+      --font-size-lg: 16px;
       --font-size-h4: 16px;
       --font-size-h3: 17.5px;
       --font-size-h2: 19px;
@@ -54,5 +62,3 @@ const variables = css`
     }
   }
 `;
-
-export default variables;

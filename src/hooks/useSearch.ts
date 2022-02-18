@@ -14,7 +14,7 @@ interface Options {
   minKeywordLength?: number;
 }
 
-const useSearch = <T extends Record<string, any>>(
+export const useSearch = <T extends Record<string, any>>(
   dataList: T[],
   searchFrom: string,
   refBy: string,
@@ -91,5 +91,3 @@ const useSearch = <T extends Record<string, any>>(
 
   return {search, results, handleSearchInputChange};
 };
-
-export default useSearch;

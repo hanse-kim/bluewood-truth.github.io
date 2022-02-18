@@ -5,12 +5,10 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Main = ({children}: Props) => {
+export const Main = ({children}: Props) => {
   return (
     <MainWrapper>
       <MainInner>{children}</MainInner>
     </MainWrapper>
   );
 };
-
-export default Main;

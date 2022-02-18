@@ -7,13 +7,14 @@ export interface SiteNode extends Node {
 }
 
 export interface MdxNode extends Node {
+  slug?: string;
   frontmatter: {
     title: string;
     date: string;
     tags: string[];
   };
   body: string;
-  slug?: string;
+  rawBody: string;
 }
 
 export interface Tag {

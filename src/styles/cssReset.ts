@@ -5,7 +5,7 @@ export const cssReset = css`
     box-sizing: border-box;
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.15;
+    line-height: 1.55;
     -webkit-text-size-adjust: 100%;
   }
 

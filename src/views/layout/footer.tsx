@@ -1,12 +1,10 @@
 import React from 'react';
 import {FooterWrapper} from './styled';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <FooterWrapper>
       Copyright 2022. bluewood-truth All right reserved.
     </FooterWrapper>
   );
 };
-
-export default Footer;

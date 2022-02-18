@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react';
+import {PageButtonWrapper} from './styled';
 
 interface Props {
   page: number;
@@ -8,20 +9,19 @@ interface Props {
   setPage: (page: number) => void;
 }
 
-const PageButton = ({page, label, setPage, disabled, selected}: Props) => {
+export const PageButton = ({page, label, setPage, disabled, selected}: Props) => {
   const clickHandler = useCallback(() => {
+    window.scrollTo(0, 0);
     setPage(page);
   }, [page]);
 
   return (
-    <button
+    <PageButtonWrapper
       onClick={clickHandler}
       disabled={disabled}
-      {...(selected && {style: {color: 'red'}})}
+      data-selected={selected}
     >
       {label || page}
-    </button>
+    </PageButtonWrapper>
   );
 };
-
-export default React.memo(PageButton);

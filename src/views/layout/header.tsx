@@ -1,9 +1,9 @@
 import React from 'react';
 import {Logo} from 'src/components/logo';
-import NavButton from 'src/components/navButton/navButton';
+import {NavButton} from 'src/components/navButton';
 import {HeaderInner, HeaderWrapper, NavWrapper} from './styled';
 
-const Header = () => {
+export const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderInner>
@@ -17,5 +17,3 @@ const Header = () => {
     </HeaderWrapper>
   );
 };
-
-export default Header;

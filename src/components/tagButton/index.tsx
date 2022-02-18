@@ -1,12 +1,11 @@
 import React from 'react';
 import {getTagUrl} from 'src/utils/common';
+import {TagButtonWrapper} from './styled';
 
-const TagButton = ({tag}: {tag: string}) => {
+export const TagButton = ({tag}: {tag: string}) => {
   return (
     <a href={getTagUrl(tag)}>
-      <button>{tag}</button>
+      <TagButtonWrapper>{tag}</TagButtonWrapper>
     </a>
   );
 };
-
-export default TagButton;

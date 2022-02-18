@@ -1,10 +1,10 @@
 import React from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
-import useSearch from 'src/hooks/useSearch';
+import {useSearch} from 'src/hooks/useSearch';
 import {MdxNode} from 'src/types';
 import {getPostUrl} from 'src/utils/common';
 
-export const pageQuery = graphql`
+const query = graphql`
   {
     allMdx(sort: {fields: frontmatter___date, order: DESC}) {
       nodes {
@@ -19,11 +19,11 @@ export const pageQuery = graphql`
   }
 `;
 
-const SearchModal = () => {
+export const SearchModal = () => {
   const {
-    allMdx: {nodes},
-  } = useStaticQuery<{allMdx: {nodes: MdxNode[]}}>(pageQuery);
-  const {results, handleSearchInputChange} = useSearch(
+    allMdx: { nodes },
+  } = useStaticQuery<{ allMdx: { nodes: MdxNode[] } }>(query);
+  const { results, handleSearchInputChange } = useSearch(
     nodes,
     'rawBody',
     'slug',
@@ -57,5 +57,3 @@ const SearchModal = () => {
     </div>
   );
 };
-
-export default SearchModal;
