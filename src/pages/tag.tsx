@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, graphql, PageProps} from 'gatsby';
-import Layout from 'src/components/layout';
+import Layout from 'src/views/layout';
 import {getTagUrl} from 'src/utils/common';
 
 interface DataType {

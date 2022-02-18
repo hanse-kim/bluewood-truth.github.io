@@ -1,13 +1,12 @@
 import React from 'react';
 import {graphql, Link, navigate, PageProps} from 'gatsby';
-import Layout from 'src/components/layout';
+import Layout from 'src/views/layout';
 import {MdxNode} from 'src/types';
 import PostList from 'src/components/postList';
 import usePagination from 'src/hooks/usePagination';
 import PageNav from 'src/components/pageNav';
-import useSearch from 'src/hooks/useSearch';
-import _ from 'lodash';
 import SearchModal from 'src/views/searchModal';
+import _ from 'lodash';
 
 interface DataType {
   allMdx: {

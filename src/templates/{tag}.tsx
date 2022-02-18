@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql, Link, PageProps} from 'gatsby';
 import {MdxNode} from 'src/types';
-import Layout from 'src/components/layout';
+import Layout from 'src/views/layout';
 import PostList from 'src/components/postList';
 
 interface PageContextType {
