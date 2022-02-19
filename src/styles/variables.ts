@@ -3,7 +3,7 @@ import {BREAKPOINT_TABLET} from './constants';
 
 export const variables = css`
   :root {
-    --page-width: 720px;
+    --page-width: 960px;
     --header-height: 72px;
     --footer-height: 120px;
 

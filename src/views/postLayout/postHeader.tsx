@@ -2,7 +2,7 @@ import React from 'react';
 import {TagButtonGroup} from 'src/components/tagButton';
 import {HeadingTitle, PostDate} from 'src/components/typography';
 import {PostHeaderWrapper} from './styled';
-import {NavButton} from 'src/components/textButton';
+import {TextButton} from 'src/components/textButton';
 
 interface Props {
   backUrl?: string;
@@ -14,7 +14,7 @@ interface Props {
 export const PostHeader = ({backUrl, title, date, tags}: Props) => {
   return (
     <PostHeaderWrapper>
-      {backUrl && <NavButton to={backUrl}>{'< 이전 페이지로'}</NavButton>}
+      {backUrl && <TextButton to={backUrl}>{'< 이전 페이지로'}</TextButton>}
       <hgroup>
         <HeadingTitle>{title}</HeadingTitle>
         <PostDate>{`작성일: ${date}`}</PostDate>

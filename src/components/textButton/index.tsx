@@ -9,7 +9,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const NavButton = ({to, onClick, children, disabled}: Props) => {
+export const TextButton = ({to, onClick, children, disabled}: Props) => {
   if (to) {
     return (
       <Link to={to || '#'}>

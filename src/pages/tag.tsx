@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link, graphql, PageProps} from 'gatsby';
+import {graphql, PageProps} from 'gatsby';
 import {Layout} from 'src/views/layout';
-import {getTagUrl} from 'src/utils/common';
+import {HeadingTitle} from 'src/components/typography';
+import {TagList} from 'src/views/tagList';
 
 interface DataType {
   tagsGroup: {
@@ -29,18 +30,8 @@ const TagsPage = ({
   },
 }: PageProps<DataType>) => (
   <Layout>
-    <div>
-      <h1>Tags</h1>
-      <ul>
-        {tags.map((tag) => (
-          <li key={tag.value}>
-            <Link to={getTagUrl(tag.value)}>
-              {tag.value} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <HeadingTitle>모든 태그 (총 {tags.length}개)</HeadingTitle>
+    <TagList tags={tags} />
   </Layout>
 );
 

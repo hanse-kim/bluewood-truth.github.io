@@ -1,8 +1,11 @@
 import React from 'react';
-import {graphql, Link, PageProps} from 'gatsby';
+import {graphql, PageProps} from 'gatsby';
 import {MdxNode} from 'src/types';
 import {Layout} from 'src/views/layout';
 import {PostList} from 'src/views/postList';
+import {HeadingTitle} from 'src/components/typography';
+import {usePagination} from 'src/hooks/usePagination';
+import {PageNav} from 'src/views/pageNav';
 
 interface PageContextType {
   tag: string;
@@ -32,6 +35,7 @@ export const pageQuery = graphql`
             date(formatString: "YYYY-MM-DD")
             tags
           }
+          rawBody
         }
       }
     }
@@ -41,15 +45,16 @@ export const pageQuery = graphql`
 const TagPage = ({pageContext, data}: PageProps<DataType, PageContextType>) => {
   const {tag} = pageContext;
   const {edges, totalCount} = data.allMdx;
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? '' : 's'
-  } tagged with "${tag}"`;
+  const nodes = edges.map((edge) => edge.node);
+  const {paginatedData, currPage, lastPage, setPage} = usePagination(nodes);
 
   return (
     <Layout>
-      <h1>{tagHeader}</h1>
-      <PostList nodes={edges.map((edge) => edge.node)} />
-      <Link to='/tag'>All tags</Link>
+      <HeadingTitle>
+        태그: {tag} (총 {totalCount}건)
+      </HeadingTitle>
+      <PostList nodes={paginatedData} />
+      <PageNav currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );
 };
