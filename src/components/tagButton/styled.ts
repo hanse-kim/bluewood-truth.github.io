@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const TagButtonWrapper = styled.button`
-  padding: 4px 8px;
+export const TagButtonWrapper = styled.span`
+  padding: 3px 8px 4px 8px;
   border: none;
   border-radius: 4px;
   font-size: var(--font-size-xs);
@@ -15,4 +15,9 @@ export const TagButtonWrapper = styled.button`
     color: var(--color-bg);
     background-color: var(--color-main);
   }
+`;
+
+export const TagButtonGroupWrapper = styled.span`
+  display: flex;
+  column-gap: 8px;
 `;

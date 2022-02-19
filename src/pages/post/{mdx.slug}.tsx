@@ -1,8 +1,8 @@
 import React from 'react';
-import {graphql, Link, PageProps} from 'gatsby';
+import {graphql, PageProps} from 'gatsby';
 import {Layout} from 'src/views/layout';
 import {MdxNode} from 'src/types';
-import {MDXRenderer} from 'gatsby-plugin-mdx';
+import { PostLayout } from 'src/views/postLayout';
 
 interface DataType {
   mdx: MdxNode;
@@ -14,6 +14,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
+        tags
       }
       body
     }
@@ -23,10 +24,7 @@ export const pageQuery = graphql`
 const PostPage = ({data: {mdx}}: PageProps<DataType>) => {
   return (
     <Layout title={mdx.frontmatter.title}>
-      <Link to='/blog'>목록으로 가기</Link>
-      <h1>{mdx.frontmatter.title}</h1>
-      <div>작성일: {mdx.frontmatter.date}</div>
-      <MDXRenderer>{mdx.body}</MDXRenderer>
+      <PostLayout backUrl='/blog' post={mdx} />
     </Layout>
   );
 };

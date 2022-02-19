@@ -10,6 +10,7 @@ export const variables = css`
     --color-main: #0076da;
     --color-text: #1a1e21;
     --color-text-footer: #3f4950;
+    --color-text-quote: #63727e;
     --color-bg: #ffffff;
     --color-bg-footer: #f4f5f6;
     --color-border: #e6e8ea;
@@ -34,6 +35,7 @@ export const variables = css`
     --color-main: #2c93ea;
     --color-text: #eff3f6;
     --color-text-footer: #c6d3dc;
+    --color-text-quote: #a6bac9;
     --color-bg: #1a1e21;
     --color-bg-footer: #202d3a;
     --color-border: #2d3a47;

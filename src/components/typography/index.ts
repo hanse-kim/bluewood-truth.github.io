@@ -12,5 +12,5 @@ export const HeadingSubTitle = styled.h2`
 
 export const PostDate = styled.p`
   font-weight: var(--font-weight-thin);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
 `;

@@ -1,13 +1,17 @@
 import styled from "@emotion/styled";
 
-export const NavButtonWrapper = styled.button`
+export const TextButtonWrapper = styled.button`
   background: none;
   border: none;
   padding-top: 2px;
   cursor: pointer;
   transition: text-shadow 0.2s;
 
-  &:hover {
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) {
     text-shadow: 0 0 0.5px var(--color-text);
   }
 `;
@@ -19,7 +23,7 @@ export const Underline = styled.div`
   background-color: var(--color-text);
   transition: width 0.2s;
 
-  ${NavButtonWrapper}:hover > & {
+  ${TextButtonWrapper}:hover:not(:disabled) > & {
     width: 100%;
   }
 `;

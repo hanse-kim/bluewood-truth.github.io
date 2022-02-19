@@ -1,29 +1,30 @@
 import {Link} from 'gatsby';
 import React from 'react';
-import {NavButtonWrapper, Underline} from './styled';
+import {TextButtonWrapper, Underline} from './styled';
 
 interface Props {
   to?: string;
+  disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children?: React.ReactNode;
 }
 
-export const NavButton = ({ to, onClick, children }: Props) => {
+export const NavButton = ({to, onClick, children, disabled}: Props) => {
   if (to) {
     return (
       <Link to={to || '#'}>
-        <NavButtonWrapper onClick={onClick}>
+        <TextButtonWrapper onClick={onClick} disabled={disabled}>
           {children}
           <Underline />
-        </NavButtonWrapper>
+        </TextButtonWrapper>
       </Link>
     );
   }
 
   return (
-    <NavButtonWrapper onClick={onClick}>
+    <TextButtonWrapper onClick={onClick} disabled={disabled}>
       {children}
       <Underline />
-    </NavButtonWrapper>
+    </TextButtonWrapper>
   );
 };

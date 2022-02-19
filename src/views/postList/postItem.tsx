@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import {MdxNode} from 'src/types';
 import {extractContentFromMarkdown, getPostUrl} from 'src/utils/common';
-import {TagButton} from 'src/components/tagButton';
+import {TagButton, TagButtonGroup} from 'src/components/tagButton';
 import {
   PostItemHeader,
   PostItemDescription,
@@ -20,11 +20,7 @@ export const PostItem = ({node}: {node: MdxNode}) => {
           <PostDate>작성일: {node.frontmatter.date}</PostDate>
         </PostItemHeader>
       </Link>
-      <PostItemTagContainer>
-        {node.frontmatter.tags.map((tag) => (
-          <TagButton key={tag} tag={tag} />
-        ))}
-      </PostItemTagContainer>
+      <TagButtonGroup tags={node.frontmatter.tags} />
       <PostItemDescription>
         {extractContentFromMarkdown(node.rawBody)}
       </PostItemDescription>

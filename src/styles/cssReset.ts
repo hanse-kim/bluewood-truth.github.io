@@ -23,8 +23,10 @@ export const cssReset = css`
   h5,
   h6,
   ol,
+  ul,
   p,
-  ul {
+  pre,
+  blockquote {
     margin: 0;
     padding: 0;
     font-weight: inherit;
@@ -69,6 +71,7 @@ export const cssReset = css`
   optgroup,
   select,
   textarea {
+    color: inherit;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;

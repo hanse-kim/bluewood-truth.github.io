@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react';
+import { NavButton } from 'src/components/textButton';
 import {PageButtonWrapper} from './styled';
 
 interface Props {
@@ -16,12 +17,8 @@ export const PageButton = ({page, label, setPage, disabled, selected}: Props) =>
   }, [page]);
 
   return (
-    <PageButtonWrapper
-      onClick={clickHandler}
-      disabled={disabled}
-      data-selected={selected}
-    >
-      {label || page}
+    <PageButtonWrapper onClick={clickHandler} data-selected={selected}>
+      <NavButton disabled={selected || disabled}>{label || page}</NavButton>
     </PageButtonWrapper>
   );
 };
