@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 
-export const SearchModalWrapper = styled.section`
+export const SearchModalBox = styled.section`
   position: absolute;
   top: 120px;
   left: 50%;
@@ -12,6 +12,7 @@ export const SearchModalWrapper = styled.section`
   max-width: 480px;
   background-color: var(--color-bg);
   border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 `;
 
 export const SearchModalInputWrapper = styled.div`

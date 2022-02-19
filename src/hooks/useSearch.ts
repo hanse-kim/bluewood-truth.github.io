@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import _ from 'lodash';
 import {
   escapedRegExp,
@@ -91,5 +91,9 @@ export const useSearch = <T extends Record<string, any>>(
     debounceWait
   );
 
-  return {search, results, handleSearchInputChange};
+  const resetResults = useCallback(() => {
+    setResults([]);
+  },[]);
+
+  return {search, results, resetResults, handleSearchInputChange};
 };
