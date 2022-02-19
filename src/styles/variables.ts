@@ -7,6 +7,10 @@ export const variables = css`
     --header-height: 72px;
     --footer-height: 120px;
 
+    --z-index-base: 0;
+    --z-index-overlay: 1100;
+    --z-index-modal: 1200;
+
     --color-main: #0076da;
     --color-text: #1a1e21;
     --color-text-footer: #3f4950;
@@ -14,6 +18,8 @@ export const variables = css`
     --color-bg: #ffffff;
     --color-bg-footer: #f4f5f6;
     --color-border: #e6e8ea;
+
+    --color-overlay: rgba(0, 0, 0, 0.5);
 
     --font-weight-thin: 100;
     --font-weight-light: 300;
@@ -23,6 +29,7 @@ export const variables = css`
     --font-size-sm: 14px;
     --font-size-md: 16px;
     --font-size-lg: 18px;
+    --font-size-xl: 20px;
     --font-size-h4: 18px;
     --font-size-h3: 20px;
     --font-size-h2: 24px;

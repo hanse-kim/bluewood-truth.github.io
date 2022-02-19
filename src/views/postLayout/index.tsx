@@ -42,7 +42,7 @@ const components = {
 export const PostLayout = ({post, backUrl}: Props) => {
   return (
     <PostLayoutWrapper>
-      <PostHeader backUrl={backUrl} {...post.frontmatter} />
+      <PostHeader backUrl={backUrl || '/blog'} {...post.frontmatter} />
       <PostContentWrapper>
         <MDXProvider components={components}>
           <MDXRenderer>{post.body}</MDXRenderer>

@@ -1,7 +1,7 @@
 import {css} from '@emotion/react';
 import {cssReset} from './cssReset';
-import { prismTheme } from './prismTheme';
 import {variables} from './variables';
+import {prismTheme} from './prismTheme';
 
 export const globalStyles = css`
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap');

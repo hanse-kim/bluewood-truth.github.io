@@ -51,6 +51,11 @@ export const useSearch = <T extends Record<string, any>>(
   };
 
   const search = async (query: string) => {
+    if (query.length < minKeywordLength) {
+      setResults([]);
+      return;
+    }
+
     query = encode(query);
     const storageKey = `query_${cacheKey}_${query}`;
     const cachedResults = getStorageItem<string[]>(storageKey, sessionStorage);
@@ -63,8 +68,6 @@ export const useSearch = <T extends Record<string, any>>(
     let newResults: string[] = [];
 
     dataList.forEach((data) => {
-      if (query.length < minKeywordLength) return;
-
       const searchString = encode(getProperty(searchFrom, data));
       const refKey = getProperty(refBy, data);
       const re = escapedRegExp(query, 'g');
@@ -76,7 +79,6 @@ export const useSearch = <T extends Record<string, any>>(
       if (hitCount[refKey] > 0) newResults.push(refKey);
     });
 
-    if (newResults.length === 0) return;
     newResults = newResults
       .sort((a, b) => hitCount[b] - hitCount[a])
       .slice(0, limit);

@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import {useSearch} from 'src/hooks/useSearch';
 import {MdxNode} from 'src/types';
-import {getPostUrl} from 'src/utils/common';
+import {Overlay} from 'src/components/overlay';
+import {useModal} from 'src/contexts/modalContext';
+import {
+  SearchModalInput,
+  SearchModalInputWrapper,
+  SearchModalWrapper,
+  SearchResultContainer,
+} from './styled';
+import {CrossIcon, IconButton, SearchIcon} from 'src/components/icon';
+import {SearchResultItem} from './searchResultItem';
 
 const query = graphql`
   {
@@ -20,11 +29,10 @@ const query = graphql`
 `;
 
 export const SearchModal = () => {
-  const {
-    allMdx: { nodes },
-  } = useStaticQuery<{ allMdx: { nodes: MdxNode[] } }>(query);
-  const { results, handleSearchInputChange } = useSearch(
-    nodes,
+  const {isOpen, onClose} = useModal('search');
+  const {allMdx} = useStaticQuery<{allMdx: {nodes: MdxNode[]}}>(query);
+  const {results, handleSearchInputChange} = useSearch(
+    allMdx.nodes,
     'rawBody',
     'slug',
     {
@@ -32,28 +40,29 @@ export const SearchModal = () => {
     }
   );
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onInputResetClick = () => {
+    if (inputRef.current) inputRef.current.value = '';
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <div
-      style={{
-        width: '500px',
-        position: 'absolute',
-        top: '20%',
-        left: '50%',
-        backgroundColor: 'white',
-        border: '1px solid black',
-      }}
-    >
-      <input onChange={handleSearchInputChange} />
-      <ul>
-        {results.map((result) => (
-          <li key={result.slug}>
-            <a href={getPostUrl(result.slug)}>
-              <div>{result.frontmatter.tags}</div>
-              <h4>{result.frontmatter.title}</h4>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Overlay onClick={onClose}>
+      <SearchModalWrapper onClick={(e) => e.stopPropagation()}>
+        <SearchModalInputWrapper>
+          <SearchIcon />
+          <SearchModalInput ref={inputRef} onChange={handleSearchInputChange} />
+          <IconButton iconElement={<CrossIcon />} onClick={onInputResetClick} />
+        </SearchModalInputWrapper>
+        {results.length > 0 && (
+          <SearchResultContainer>
+            {results.map((result) => (
+              <SearchResultItem searchResult={result} key={result.slug} />
+            ))}
+          </SearchResultContainer>
+        )}
+      </SearchModalWrapper>
+    </Overlay>
   );
 };

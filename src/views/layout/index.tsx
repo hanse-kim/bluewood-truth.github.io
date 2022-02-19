@@ -1,11 +1,13 @@
 import React from 'react';
 import {Global} from '@emotion/react';
 import {globalStyles} from 'src/styles/global';
+import {useSiteMetadata} from 'src/hooks/useSiteMetadata';
 import {Header} from './header';
 import {Main} from './main';
 import {Footer} from './footer';
 import {LayoutWrapper} from './styled';
-import {useSiteMetadata} from 'src/hooks/useSiteMetadata';
+import {ModalContextProvider} from '../../contexts/modalContext';
+import { SearchModal } from '../searchModal';
 
 interface Props {
   title?: string;
@@ -14,13 +16,17 @@ interface Props {
 
 export const Layout = ({title, children}: Props) => {
   const {title: siteTitle} = useSiteMetadata();
+
   return (
     <LayoutWrapper>
       <title>{title || siteTitle}</title>
       <Global styles={globalStyles} />
-      <Header />
-      <Main>{children}</Main>
-      <Footer />
+      <ModalContextProvider>
+        <Header />
+        <Main>{children}</Main>
+        <Footer />
+        <SearchModal />
+      </ModalContextProvider>
     </LayoutWrapper>
   );
 };
