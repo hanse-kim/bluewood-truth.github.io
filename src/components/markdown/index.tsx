@@ -55,7 +55,6 @@ export const UnorderedList = Ul;
 export const OrderedList = Ol;
 
 export const ListItem = ({ children }: Props) => {
-  console.log(children);
   if (
     typeof children === 'string' ||
     (Array.isArray(children) &&

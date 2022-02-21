@@ -33,9 +33,8 @@ export const H4 = styled.h4`
 
 const listCommonStyle = css`
   padding-left: 2rem;
-  ul,
-  li & {
-    /* margin-top: var(--font-size-sm); */
+  div > div > & {
+    margin-top: var(--font-size-sm);
   }
 `;
 
@@ -62,7 +61,7 @@ export const ListItemInner = styled.div`
 `;
 
 export const Strong = styled.strong`
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
 `;
 
 export const Anchor = styled.a`
@@ -85,10 +84,12 @@ export const QuoteWrapper = styled.blockquote`
 `;
 
 export const Code = styled.code`
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   background-color: var(--color-bg-footer);
   border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 0 4px;
   margin: 0 2px;
+  width: fit-content;
   color: var(--color-main);
 `;

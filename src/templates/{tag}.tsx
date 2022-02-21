@@ -46,7 +46,7 @@ const TagPage = ({pageContext, data}: PageProps<DataType, PageContextType>) => {
   const {tag} = pageContext;
   const {edges, totalCount} = data.allMdx;
   const nodes = edges.map((edge) => edge.node);
-  const {paginatedData, currPage, lastPage, setPage} = usePagination(nodes);
+  const { paginatedData, currPage, lastPage, setPage } = usePagination(nodes);
 
   return (
     <Layout>

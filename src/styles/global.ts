@@ -4,7 +4,7 @@ import {variables} from './variables';
 import {prismTheme} from './prismTheme';
 
 export const globalStyles = css`
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap');
   ${cssReset};
   ${variables};
   ${prismTheme};
@@ -25,5 +25,13 @@ export const globalStyles = css`
   pre[class*='language-'] {
     background-color: var(--color-bg-footer);
     border: 1px solid var(--color-border);
+  }
+
+  .caption {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: -1rem;
+    transform: translateY(-1rem);
   }
 `;

@@ -1,10 +1,13 @@
+import {keyframes} from '@emotion/react';
 import styled from '@emotion/styled';
+import {fadeIn} from 'src/styles/keyframes';
 
 export const PostListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   row-gap: 36px;
   margin-bottom: 72px;
+  animation: ${fadeIn} 0.5s ease;
 `;
 
 export const PostItemWrapper = styled.div`
@@ -17,11 +20,6 @@ export const PostItemHeader = styled.hgroup`
   display: flex;
   flex-direction: column;
   row-gap: 2px;
-`;
-
-export const PostItemTagContainer = styled.div`
-  display: flex;
-  column-gap: 8px;
 `;
 
 export const PostItemDescription = styled.p`

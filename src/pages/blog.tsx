@@ -33,7 +33,7 @@ export const pageQuery = graphql`
 
 const BlogPage = ({data: {allMdx}}: PageProps<DataType>) => {
   const {paginatedData, currPage, lastPage, setPage} = usePagination(
-    allMdx.nodes, { itemsPerPage: 3}
+    allMdx.nodes
   );
 
   return (

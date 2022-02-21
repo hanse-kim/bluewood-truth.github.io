@@ -116,12 +116,6 @@ green     #859900
 
   ${css(languageList.map(getCodeBlockLanguageLabelContentStyle).join('\n'))};
 
-  ${css(`
-  .language-javascript::after {
-    content: "typescirpt";
-  }
-`)}
-
   /* Inline code */
   :not(pre) > code[class*='language-'] {
     padding: 0.1em;

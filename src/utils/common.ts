@@ -65,11 +65,12 @@ export const escapedRegExp = (str: string, flags?: string) => {
   return new RegExp(_.escapeRegExp(str), flags);
 };
 
-export const extractContentFromMarkdown = (markdown: string) => {
+export const getPlainTextFromMarkdown = (markdown: string) => {
   const yamlRegex = /(\-\-\-[\s\S]+\-\-\-)/;
-  const headingRegex = /(^[#]+ .+)\n/gm;
+  const headingRegex = /(^[#\- ]+)/gm;
+  const imageRegex = /[]/;
   return markdown
     .replace(yamlRegex, '')
     .replace(headingRegex, '')
-    .slice(0, 200);
+    .slice(0, 300);
 };

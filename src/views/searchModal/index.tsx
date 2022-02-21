@@ -32,16 +32,7 @@ export const SearchModal = () => {
   const {isOpen, onClose} = useModal('search');
   const {results, handleSearchInputChange} = usePostSearch(isOpen);
   const {inputRef, onInputResetClick} = useInputReset();
-
-  const [text, setText] = useState('');
-
-  const composed: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      handleSearchInputChange(e);
-      setText(e.target.value);
-    },
-    [handleSearchInputChange]
-  );
+  useAutoFocus(isOpen, inputRef);
 
   if (!isOpen) return null;
 
@@ -50,7 +41,7 @@ export const SearchModal = () => {
       <SearchModalBox onClick={(e) => e.stopPropagation()}>
         <SearchModalInputWrapper>
           <SearchIcon />
-          <SearchModalInput ref={inputRef} value={text} onChange={composed} />
+          <SearchModalInput ref={inputRef} onChange={handleSearchInputChange} />
           <IconButton iconElement={<CrossIcon />} onClick={onInputResetClick} />
         </SearchModalInputWrapper>
         {results.length > 0 && (
@@ -90,4 +81,15 @@ const useInputReset = () => {
   };
 
   return {inputRef, onInputResetClick};
+};
+
+const useAutoFocus = (
+  isOpen: boolean,
+  inputRef: React.RefObject<HTMLInputElement>
+) => {
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen, inputRef.current]);
 };

@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.header`
 
 export const HeaderInner = styled.div`
   margin: 0 auto;
-  width: var(--page-width);
+  max-width: var(--page-width);
   height: 100%;
   display: flex;
   align-items: center;
@@ -38,8 +38,8 @@ export const MainWrapper = styled.main`
 export const MainInner = styled.div`
   position: relative;
   margin: 0 auto;
-  padding: 48px 0 72px 0;
-  width: var(--page-width);
+  padding: 48px 0 96px 0;
+  max-width: var(--page-width);
   height: 100%;
   display: flex;
   flex-direction: column;

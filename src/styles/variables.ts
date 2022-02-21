@@ -24,6 +24,7 @@ export const variables = css`
     --font-weight-thin: 100;
     --font-weight-light: 300;
     --font-weight-regular: 400;
+    --font-weight-medium: 500;
 
     --font-size-xs: 12px;
     --font-size-sm: 14px;
@@ -32,8 +33,8 @@ export const variables = css`
     --font-size-xl: 20px;
     --font-size-h4: 18px;
     --font-size-h3: 20px;
-    --font-size-h2: 24px;
-    --font-size-h1: 28px;
+    --font-size-h2: 28px;
+    --font-size-h1: 32px;
     --font-size-sub-title: 28px;
     --font-size-title: 36px;
   }
@@ -63,9 +64,9 @@ export const variables = css`
       --font-size-md: 14px;
       --font-size-lg: 16px;
       --font-size-h4: 16px;
-      --font-size-h3: 17.5px;
-      --font-size-h2: 19px;
-      --font-size-h1: 20.5px;
+      --font-size-h3: 18px;
+      --font-size-h2: 20px;
+      --font-size-h1: 24px;
       --font-size-sub-title: 21px;
       --font-size-title: 24.5px;
     }

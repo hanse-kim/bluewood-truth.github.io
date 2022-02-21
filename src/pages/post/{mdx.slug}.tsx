@@ -21,7 +21,19 @@ export const pageQuery = graphql`
   }
 `;
 
-const PostPage = ({data: {mdx}}: PageProps<DataType>) => {
+const PostPage = ({ data: { mdx } }: PageProps<DataType>) => {
+  console.log(`
+  query ($id: String) {
+    mdx(id: {eq: $id}) {
+      frontmatter {
+        title
+        date(formatString: "YYYY-MM-DD")
+        tags
+      }
+      body
+    }
+  }
+`);
   return (
     <Layout title={mdx.frontmatter.title}>
       <PostLayout backUrl='/blog' post={mdx} />
