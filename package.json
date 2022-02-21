@@ -23,6 +23,7 @@
     "gatsby": "^4.8.0",
     "gatsby-plugin-emotion": "^7.8.0",
     "gatsby-plugin-mdx": "^3.8.1",
+    "gatsby-plugin-react-svg": "^3.1.0",
     "gatsby-plugin-root-import": "^2.0.8",
     "gatsby-plugin-sharp": "^4.9.0",
     "gatsby-remark-images": "^6.9.0",

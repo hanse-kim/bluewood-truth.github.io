@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'gatsby';
-import {LogoImage} from './styled';
+import LogoImage from 'src/images/assets/logo.svg';
+import {LogoImageWrapper, LogoWrapper} from './styled';
 
 interface Props {
   to?: string;
@@ -8,8 +9,12 @@ interface Props {
 
 export const Logo = ({to = '/blog'}: Props) => {
   return (
-    <Link to={to}>
-      <LogoImage />
-    </Link>
+    <LogoWrapper>
+      <Link to={to}>
+        <LogoImageWrapper>
+          <LogoImage />
+        </LogoImageWrapper>
+      </Link>
+    </LogoWrapper>
   );
 };

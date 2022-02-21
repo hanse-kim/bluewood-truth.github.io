@@ -1,23 +1,17 @@
 import styled from '@emotion/styled';
 import {BREAKPOINT_TABLET} from 'src/styles/constants';
-import logo from 'src/images/assets/logo.svg';
-import logoSmall from 'src/images/assets/logoSmall.png';
 
-export const LogoImage = styled.span`
-  display: block;
-  width: 178px;
-  height: 45px;
-  background-image: url(${logo});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transition: transform 0.1s;
-
+export const LogoWrapper = styled.div`
   ${BREAKPOINT_TABLET} {
-    width: 145px;
-    height: 36px;
-    background-image: url(${logoSmall});
+    transform: scale(80%);
   }
+`;
+
+export const LogoImageWrapper = styled.span`
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  transition: transform 0.1s;
 
   &:hover {
     transform: scale(105%);

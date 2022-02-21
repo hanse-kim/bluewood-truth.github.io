@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderInner>
-        <Logo to='/' />
+        <Logo to='/blog' />
         <NavWrapper>
           <TextButton to='/blog'>posts</TextButton>
           <TextButton to='/tag'>tags</TextButton>
