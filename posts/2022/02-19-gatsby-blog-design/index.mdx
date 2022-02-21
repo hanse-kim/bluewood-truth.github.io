@@ -1,0 +1,668 @@
+---
+title: Gatsby 블로그 제작 - 디자인 및 컴포넌트 제작
+date: 2022-02-19
+tags: ["Figma", "React", "Emotion"]
+---
+
+
+## 디자인 제작
+
+디자인 툴은 **Figma**를 사용했다. Figma에는 오토 레이아웃(Auto Layout)이라는 강력한 기능이 있어 CSS의 flex box 개념에 익숙하다면 비슷한 느낌으로 작업할 수 있다!
+
+### 디자인 과정
+
+- 전체적으로 slit gray 계열의 grayscale을 사용했고, 포인트 색상으로 파란색을 선택했다.
+- 컨셉은 Notion과 brunch를 참고했다. 둘 다 무언가 작성하고 읽기 위한 서비스인 만큼 읽기 좋은, 쓰기 좋은 UI/UX를 갖추고 있다고 생각했기 때문이다.
+- '중요한 내용 = 볼드체'라는 고정관념이 있었는데 heading에 얇은 두께를 쓰는 것도 깔끔하고 괜찮아 보인다.
+- 기본 텍스트도 font weight를 Regular(400)이 아닌 Light(300)로 잡고, 가장 두꺼운 두께를 Regular로 사용했다.
+
+![figma1](.\figma1.png)
+
+![figma2](.\figma2.png)
+
+![figma3](.\figma3.png)
+
+<br />
+
+
+
+## 디자인 적용
+
+스타일링에는 css-in-js 라이브러리인 Emotion을 사용했다.
+
+작업에 앞서 `vscode-styled-components`라는 VSCode 플러그인을 설치했다. 아래와 같이 CSS template literal에 하이라이트와 자동완성 기능을 추가하는 플러그인이다. 전에 이런 기능을 원해서 Emotion으로 검색했을 때는 못 찾았었는데, 알고 보니 stylesd-components 라이브러리 용으로 이미 있었다. 문법이 유사하기 때문에 Emotion에서도 문제 없이 사용할 수 있다.
+
+![js-styled-component](.\js-styled-component.png)
+
+### 글로벌 스타일 작성
+
+우선 CSS Reset 스타일을 작성했다. CSS Reset은 주로 브라우저 간의 기본 스타일 차이를 없애기 위해, 그리고 일반적으로 필요 없다고 여겨지는 스타일들(`body`의 `margin` 등)을 미리 제거하고 시작해서 반복 작업을 줄이기 위해 사용한다. 나는 [Minimal CSS Reset](https://www.digitalocean.com/community/tutorials/css-minimal-css-reset)과 [Normalize.css](http://necolas.github.io/normalize.css/)에서 필요한 부분을 가져오고 수정해서 사용하고 있다.
+
+- src/styles/cssReset.ts
+
+```typescript
+import {css} from '@emotion/react';
+
+export const cssReset = css`
+  html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  *,
+  :after,
+  :before {
+    box-sizing: inherit;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ol,
+  p,
+  ul {
+    margin: 0;
+    padding: 0;
+    font-weight: inherit;
+  }
+
+  main {
+    display: block;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  img {
+    border-style: none;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+  }
+
+  a {
+    background-color: transparent;
+    color: inherit;
+    outline: 0;
+  }
+
+  a,
+  a:active,
+  a:hover {
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+  }
+`;
+```
+
+다음으로 스타일 변수를 작성했는데 이 부분은 어떻게 해야 할지 조금 고민이 되었다. 다크 모드까지 만드는 걸 고려하면 방법은 두 가지가 있다.
+
+- Emotion theme를 사용하기
+- CSS 변수와 attribute selector를 사용하기
+
+개인적으로 이런 간단한 프로젝트에선 Emotion theme는 작성할 코드량은 늘어나는데 비해 이점은 딱히 없다고 생각해서 두 번째 방법을 택했다. 나중에 찾아보니 css-in-js에서 제공하는 theme 기능보다는 CSS 변수 사용을 권장하는 글이 꽤 보였다. 하긴 같은 동작을 할 때 CSS 네이티브 기능과 JavaScript 사용을 비교하면 일반적으로 전자의 성능이 좋으니 그럴 만도 하다.
+
+- `src/styles/variables.ts`
+
+```typescript
+import {css} from '@emotion/react';
+
+const variables = css`
+  :root {
+    --color-main: #0076da;
+    --color-text: #1a1e21;
+    --color-text-footer: #3f4950;
+    --color-bg: #ffffff;
+    --color-bg-footer: #f4f5f6;
+    --color-border: #e6e8ea;
+
+    --font-weight-light: 300;
+    --font-weight-demi-light: 350;
+    --font-weight-regular: 400;
+
+    --font-size-default: 16px;
+    --font-size-h4: 18px;
+    --font-size-h3: 20px;
+    --font-size-h2: 24px;
+    --font-size-h1: 28px;
+    --font-size-sub-title: 28px;
+    --font-size-title: 36px;
+  }
+
+  [data-theme='dark'] {
+    --color-main: #2c93ea;
+    --color-text: #eff3f6;
+    --color-text-footer: #c6d3dc;
+    --color-bg: #1a1e21;
+    --color-bg-footer: #202d3a;
+    --color-border: #2d3a47;
+  }
+
+  @media (max-device-width: 767px) {
+    html {
+      font-size: 14px;
+    }
+
+    :root {
+      --font-size-default: 14px;
+      --font-size-h4: 16px;
+      --font-size-h3: 17.5px;
+      --font-size-h2: 19px;
+      --font-size-h1: 20.5px;
+      --font-size-sub-title: 21px;
+      --font-size-title: 24.5px;
+    }
+  }
+`;
+
+export default variables;
+```
+
+마지막으로 위 둘을 합쳐 global styles로 만들고 `Layout` 컴포넌트에 추가했다.
+
+- `src/styles/global.ts`
+
+```typescript
+import {css} from '@emotion/react';
+import {cssReset} from './cssReset';
+import variables from './variables';
+
+const globalStyles = css`
+    ${cssReset};
+    ${variables};
+  `;
+
+export default globalStyles;
+```
+
+- `src/components/layout/index.tsx`
+
+```tsx
+import React from 'react';
+import {graphql, useStaticQuery} from 'gatsby';
+import {SiteNode} from 'src/types';
+import Header from './header';
+import {Global} from '@emotion/react';
+import globalStyles from 'src/styles/global';
+
+...
+
+const Layout = ({title, children}: Props) => {
+  const data = useStaticQuery<{site: SiteNode}>(query);
+  return (
+    <div>
+      <title>{title || data.site.siteMetadata.title}</title>
+      <Global styles={globalStyles} />
+      <Header />
+      <main>{children}</main>
+    </div>
+  );
+};
+
+export default Layout;
+```
+
+이제 스타일 적용을 위한 기본적인 준비가 끝났다.
+
+### 컴포넌트 제작
+
+컴포넌트는 크게 두 가지로 분류했다.
+
+- component: 여러 view에서 사용되는 재사용 가능한 요소들.
+- view: component의 조합으로 만들어지는 화면의 UI 요소. 단독으로 의미를 갖는 최소 요소. page는 이 view만을 사용하여 구성한다.
+
+![component vs view](.\component-vs-view.png)
+
+<em class="caption">나중에 변경이 있긴 했지만 일반적으로 이런 관점으로 개발을 진행했다</em>
+
+그리고 코드의 일관성을 위해 미리 규칙을 정했다.
+
+- 하나의 component는 `src/components/[컴포넌트명]` 꼴의 디렉터리 안에 작성한다.
+  - Emotion styled 컴포넌트만을 사용하여 하나의 파일로 작성 가능한 경우 `index.ts`만 작성한다.
+  - 마크업 구조가 필요한 경우 Emotion styled 컴포넌트를 담은 `styled.ts` 파일과 마크업 구조를 담은 `index.tsx` 파일을 작성한다. 외부에서는 이 `index.tsx` 파일에서 `export`한 컴포넌트만 `import {} from 'src/components/[컴포넌트명]'` 꼴로 `import`하여 사용한다.
+- 하나의 view는 `src/views/[컴포넌트명]` 꼴의 디렉터리 안에 작성한다.
+  - 기본적으로 component와 동일한 규칙을 따른다.
+  - 하나의 view에만 사용하는 component의 경우 해당 view 디렉터리 안에 작성한다.
+
+그리고 이건 개발 중간에 추가한 규칙이다.
+
+- `export default`를 사용하지 않는다. (단 page, template 컴포넌트는 제외)
+
+이는 [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html)에서 확인한 규칙인데, 본문에선 이렇게 설명하고 있다.
+
+> 기본 내보내기(default exports)를 사용하지 마십시오. 이는 모든 가져오기(imports)가 균일한 패턴을 갖는 것을 보장합니다.
+>
+> 기본 내보내기는 표준적인 이름을 제공하지 않습니다. 따라서 잠재적인 가독성 감소를 포함해서, 개발자에게 이점이 거의 없고 유지보수를 어렵게 합니다.
+>
+> ```
+> import Foo from './bar';  // 허용됨
+> import Bar from './bar';  // 마찬가지로 허용됨
+> ```
+
+한 마디로 `export default`로 내보낸 모듈은 어떤 이름으로든 `import`가 가능하고, 이것이 잠재적으로 혼란을 야기할 수 있다는 것이다. 타당한 의견이고 또 `export default`를 사용하지 않는다고 문제될 만한 일도 없다고 생각해서 이를 적극 수용했다.
+
+단 프레임워크 명세상 page 컴포넌트와 template 컴포넌트는 `export default`로 내보내야 하므로 이들은 제외했다.
+
+### 마크다운 스타일 적용
+
+`@mdx-js/react`의 `MDXProvider`를 통해 마크다운에 스타일을 적용할 수 있다. TypeScript라면 우선 타입 정의 패키지를 설치해야 한다. 
+
+```shell
+$ npm install --save-dev @types/mdx-js__react
+```
+
+그러면 이제 `MDXProvider`로 마크다운 렌더링에 사용할 컴포넌트를 커스터마이징 할 수 있다. 커스터마이징 가능한 컴포넌트와 그 방법은 [gatsby-plugin-mdx](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/?=remark#mdxprovider)에서 확인할 수 있다.
+
+- `src/views/postLayout/index.tsx`
+
+```tsx
+import React from 'react';
+import {MDXProvider} from '@mdx-js/react';
+import {MDXRenderer} from 'gatsby-plugin-mdx';
+import {MdxNode} from 'src/types';
+import {PostHeader} from './postHeader';
+import {PostContentWrapper, PostLayoutWrapper} from './styled';
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  OrderedList,
+  UnorderedList,
+  Paragraph,
+  Strong,
+  Anchor,
+  Blockquote,
+  ListItem,
+  Code,
+} from 'src/components/markdown';
+
+interface Props {
+  backUrl?: string;
+  post: MdxNode;
+}
+
+const components = {
+  p: Paragraph,
+  h1: Heading1,
+  h2: Heading2,
+  h3: Heading3,
+  h4: Heading4,
+  ul: UnorderedList,
+  ol: OrderedList,
+  li: ListItem,
+  strong: Strong,
+  a: Anchor,
+  inlineCode: Code,
+  blockquote: Blockquote,
+};
+
+export const PostLayout = ({post, backUrl}: Props) => {
+  return (
+    <PostLayoutWrapper>
+      <PostHeader backUrl={backUrl || '/blog'} {...post.frontmatter} />
+      <PostContentWrapper>
+        <MDXProvider components={components}>
+          <MDXRenderer>{post.body}</MDXRenderer>
+        </MDXProvider>
+      </PostContentWrapper>
+    </PostLayoutWrapper>
+  );
+};
+```
+
+- 마크다운 원문
+
+```markdown
+# 큰 제목 1
+
+### 작은 제목 1
+
+같이, 찬미를 못하다 싸인 우리 유소년에게서 희망의 끓는다. 장식하는 인도하겠다는 피고 철환하였는가? 인간이 그들의 사랑의 봄바람을 과실이 무엇이 약동하다.
+
+청춘이 따뜻한 스며들어 시들어 군영과 새가 사막이다. 그들의 돋고, 대중을 할지니, 앞이 구하기 이상의 아름다우냐? 투명하되 곳으로 같이, 위하여 그들의 인간의 공자는 그들은 이것이다.
+
+1. 천자만홍이 바로 석가는 풀이 크고 낙원을 하는 원대하고, 방황하여도, 것이다. 
+
+2. 들어 우리의 타오르고 우리는 피가 것이다.
+
+3. 트고, 그들의 타오르고 평화스러운 힘차게 뿐이다. 우리는 설산에서 그들은 피어나기 것이 남는 있는 따뜻한 피다.
+
+### 작은 제목 2
+
+- 나의 그러나 무성할 당신은 나의 라이너 계십니다. 동경과 무덤 한 언덕 나는 않은 거외다.
+- 나의 이제 위에 불러 써 있습니다. 나는 마리아 된 아무 너무나 하나 시인의 사랑과 소녀들의 까닭입니다.
+
+  - 릴케 밤이 이름자 이웃 사랑과 않은 봅니다.
+  - 불러 때 걱정도 하나에 나의 하나 이국 있습니다.
+
+### 작은 제목 3
+
+> 할지라도 바로 그것을 같은 있는 할지니, 뿐이다. 든 우리의 피부가 들어 품에 얼음 있는 것이다. 이성은 것이 못할 장식하는 인도하겠다는 발휘하기 석가는 것이다.
+
+찬미를 길을 얼마나 생생하며, 곳이 그들은 만천하의 하였으며, 찾아 황금시대다. 피가 이상 보배를 봄바람이다. 광야에서 새 꽃이 청춘에서만 든 것이다.보라, 것이 운다.
+```
+
+- 결과
+
+![마크다운 커스터마이징](.\마크다운-커스터마이징.png)
+
+추가적으로 마크다운을 위한 라이브러리를 찾아서 적용했다. `.md` 파일을 위한 `gatsby-transformer-remark` 관련 플러그인들이 `.mdx`와도 호환되므로 그대로 사용할 수 있다. 나는 `gatsby-remark-images`와 `gatsby-remark-prismjs`를 추가했다.
+
+```shell
+$ npm install gatsby-remark-images gatsby-plugin-sharp
+$ npm install gatsby-remark-prismjs prismjs
+```
+
+> - `gatsby-remark-images`: 마크다운에서 상대경로로 이미지를 사용하기 위한 플러그인.
+> - `gatsby-plugin-sharp`: 이미지 처리를 위한 low-level 플러그인. 주로 다른 이미지 관련 Gatsby 플러그인에서 요구됨.
+> - `gatsby-remark-prismjs`: Gatsby에서 마크다운 렌더링 시 코드블럭에 PrismJS의 코드 하이라이팅을 사용하기 위한 플러그인.
+> - `prismjs`: 코드 하이라이팅 라이브러리.
+
+- `gatsby-config.js`
+
+```javascript
+module.exports = {
+  ...
+  plugins: [
+    ...
+    'gatsby-plugin-sharp',
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 720,
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: 'language-',
+              showLineNumbers: true,
+              noInlineHighlight: true,
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+```
+
+> `gatsby-remark-prismjs`의 옵션 중 줄 번호를 표시하도록 바꾸었고, 인라인 하이라이트는 위에서 적용한 게 있으므로 사용하지 않도록 했다.
+
+`gatsby-remark-images`는 설치 및 `gatsby-config.js` 설정 후 바로 적용된다. `gatsby-remark-prismjs`는 추가적으로 스타일을 불러와야 하는데 [gatsby-remark-prismjs](https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/?=prism)에서는 `gatsby-browser.js`에 PrismJS 테마 중 하나를 `require`로 가져오게끔 적혀 있다.
+
+나는 Emotion을 쓰고 있으므로 기존의 global styles에 테마 CSS 내용을 추가하는 방식을 택했다. 가져온 CSS는 `prismjs/themes/prism-solarizedlight.css`와 `prismjs/plugins/line-numbers/prism-line-numbers.css`이다.
+
+- `src/styles/prismTheme.ts`
+
+```typescript
+import {css} from '@emotion/react';
+
+...
+
+export const prismTheme = css`
+... (두 CSS 파일의 내용을 카피한 후 입맛에 맞게 수정했다)
+`;
+```
+
+- `src/styles/global.ts`
+
+```typescript
+import {css} from '@emotion/react';
+import {cssReset} from './cssReset';
+import {variables} from './variables';
+import {prismTheme} from './prismTheme';
+
+export const globalStyles = css`
+  ...
+  ${cssReset};
+  ${variables};
+  ${prismTheme};
+  ...
+`;
+```
+
+- 마크다운 원문
+
+````markdown
+### 작은 제목 2
+
+```typescript
+const main = () => {
+  console.log('hello world!');
+}
+
+main();
+```
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+  <head></head>
+  <body>
+    <h1>Hello world</h1>
+  </body>
+</html>
+```
+````
+
+- 결과
+
+![코드블록 하이라이팅](.\코드블록-하이라이팅.png)
+
+이로써 포스트 페이지의 마크다운 스타일링도 마쳤다.
+
+### 검색 모달 구현
+
+검색 기능은 모달로 구현하기로 했다. 우선 모달의 열림/닫힘 상태 관리를 위해 ContextAPI를 사용했다.
+
+- `src/contexts/modalContext.tsx`
+
+```tsx
+import React, {useContext, useState} from 'react';
+
+interface ContextState {
+  isOpenModal: (modal: string) => boolean;
+  onOpenModal: (modal: string) => () => void;
+  onCloseModal: (modal: string) => () => void;
+}
+
+interface ProviderProps {
+  children?: React.ReactNode;
+}
+
+const ModalContext = React.createContext<ContextState | null>(null);
+
+export const ModalContextProvider = ({children}: ProviderProps) => {
+  const [modalOpenMap, setOpen] = useState<Record<string, boolean>>({});
+
+  const isOpenModal = (modal: string) => modalOpenMap[modal];
+
+  const onOpenModal = (modal: string) => () => {
+    setOpen((modalOpenMap) => ({...modalOpenMap, [modal]: true}));
+  };
+
+  const onCloseModal = (modal: string) => () => {
+    setOpen((modalOpenMap) => ({...modalOpenMap, [modal]: false}));
+  };
+
+  return (
+    <ModalContext.Provider value={{isOpenModal, onOpenModal, onCloseModal}}>
+      {children}
+    </ModalContext.Provider>
+  );
+};
+
+export const useModal = (modal: string) => {
+  const state = useContext(ModalContext);
+  if (state === null) throw new Error('Cannot find modal context provider.');
+
+  const {isOpenModal, onOpenModal, onCloseModal} = state;
+
+  return {
+    isOpen: isOpenModal(modal),
+    onOpen: onOpenModal(modal),
+    onClose: onCloseModal(modal),
+  };
+};
+```
+
+> `ModalContext`는 파일 내에 숨기고 `ModalContextProvider`와 `useModal`만을 `export`로 노출시켰다.
+>
+> `ModalContextProvider`는 `ModalContext.Provider`를 래핑하는 컴포넌트로 모달의 여닫힘 상태를 갖는다. 그리고 문자열을 받는 고차 함수를 `ModalContext.Provider`의 `value`로 보낸다.
+>
+> `useModal`은 `useContext`를 한번 래핑하여 사용하기 편하게 만든 훅이다. `useModal(모달이름)` 꼴로 호출하면 해당 모달의 여닫힘 상태를 확인하거나 조작할 수 있다.
+
+현재로서는 모달이 검색 모달 하나 뿐이지만 추후 다른 모달을 추가할 것을 대비해 상태를 단순 `boolean`이 아닌 `Record<string, boolean>`으로 두고, 키값을 통해 각 모달의 상태를 구분하여 관리할 수 있도록 만들었다.
+
+이후 요전에 만든 검색 기능을 이용해 검색 모달을 구현했다.
+
+- `src/views/searchModal/index.tsx`
+
+```tsx
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {graphql, useStaticQuery} from 'gatsby';
+import {useSearch} from 'src/hooks/useSearch';
+import {MdxNode} from 'src/types';
+import {Overlay} from 'src/components/overlay';
+import {useModal} from 'src/contexts/modalContext';
+import {
+  SearchModalInput,
+  SearchModalInputWrapper,
+  SearchModalBox,
+  SearchResultContainer,
+} from './styled';
+import {CrossIcon, IconButton, SearchIcon} from 'src/components/icon';
+import {SearchResultItem} from './searchResultItem';
+
+const query = graphql`
+  {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+      nodes {
+        slug
+        frontmatter {
+          title
+          tags
+        }
+        rawBody
+      }
+    }
+  }
+`;
+
+export const SearchModal = () => {
+  const {isOpen, onClose} = useModal('search');
+  const {results, handleSearchInputChange} = usePostSearch(isOpen);
+  const {inputRef, onInputResetClick} = useInputReset();
+  useAutoFocus(isOpen, inputRef);
+
+  if (!isOpen) return null;
+
+  return (
+    <Overlay onClick={onClose}>
+      <SearchModalBox onClick={(e) => e.stopPropagation()}>
+        <SearchModalInputWrapper>
+          <SearchIcon />
+          <SearchModalInput ref={inputRef} onChange={handleSearchInputChange} />
+          <IconButton iconElement={<CrossIcon />} onClick={onInputResetClick} />
+        </SearchModalInputWrapper>
+        {results.length > 0 && (
+          <SearchResultContainer>
+            {results.map((result) => (
+              <SearchResultItem searchResult={result} key={result.slug} />
+            ))}
+          </SearchResultContainer>
+        )}
+      </SearchModalBox>
+    </Overlay>
+  );
+};
+
+const usePostSearch = (isOpen: boolean) => {
+  const {allMdx} = useStaticQuery<{allMdx: {nodes: MdxNode[]}}>(query);
+  const {results, resetResults, handleSearchInputChange} = useSearch(
+    allMdx.nodes,
+    'rawBody',
+    'slug',
+    {
+      cacheKey: 'search-modal',
+    }
+  );
+
+  useEffect(() => {
+    if (!isOpen) resetResults();
+  }, [isOpen, resetResults]);
+
+  return {results, handleSearchInputChange};
+};
+
+const useInputReset = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onInputResetClick = () => {
+    if (inputRef.current) inputRef.current.value = '';
+  };
+
+  return {inputRef, onInputResetClick};
+};
+
+const useAutoFocus = (
+  isOpen: boolean,
+  inputRef: React.RefObject<HTMLInputElement>
+) => {
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen, inputRef.current]);
+};
+```
+
+구현 중에 깨달은 문제는 이미 검색 input에서 검색을 위한 debounce 핸들러를 `onChange` 이벤트에 사용 중이라 입력값을 직접 제어하지 못한다는 점이었다. ([참고 - 제어 컴포넌트](https://ko.reactjs.org/docs/forms.html#controlled-components)) 그래서 일단은 `useRef`를 이용해 `current.value` 값을 변경하는 다소 지저분한 방법을 사용했는데, 이 부분은 추후에 다시 손봐야 할 것 같다.
+
+<br />
+
+## 후기
+
+디자인까지 적용하니 꽤 그럴 듯하게 보인다.
+
+앞으로는 공부한 내용을 정리하면서 더 필요한 기능을 차차 추가해나갈 예정이다. 당초 추가할 예정이었던 요소들은 다음과 같다.
+
+- 댓글 기능
+- Google Analytics
+
+그리고 새로이 추가해야겠다고 생각한 요소는 다음과 같다.
+
+- 포스트 이전글, 다음글 링크
+- 간단한 포트폴리오를 겸한 소개 페이지
+
