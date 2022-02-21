@@ -17,6 +17,7 @@ import {
   Blockquote,
   ListItem,
   Code,
+  Image,
 } from 'src/components/markdown';
 
 interface Props {
@@ -37,6 +38,7 @@ const components = {
   a: Anchor,
   inlineCode: Code,
   blockquote: Blockquote,
+  img: Image,
 };
 
 export const PostLayout = ({post, backUrl}: Props) => {

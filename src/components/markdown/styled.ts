@@ -88,8 +88,13 @@ export const Code = styled.code`
   background-color: var(--color-bg-footer);
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  padding: 0 4px;
+  padding: 0 0.25em;
   margin: 0 2px;
   width: fit-content;
   color: var(--color-main);
+`;
+
+export const Image = styled.img`
+  margin: 0 auto;
+  display: block;
 `;
