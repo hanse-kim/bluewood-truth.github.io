@@ -1,17 +1,14 @@
-import React from 'react';
-import {Link} from 'gatsby';
-import {Layout} from 'src/views/layout';
+import {useEffect} from 'react';
+import {useRouter} from 'src/hooks/useRouter';
 
 const IndexPage = () => {
-  return (
-    <Layout>
-      <ul>
-        <li>
-          <Link to='/blog'>블로그</Link>
-        </li>
-      </ul>
-    </Layout>
-  );
+  const {redirect} = useRouter();
+
+  useEffect(() => {
+    redirect('/blog');
+  });
+
+  return null;
 };
 
 export default IndexPage;
