@@ -1,10 +1,18 @@
 import React from 'react';
-import {FooterWrapper} from './styled';
+import {FooterLink, FooterWrapper} from './styled';
 
-export const Footer = () => {
+interface Props {
+  githubId: string;
+  githubUrl: string;
+  publishYear: string;
+}
+
+export const Footer = ({githubId, githubUrl, publishYear}: Props) => {
   return (
     <FooterWrapper>
-      Copyright 2022. bluewood-truth All right reserved.
+      Copyright {publishYear}.
+      <FooterLink href={githubUrl}>{githubId}</FooterLink>
+      All right reserved.
     </FooterWrapper>
   );
 };

@@ -7,7 +7,7 @@ import {Main} from './main';
 import {Footer} from './footer';
 import {LayoutWrapper} from './styled';
 import {ModalContextProvider} from '../../contexts/modalContext';
-import { SearchModal } from '../searchModal';
+import {SearchModal} from '../searchModal';
 
 interface Props {
   title?: string;
@@ -15,7 +15,12 @@ interface Props {
 }
 
 export const Layout = ({title, children}: Props) => {
-  const {title: siteTitle} = useSiteMetadata();
+  const {
+    title: siteTitle,
+    githubId,
+    githubUrl,
+    publishYear,
+  } = useSiteMetadata();
 
   return (
     <LayoutWrapper>
@@ -24,7 +29,7 @@ export const Layout = ({title, children}: Props) => {
       <ModalContextProvider>
         <Header />
         <Main>{children}</Main>
-        <Footer />
+        <Footer githubId={githubId} githubUrl={githubUrl} publishYear={publishYear}/>
         <SearchModal />
       </ModalContextProvider>
     </LayoutWrapper>

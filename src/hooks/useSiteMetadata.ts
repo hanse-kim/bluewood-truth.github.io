@@ -6,6 +6,10 @@ const query = graphql`
     site {
       siteMetadata {
         title
+        githubUrl
+        githubId
+        email
+        publishYear
       }
     }
   }

@@ -2,6 +2,10 @@
 module.exports = {
   siteMetadata: {
     title: '개발하고 기록하기',
+    email: 'bluewood.truth@gmail.com',
+    githubUrl: 'https://github.com/bluewood-truth',
+    githubId: 'bluewood-truth',
+    publishYear: '2022',
   },
   plugins: [
     'gatsby-plugin-emotion',

@@ -56,8 +56,15 @@ export const FooterWrapper = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  column-gap: 0.25rem;
   color: var(--color-text-footer);
   background-color: var(--color-bg-footer);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-thin);
+`;
+
+
+export const FooterLink = styled.a`
+  text-decoration: underline;
+  font-weight: var(--font-weight-regular);
 `;
