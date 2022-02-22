@@ -20,6 +20,7 @@ export const globalStyles = css`
     font-family: 'Noto Sans KR', sans-serif;
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+    transform-style: preserve-3d;
   }
 
   pre[class*='language-'] {

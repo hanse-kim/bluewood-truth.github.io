@@ -25,6 +25,7 @@ const languageList = [
   ['css', 'CSS', true],
   ['html', 'HTML', true],
   ['markdown', 'Markdown', true],
+  ['java', 'Java'],
 ];
 
 export const prismTheme = css`
