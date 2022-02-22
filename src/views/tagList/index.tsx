@@ -10,15 +10,11 @@ interface Props {
 }
 
 export const TagList = ({tags}: Props) => {
-  const allTagsTotalCount = tags.reduce(
-    (prev, curr) => prev + curr.totalCount, 0
-  );
-
   return (
     <ul>
-      {tags.map((tag) => (
-        <li>
-          <TextButton key={tag.value} to={getTagUrl(tag.value)}>
+      {tags.map((tag, i) => (
+        <li key={tag.value}>
+          <TextButton to={getTagUrl(tag.value)}>
             {tag.value} ({tag.totalCount})
           </TextButton>
         </li>

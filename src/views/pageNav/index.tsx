@@ -52,13 +52,13 @@ const usePageNav = (
   currPage: number,
   lastPage: number,
   navLength: number,
-  navDisPlayType: NavDisplayType
+  navDisplayType: NavDisplayType
 ) => {
   const [pageList, setPageNavList] = useState<number[]>([]);
 
   useEffect(() => {
     let firstPageInNav: number, lastPageInNav: number;
-    switch (navDisPlayType) {
+    switch (navDisplayType) {
       case 'fixed': {
         firstPageInNav = currPage - ((currPage - 1) % navLength);
         lastPageInNav = firstPageInNav + navLength - 1;

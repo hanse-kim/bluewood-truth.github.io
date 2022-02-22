@@ -5,7 +5,7 @@ import {PostHeaderWrapper} from './styled';
 import {TextButton} from 'src/components/textButton';
 
 interface Props {
-  backUrl?: string;
+  backUrl: string;
   title: string;
   date: string;
   tags: string[];
@@ -14,7 +14,7 @@ interface Props {
 export const PostHeader = ({backUrl, title, date, tags}: Props) => {
   return (
     <PostHeaderWrapper>
-      {backUrl && <TextButton to={backUrl}>{'< 이전 페이지로'}</TextButton>}
+      <TextButton to={backUrl}>{'< 이전 페이지로'}</TextButton>
       <hgroup>
         <HeadingTitle>{title}</HeadingTitle>
         <PostDate>{`작성일: ${date}`}</PostDate>

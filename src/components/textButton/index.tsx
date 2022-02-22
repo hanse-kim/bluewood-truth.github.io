@@ -1,5 +1,5 @@
-import {Link} from 'gatsby';
 import React from 'react';
+import {Link} from 'gatsby';
 import {TextButtonWrapper, Underline} from './styled';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 export const TextButton = ({to, onClick, children, disabled}: Props) => {
   if (to) {
     return (
-      <Link to={to || '#'}>
+      <Link to={to}>
         <TextButtonWrapper onClick={onClick} disabled={disabled}>
           {children}
           <Underline />

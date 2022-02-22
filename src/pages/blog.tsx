@@ -1,12 +1,13 @@
 import React from 'react';
-import {graphql, Link, navigate, PageProps} from 'gatsby';
+import _ from 'lodash';
+import {graphql, PageProps} from 'gatsby';
 import {Layout} from 'src/views/layout';
 import {MdxNode} from 'src/types';
 import {PostList} from 'src/views/postList';
 import {usePagination} from 'src/hooks/usePagination';
 import {PageNav} from 'src/views/pageNav';
-import _ from 'lodash';
 import {HeadingTitle} from 'src/components/typography';
+import {parseUrlSearchParams} from 'src/utils/common';
 
 interface DataType {
   allMdx: {
@@ -32,15 +33,19 @@ export const pageQuery = graphql`
   }
 `;
 
-const BlogPage = ({data: {allMdx}}: PageProps<DataType>) => {
+const BlogPage = ({data: {allMdx}, location}: PageProps<DataType>) => {
   const {paginatedData, currPage, lastPage, setPage} = usePagination(
-    allMdx.nodes
+    allMdx.nodes,
+    {
+      initialPage: parseUrlSearchParams(location.search)['page'],
+      withRouting: true,
+    }
   );
 
   return (
     <Layout>
       <HeadingTitle>전체 글 (총 {allMdx.nodes.length}건)</HeadingTitle>
-      <PostList nodes={paginatedData} />
+      <PostList nodes={paginatedData} referrer={location.href} />
       <PageNav currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );
