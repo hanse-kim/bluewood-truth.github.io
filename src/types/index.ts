@@ -3,6 +3,10 @@ import {Node} from 'gatsby';
 export interface SiteNode extends Node {
   siteMetadata: {
     title: string;
+    email: string;
+    githubUrl: string;
+    githubId: string;
+    publishYear: string;
   };
 }
 
@@ -15,6 +19,14 @@ export interface MdxNode extends Node {
   };
   body: string;
   rawBody: string;
+  tableOfContents: TocItem[];
+  excerpt: string;
+}
+
+export interface TocItem {
+  url: string;
+  title: string;
+  items?: TocItem[];
 }
 
 export interface Tag {

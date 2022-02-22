@@ -1,13 +1,9 @@
 import React from 'react';
 import {Link} from 'gatsby';
 import {MdxNode} from 'src/types';
-import {getPlainTextFromMarkdown, getPostUrl} from 'src/utils/common';
+import {getPostUrl} from 'src/utils/common';
 import {TagButtonGroup} from 'src/components/tagButton';
-import {
-  PostItemHeader,
-  PostItemDescription,
-  PostItemWrapper,
-} from './styled';
+import {PostItemHeader, PostItemDescription, PostItemWrapper} from './styled';
 import {HeadingSubTitle, PostDate} from 'src/components/typography';
 
 export const PostItem = ({node}: {node: MdxNode}) => {
@@ -20,9 +16,7 @@ export const PostItem = ({node}: {node: MdxNode}) => {
         </PostItemHeader>
       </Link>
       <TagButtonGroup tags={node.frontmatter.tags} />
-      <PostItemDescription>
-        {getPlainTextFromMarkdown(node.rawBody)}
-      </PostItemDescription>
+      <PostItemDescription>{node.excerpt}</PostItemDescription>
     </PostItemWrapper>
   );
 };

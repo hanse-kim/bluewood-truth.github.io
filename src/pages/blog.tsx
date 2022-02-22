@@ -26,6 +26,7 @@ export const pageQuery = graphql`
           tags
         }
         rawBody
+        excerpt(pruneLength: 200)
       }
     }
   }

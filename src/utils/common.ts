@@ -25,11 +25,12 @@ export const range = (start: number, end?: number) => {
 export const parseUrlSearchParams = (searchParams: string) => {
   if (searchParams.startsWith('?')) searchParams = searchParams.slice(1);
   const tokens = searchParams.split('&');
-  const result: Record<string, string> = {};
+  if (searchParams.length === 0) return {};
+  const result: Record<string, any> = {};
 
   tokens.forEach((token) => {
     const [key, value] = token.split('=');
-    result[key] = value;
+    result[key] = JSON.parse(value);
   });
 
   return result;
@@ -63,14 +64,4 @@ export const getProperty = (
 
 export const escapedRegExp = (str: string, flags?: string) => {
   return new RegExp(_.escapeRegExp(str), flags);
-};
-
-export const getPlainTextFromMarkdown = (markdown: string) => {
-  const yamlRegex = /(\-\-\-[\s\S]+\-\-\-)/;
-  const headingRegex = /(^[#\- ]+)/gm;
-  const imageRegex = /[]/;
-  return markdown
-    .replace(yamlRegex, '')
-    .replace(headingRegex, '')
-    .slice(0, 300);
 };
