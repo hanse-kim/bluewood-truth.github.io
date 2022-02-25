@@ -1,0 +1,92 @@
+---
+title: "CSS 텍스트 말줄임표(ellipsis) 처리"
+date: "2022-02-25"
+tags: ["CSS", "TIL"]
+---
+
+## 한 줄의 텍스트
+
+한 줄의 텍스트는 `text-overflow` 프로퍼티를 사용해 말줄임표 처리를 할 수 있다.
+
+```CSS
+.ellipsis-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    width: 360px;
+    border: 1px solid gray;
+}
+```
+
+```html
+<div class="ellipsis-text">
+    같이, 노래하며 하였으며, 우리 황금시대의 가치를 몸이 있으랴? 그들은 청춘의 물방아 풀이 긴지라 인간이 생생하며, 힘차게 그리하였는가?
+</div>
+```
+
+- 결과
+
+![result1](.\result1.png)
+
+`text-overflow`는 단지 텍스트가 오버플로(컨텐츠가 상자 밖으로 넘침) 상태일 때 어떻게 처리할지를 지정해주는 프로퍼티라서 혼자 있을 땐 아무런 의미가 없다. 따라서 `overflow`, `white-space` 프로퍼티를 통해 텍스트 오버플로를 발생시켜야 한다.
+
+- `overflow`: 상자 밖으로 나간 컨텐츠를 어떻게 처리할지를 결정한다. `hidden`으로 지정하면 밖으로 튀어나온 컨텐츠를 안 보이게 만든다.
+- `white-space`: 상자 내의 화이트 스페이스(white space)를 어떻게 처리할지를 결정한다. `nowrap`으로 지정하면 공백을 축소(collapse)하고 줄바꿈하지 않게 만든다.
+
+따라서 `overflow: hidden`, `white-space: nowrap`과 함께 `text-overflow: ellipsis`를 적용하면 텍스트는 한 줄이 되고 상자 밖으로 나가면 말줄임표 처리가 된다.
+
+<br />
+
+## 여러 줄의 텍스트
+
+`-webkit-line-clamp` 프로퍼티를 이용해 텍스트 줄 수를 강제할 수 있다. 이 프로퍼티는 `display: -webkit-box`, `-webkit-box-orient: vertical`과 함께 사용할 경우에만 동작한다.
+
+```css
+.ellipsis-text-2-line {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height:1.5em;
+    height: 3em;
+
+    width: 360px;
+    border: 1px solid gray;
+}
+```
+
+```html
+<div class="ellipsis-text-2-line">
+    같이, 노래하며 하였으며, 우리 황금시대의 가치를 몸이 있으랴? 그들은 청춘의 물방아 풀이 긴지라 인간이 생생하며, 힘차게 그리하였는가?
+</div>
+```
+
+- 결과
+
+![result2](.\result2.png)
+
+`-webkit-line-clamp`와 `-webkit-box-orient`는 비록 많은 브라우저에서 지원한다지만 표준이 아닌 만큼 크로스 브라우징에 주의할 필요가 있다. Stack Overflow의 [이 답변](https://stackoverflow.com/questions/5269713/css-ellipsis-on-second-line#answer-50566101)에서는 `@supports` 규칙을 이용해 호환성을 높이는 방법을 제시하고 있다.
+
+```css
+.text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @supports (-webkit-line-clamp: 2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
+```
+
+`-webkit-line-clamp` 프로퍼티를 지원한다면 두 줄로, 그렇지 않다면 한 줄로 처리될 것이다.
+
+이외에 JavaScript를 통해 말줄임표 처리를 하는 방법도 있지만, CSS로 처리할 수 있는 일은 CSS를 쓰는 게 가장 좋다고 생각하기 때문에 위 방법이 제일 낫다고 생각한다.
+
