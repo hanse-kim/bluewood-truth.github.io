@@ -1,0 +1,156 @@
+---
+title: "this"
+date: "2022-02-27"
+tags: ["JavaScript"]
+---
+
+## 요약
+
+JavaScript에서 `this`는 함수가 호출되는 방식에 따라 달라진다.
+
+- 전역 컨텍스트: 전역 객체를 가리킨다.
+- 함수 단순 호출: 엄격 모드라면 `undefined`를, 그렇지 않다면 전역 객체를 가리킨다.
+- 객체 메서드: 해당 객체를 가리킨다.
+- 함수 생성자: 생성될 객체를 가리킨다.
+- 이벤트 핸들러: 이벤트 핸들러가 등록된 엘리먼트를 가리킨다.
+
+ES5부터 추가된 `bind`, `call` 등은 호출 위치에 상관 없이 특정 객체를 `this`로 사용할 수 있게 해주고, ES6부터 추가된 화살표 함수는 `this`를 갖지 않는다.
+
+<br />
+
+## this
+
+일반적으로 `this`는 객체지향 언어의 클래스에서 사용되며, 객체 내에서 자기자신을 참조하기 위해 사용된다. 하지만 JavaScript에서는 상황에 따라 가리키는 대상이 달라지며 이런 애매모호함(?)이 JavaScript의 초반 진입장벽 중 하나로 작용하곤 한다.
+
+JavaScript에서 `this`는 호출되는 방식에 따라 `this`가 가리키는 값이 달라진다. 즉 this 바인딩은 함수 호출 시점에 결정된다. `bind`, `call` 등의 메서드를 통해 호출되는 위치에 관계 없이 `this` 값을 고정할 수도 있고, 화살표 함수는 자신의 `this` 값을 갖지 않는다.
+
+### 전역 컨텍스트
+
+전역 컨텍스트에서 `this`는 전역 객체를 가리킨다. 다른 컨텍스트에서 전역 객체를 참조하고 싶을 땐 `globalThis`를 사용하면 된다.
+
+```javascript
+console.log(window === this); // true, 웹 브라우저에선 window가 전역 객체임
+```
+
+### 함수 단순 호출
+
+엄격 모드가 아닐 때 `this`는 전역 객체를 가리킨다. 엄격 모드라면 `undefined`를 가리킨다.
+
+```javascript
+function notStrict() {
+	return this;
+}
+
+function strict() {
+	'use strict';
+	return this;
+}
+
+console.log(notStrict() === window); // true
+console.log(strict() === undefined); // true
+```
+
+### 객체의 메서드에서
+
+어떤 객체의 메서드로서 호출하면 `this`는 그 객체를 가리킨다.
+
+```javascript
+function introduce () {
+	console.log(`my name is ${this.name}`);
+}
+
+const obj = {
+    name: 'hansekim',
+    introduce: introduce,
+}
+
+obj.introduce(); // my name is hansekim
+```
+
+### 함수 생성자에서
+
+JavaScript에서는 함수를 통해 객체 타입을 정의하고 `new ` 키워드와 함께 사용하여 객체를 생성할 수 있다. 이때 함수를 생성자(constructor)라고 한다. 생성자 내에서 `this`는 생성자를 통해 생성될 객체를 가리킨다.
+
+```javascript
+// 생성자 네이밍은 파스칼 케이스를 따른다
+function Animal (name, sound) {
+    // 생성자에서 this는 생성될 객체를 가리킨다
+	this.name = name;
+    this.sound = sound;
+    this.printSound = function () {
+        console.log(`${this.name}: ${this.sound}!`);
+    }
+}
+
+const dog = new Animal('dog', 'bark');
+dog.printSound(); // dog: bark!
+```
+
+### 이벤트 핸들러에서
+
+`addEventListener()`를 이용해 엘리먼트에 이벤트 핸들러를 등록하면 `this`는 이벤트 핸들러를 등록한 엘리먼트를 가리킨다. 이벤트 객체 `e`에 대해 `e.currentTarget`과 동일하다.
+
+`this`를 사용하면 화살표 함수의 사용이 제한되거나 다른 this 바인딩 문제가 발생할 수 있으므로 웬만하면 `e.currentTarget`을 사용하는 게 더 좋아 보인다.
+
+```javascript
+// 이벤트 핸들러로서 호출하면 핸들러가 등록된 요소의 텍스트 색상을 빨간색으로 변경함
+function toRedText (e) {
+    console.log(e.currentTarget === this); // 항상 true
+    this.style.color = 'red';
+}
+
+// 모든 엘리먼트에 클릭하면 텍스트가 빨간색이 되도록 핸들러를 붙임
+document.querySelectorAll('*').forEach((element) => {
+    element.addEventListener('click', toRedText);
+});
+```
+
+### bind, call, apply
+
+`bind`, `call`, `apply`는 ES5부터 추가된 `Function` 타입 객체(즉 함수)의 메서드다. 첫 번째 인자로 새로이 할당할 `this`값을, 나머지 인자로 해당 함수의 초기 인자를 전달한다.
+
+- `bind`: `this` 인자와 함수의 초기 인자들을 받아 원본 함수의 복제를 리턴한다.
+- `call`: `this` 인자와 함수의 초기 인자들을 받아 원본 함수를 호출한다.
+- `apply`: `this` 인자와 함수의 초기 인자 배열을 받아 원본 함수를 호출한다.
+
+이렇게 `bind`, `call`, `apply`로 생성하거나 호출한 함수는 호출 방법에 상관 없이 첫 번째 인자로 전달한 객체를 `this`로 사용한다.
+
+```javascript
+function introduce (age) {
+	console.log(`my name is ${this.name}`);
+    if (age) console.log(`i'm ${age} years old`);
+}
+
+const hanseKim = {name: 'hanseKim'};
+const john = {name: 'john'};
+introduce.call(hanseKim); // my name is hanseKim
+introduce.call(john, 16); // my name is john / i'm 16 years old
+```
+
+### 화살표 함수
+
+화살표 함수는 자신의 `this`를 갖지 않는다. 따라서 위에서 언급한 사례들을 전부 무시하고 상위 스코프의 `this`를 가리킨다.
+
+```javascript
+function Counter() {
+    this.num = 0; // 이 this는 생성자의 인스턴스를 가리킨다
+    
+    setInterval(() => {
+        this.num += 1; // 화살표 함수는 this를 갖지 않으므로
+        console.log(this.num); // 상위 스코프의 this를 가리킨다
+    }, 1000);
+}
+
+new Counter();
+// 1
+// 2
+// 3
+// ...
+```
+
+<br />
+
+## 참고 자료
+
+- [this - JavaScript | MDN (mozilla.org)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this)
+
