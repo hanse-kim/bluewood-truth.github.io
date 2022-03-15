@@ -1,5 +1,6 @@
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
+  pathPrefix: '/',
   siteMetadata: {
     title: '개발하고 기록하기',
     email: 'bluewood.truth@gmail.com',
