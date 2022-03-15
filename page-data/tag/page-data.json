@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-tag-tsx",
+    "path": "/tag/",
+    "result": {"data":{"tagsGroup":{"tags":[{"value":"CSS","totalCount":1},{"value":"ES6","totalCount":1},{"value":"Emotion","totalCount":1},{"value":"Figma","totalCount":1},{"value":"Gatsby","totalCount":2},{"value":"GraphQL","totalCount":2},{"value":"HTML","totalCount":1},{"value":"JavaScript","totalCount":10},{"value":"React","totalCount":2},{"value":"TIL","totalCount":2},{"value":"웹 표준","totalCount":1}]}},"pageContext":{}},
+    "staticQueryHashes": ["2278949984","3702207254"]}
