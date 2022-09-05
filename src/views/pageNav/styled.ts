@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const PageNavWrapper = styled.div`
+const PageNav = styled.div`
   display: flex;
   margin: 0 auto;
 `;
 
-export const PageButtonWrapper = styled.div`
+const PageButtonWrapper = styled.div`
   width: 36px;
   height: 36px;
   font-size: var(--font-size-lg);
@@ -15,3 +15,7 @@ export const PageButtonWrapper = styled.div`
     font-weight: var(--font-weight-regular);
   }
 `;
+
+export const Styled = {
+  PageNav, PageButtonWrapper
+}

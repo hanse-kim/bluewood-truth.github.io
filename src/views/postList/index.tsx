@@ -1,7 +1,7 @@
 import React from 'react';
 import {MdxNode} from 'src/types';
 import {PostItem} from './postItem';
-import {PostListWrapper} from './styled';
+import {Styled} from './styled';
 
 interface Props {
   nodes: MdxNode[];
@@ -10,10 +10,10 @@ interface Props {
 
 export const PostList = ({nodes, referrer}: Props) => {
   return (
-    <PostListWrapper>
+    <Styled.PostList>
       {nodes.map((node) => (
         <PostItem key={node.id} node={node} referrer={referrer} />
       ))}
-    </PostListWrapper>
+    </Styled.PostList>
   );
 };

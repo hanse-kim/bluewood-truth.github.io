@@ -5,8 +5,8 @@ import {useSiteMetadata} from 'src/hooks/useSiteMetadata';
 import {Header} from './header';
 import {Main} from './main';
 import {Footer} from './footer';
-import {LayoutWrapper} from './styled';
-import {ModalContextProvider} from '../../contexts/modalContext';
+import {Styled} from './styled';
+import {ModalProvider} from '../../contexts/modalContext';
 import {SearchModal} from '../searchModal';
 
 interface Props {
@@ -23,15 +23,19 @@ export const Layout = ({title, children}: Props) => {
   } = useSiteMetadata();
 
   return (
-    <LayoutWrapper>
+    <Styled.Layout>
       <title>{title || siteTitle}</title>
       <Global styles={globalStyles} />
-      <ModalContextProvider>
+      <ModalProvider>
         <Header />
         <Main>{children}</Main>
-        <Footer githubId={githubId} githubUrl={githubUrl} publishYear={publishYear}/>
+        <Footer
+          githubId={githubId}
+          githubUrl={githubUrl}
+          publishYear={publishYear}
+        />
         <SearchModal />
-      </ModalContextProvider>
-    </LayoutWrapper>
+      </ModalProvider>
+    </Styled.Layout>
   );
 };

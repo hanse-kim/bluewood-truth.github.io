@@ -1,5 +1,5 @@
 import React from 'react';
-import {MainInner, MainWrapper} from './styled';
+import {Styled} from './styled';
 
 interface Props {
   children?: React.ReactNode;
@@ -7,8 +7,8 @@ interface Props {
 
 export const Main = ({children}: Props) => {
   return (
-    <MainWrapper>
-      <MainInner>{children}</MainInner>
-    </MainWrapper>
+    <Styled.Main>
+      <Styled.MainInner>{children}</Styled.MainInner>
+    </Styled.Main>
   );
 };

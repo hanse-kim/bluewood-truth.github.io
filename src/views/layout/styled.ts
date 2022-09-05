@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 import {BREAKPOINT_TABLET} from 'src/styles/constants';
 
-export const LayoutWrapper = styled.div`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 `;
 
-export const HeaderWrapper = styled.header`
+const Header = styled.header`
   height: var(--header-height);
   border-bottom: 1px solid var(--color-border);
 `;
 
-export const HeaderInner = styled.div`
+const HeaderInner = styled.div`
   margin: 0 auto;
   max-width: var(--page-width);
   height: 100%;
@@ -26,16 +26,16 @@ export const HeaderInner = styled.div`
   }
 `;
 
-export const NavWrapper = styled.nav`
+const Nav = styled.nav`
   display: flex;
   column-gap: 24px;
 `;
 
-export const MainWrapper = styled.main`
+const Main = styled.main`
   flex-grow: 1;
 `;
 
-export const MainInner = styled.div`
+const MainInner = styled.div`
   position: relative;
   margin: 0 auto;
   padding: 48px 0 96px 0;
@@ -51,7 +51,7 @@ export const MainInner = styled.div`
   }
 `;
 
-export const FooterWrapper = styled.footer`
+const Footer = styled.footer`
   height: var(--footer-height);
   display: flex;
   align-items: center;
@@ -63,8 +63,18 @@ export const FooterWrapper = styled.footer`
   font-weight: var(--font-weight-thin);
 `;
 
-
-export const FooterLink = styled.a`
+const FooterLink = styled.a`
   text-decoration: underline;
   font-weight: var(--font-weight-regular);
 `;
+
+export const Styled = {
+  Layout,
+  Header,
+  HeaderInner,
+  Nav,
+  Main,
+  MainInner,
+  Footer,
+  FooterLink,
+};

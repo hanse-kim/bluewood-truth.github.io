@@ -12,7 +12,7 @@ interface ProviderProps {
 
 const ModalContext = React.createContext<ContextState | null>(null);
 
-export const ModalContextProvider = ({children}: ProviderProps) => {
+export const ModalProvider = ({children}: ProviderProps) => {
   const [modalOpenMap, setOpen] = useState<Record<string, boolean>>({});
 
   const isOpenModal = (modal: string) => modalOpenMap[modal];

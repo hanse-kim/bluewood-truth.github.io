@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {range} from 'src/utils/common';
 import {PageButton} from './pageButton';
-import {PageNavWrapper} from './styled';
+import {Styled} from './styled';
 
 interface Props {
   currPage: number;
@@ -23,7 +23,7 @@ export const PageNav = ({
   const {pageList} = usePageNav(currPage, lastPage, navLength, navDisPlayType);
 
   return (
-    <PageNavWrapper>
+    <Styled.PageNav>
       <PageButton
         label='<'
         page={pageList[0] - 1}
@@ -44,7 +44,7 @@ export const PageNav = ({
         setPage={setPage}
         disabled={pageList[pageList.length - 1] === lastPage}
       />
-    </PageNavWrapper>
+    </Styled.PageNav>
   );
 };
 

@@ -1,8 +1,7 @@
-import {keyframes} from '@emotion/react';
 import styled from '@emotion/styled';
 import {fadeIn} from 'src/styles/keyframes';
 
-export const PostListWrapper = styled.ul`
+const PostList = styled.ul`
   display: flex;
   flex-direction: column;
   row-gap: 36px;
@@ -10,19 +9,19 @@ export const PostListWrapper = styled.ul`
   animation: ${fadeIn} 0.5s ease;
 `;
 
-export const PostItemWrapper = styled.div`
+const PostItem = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
 `;
 
-export const PostItemHeader = styled.hgroup`
+const PostItemHeader = styled.hgroup`
   display: flex;
   flex-direction: column;
   row-gap: 2px;
 `;
 
-export const PostItemDescription = styled.p`
+const PostItemDescription = styled.p`
   color: var(--color-text-footer);
   font-size: var(--font-size-sm);
   width: 100%;
@@ -32,3 +31,10 @@ export const PostItemDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
+export const Styled = {
+  PostList,
+  PostItem,
+  PostItemHeader,
+  PostItemDescription,
+};

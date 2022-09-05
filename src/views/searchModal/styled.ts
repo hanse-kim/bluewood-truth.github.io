@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { Link } from 'gatsby';
+import {Link} from 'gatsby';
 
-export const SearchModalBox = styled.section`
+const SearchModalBox = styled.section`
   position: absolute;
   top: 120px;
   left: 50%;
@@ -15,13 +15,13 @@ export const SearchModalBox = styled.section`
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 `;
 
-export const SearchModalInputWrapper = styled.div`
+const SearchInputWrapper = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
 `;
 
-export const SearchModalInput = styled.input`
+const SearchInput = styled.input`
   flex-grow: 1;
   padding: 2px 4px;
   border: none;
@@ -32,7 +32,7 @@ export const SearchModalInput = styled.input`
   }
 `;
 
-export const SearchResultContainer = styled.ul`
+const SearchResultContainer = styled.ul`
   margin-top: 10px;
   border-top: 1px solid var(--color-border);
   padding: 18px 0;
@@ -41,7 +41,7 @@ export const SearchResultContainer = styled.ul`
   row-gap: 10px;
 `;
 
-export const SearchResultItemWrapper = styled.li`
+const SearchResultItem = styled.li`
   border-radius: 8px;
   padding: 8px 16px;
   background-color: var(--color-bg-footer);
@@ -56,26 +56,38 @@ export const SearchResultItemWrapper = styled.li`
   }
 `;
 
-export const SearchResultLink = styled(Link)`
+const SearchResultLink = styled(Link)`
   display: flex;
   align-items: center;
 `;
 
-export const SearchResultInfoWrapper = styled.div`
+const SearchResultInfo = styled.div`
   flex-grow: 1;
 `;
 
-export const SearchResultItemTags = styled.span`
+const SearchResultItemTags = styled.span`
   font-size: var(--font-size-xs);
   display: flex;
   column-gap: 8px;
 `;
 
-export const SearchResultItemTitle = styled.h3`
+const SearchResultItemTitle = styled.h3`
   font-size: var(--font-size-xl);
   color: var(--color-text);
 
-  ${SearchResultItemWrapper}:hover & {
+  ${SearchResultItem}:hover & {
     color: var(--color-bg);
   }
 `;
+
+export const Styled = {
+  SearchModalBox,
+  SearchInputWrapper,
+  SearchInput,
+  SearchResultContainer,
+  SearchResultItem,
+  SearchResultLink,
+  SearchResultInfo,
+  SearchResultItemTags,
+  SearchResultItemTitle,
+};

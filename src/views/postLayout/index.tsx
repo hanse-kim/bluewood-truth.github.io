@@ -3,7 +3,7 @@ import {MDXProvider} from '@mdx-js/react';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
 import {MdxNode} from 'src/types';
 import {PostHeader} from './postHeader';
-import {PostContentWrapper, PostLayoutWrapper} from './styled';
+import {Styled} from './styled';
 import {
   Heading1,
   Heading2,
@@ -43,13 +43,13 @@ const components = {
 
 export const PostLayout = ({post, backUrl}: Props) => {
   return (
-    <PostLayoutWrapper>
+    <Styled.PostLayout>
       <PostHeader backUrl={backUrl || '/blog'} {...post.frontmatter} />
-      <PostContentWrapper>
+      <Styled.PostContent>
         <MDXProvider components={components}>
           <MDXRenderer>{post.body}</MDXRenderer>
         </MDXProvider>
-      </PostContentWrapper>
-    </PostLayoutWrapper>
+      </Styled.PostContent>
+    </Styled.PostLayout>
   );
 };

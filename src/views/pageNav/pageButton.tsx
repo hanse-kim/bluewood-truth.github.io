@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {TextButton} from 'src/components/textButton';
-import {PageButtonWrapper} from './styled';
+import {Styled} from './styled';
 
 interface Props {
   page: number;
@@ -22,8 +22,8 @@ export const PageButton = ({
   }, [page]);
 
   return (
-    <PageButtonWrapper onClick={clickHandler} data-selected={selected}>
+    <Styled.PageButtonWrapper onClick={clickHandler} data-selected={selected}>
       <TextButton disabled={selected || disabled}>{label || page}</TextButton>
-    </PageButtonWrapper>
+    </Styled.PageButtonWrapper>
   );
 };

@@ -1,15 +1,10 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {graphql, useStaticQuery} from 'gatsby';
 import {useSearch} from 'src/hooks/useSearch';
 import {MdxNode} from 'src/types';
 import {Overlay} from 'src/components/overlay';
 import {useModal} from 'src/contexts/modalContext';
-import {
-  SearchModalInput,
-  SearchModalInputWrapper,
-  SearchModalBox,
-  SearchResultContainer,
-} from './styled';
+import {Styled} from './styled';
 import {CrossIcon, IconButton, SearchIcon} from 'src/components/icon';
 import {SearchResultItem} from './searchResultItem';
 
@@ -38,20 +33,23 @@ export const SearchModal = () => {
 
   return (
     <Overlay onClick={onClose}>
-      <SearchModalBox onClick={(e) => e.stopPropagation()}>
-        <SearchModalInputWrapper>
+      <Styled.SearchModalBox onClick={(e) => e.stopPropagation()}>
+        <Styled.SearchInputWrapper>
           <SearchIcon />
-          <SearchModalInput ref={inputRef} onChange={handleSearchInputChange} />
+          <Styled.SearchInput
+            ref={inputRef}
+            onChange={handleSearchInputChange}
+          />
           <IconButton iconElement={<CrossIcon />} onClick={onInputResetClick} />
-        </SearchModalInputWrapper>
+        </Styled.SearchInputWrapper>
         {results.length > 0 && (
-          <SearchResultContainer>
+          <Styled.SearchResultContainer>
             {results.map((result) => (
               <SearchResultItem searchResult={result} key={result.slug} />
             ))}
-          </SearchResultContainer>
+          </Styled.SearchResultContainer>
         )}
-      </SearchModalBox>
+      </Styled.SearchModalBox>
     </Overlay>
   );
 };
