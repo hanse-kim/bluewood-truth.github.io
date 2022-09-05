@@ -23,6 +23,7 @@
     "@mdx-js/react": "v1",
     "gatsby": "^4.8.0",
     "gatsby-plugin-emotion": "^7.8.0",
+    "gatsby-plugin-gtag": "^1.0.13",
     "gatsby-plugin-mdx": "^3.8.1",
     "gatsby-plugin-react-svg": "^3.1.0",
     "gatsby-plugin-root-import": "^2.0.8",
