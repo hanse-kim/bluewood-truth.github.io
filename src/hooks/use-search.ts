@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
-import { escapedRegExp, getProperty, getStorageItem, setStorageItem } from 'src/utils/common';
+import { escapedRegExp, getProperty, getStorageItem, setStorageItem } from 'src/_common/utils';
 
 interface Options {
   limit?: number;

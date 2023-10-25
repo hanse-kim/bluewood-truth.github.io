@@ -12,7 +12,7 @@ export const Header = () => {
       <Styled.HeaderInner>
         <Logo to="/blog" />
         <Styled.Nav>
-          <TextButton to="/tag">tags</TextButton>
+          <TextButton to="/tags">tags</TextButton>
           <TextButton onClick={onOpen}>search</TextButton>
         </Styled.Nav>
       </Styled.HeaderInner>

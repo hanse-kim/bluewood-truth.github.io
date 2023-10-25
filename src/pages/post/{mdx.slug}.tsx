@@ -3,6 +3,7 @@ import { graphql, type PageProps } from 'gatsby';
 import { Layout } from 'src/views/layout';
 import { type MdxNode } from 'src/types';
 import { PostLayout } from 'src/views/post-layout';
+import { routes } from 'src/_common/constants/routes';
 
 interface DataType {
   mdx: MdxNode;
@@ -27,7 +28,7 @@ const PostPage = ({
 }: PageProps<DataType, object, { referrer: string }>) => {
   return (
     <Layout title={mdx.frontmatter.title}>
-      <PostLayout backUrl={location.state?.referrer ?? '/blog'} post={mdx} />
+      <PostLayout backUrl={location.state?.referrer ?? routes.home} post={mdx} />
     </Layout>
   );
 };

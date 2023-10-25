@@ -1,6 +1,6 @@
 import React from 'react';
+import { routes } from 'src/_common/constants/routes';
 import { TextButton } from 'src/components/text-button';
-import { getTagUrl } from 'src/utils/common';
 
 interface Props {
   tags: Array<{
@@ -14,7 +14,7 @@ export const TagList = ({ tags }: Props) => {
     <ul>
       {tags.map((tag) => (
         <li key={tag.value}>
-          <TextButton to={getTagUrl(tag.value)}>
+          <TextButton to={routes.tag(tag.value)}>
             {tag.value} ({tag.totalCount})
           </TextButton>
         </li>

@@ -6,7 +6,7 @@ import { PostList } from 'src/views/post-list';
 import { HeadingTitle } from 'src/components/typography';
 import { usePagination } from 'src/hooks/use-pagination';
 import { PageNav } from 'src/views/page-nav';
-import { parseUrlSearchParams } from 'src/utils/common';
+import { parseUrlSearchParams } from 'src/_common/utils';
 
 interface PageContextType {
   tag: string;

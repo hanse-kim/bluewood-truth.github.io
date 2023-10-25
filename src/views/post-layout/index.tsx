@@ -21,7 +21,7 @@ import {
 } from 'src/components/markdown';
 
 interface Props {
-  backUrl?: string;
+  backUrl: string;
   post: MdxNode;
 }
 
@@ -44,7 +44,7 @@ const components = {
 export const PostLayout = ({ post, backUrl }: Props) => {
   return (
     <Styled.PostLayout>
-      <PostHeader backUrl={backUrl ?? '/blog'} {...post.frontmatter} />
+      <PostHeader backUrl={backUrl} {...post.frontmatter} />
       <Styled.PostContent>
         <MDXProvider components={components}>
           <MDXRenderer>{post.body}</MDXRenderer>

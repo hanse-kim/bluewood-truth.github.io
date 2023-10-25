@@ -3,7 +3,7 @@ import React from 'react';
 import { HeadingTitle } from 'src/components/typography';
 import { usePagination } from 'src/hooks/use-pagination';
 import { type MdxNode } from 'src/types';
-import { parseUrlSearchParams } from 'src/utils/common';
+import { parseUrlSearchParams } from 'src/_common/utils';
 import { Layout } from 'src/views/layout';
 import { PageNav } from 'src/views/page-nav';
 import { PostList } from 'src/views/post-list';

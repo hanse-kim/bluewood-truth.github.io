@@ -1,5 +1,5 @@
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { range } from 'src/utils/common';
 import { PageButton } from './page-button';
 import { Styled } from './styled';
 
@@ -62,7 +62,7 @@ const usePageNav = (
 
     firstPageInNav = Math.max(1, firstPageInNav);
     lastPageInNav = Math.min(lastPage, lastPageInNav);
-    setPageNavList(range(firstPageInNav, lastPageInNav + 1));
+    setPageNavList(_.range(firstPageInNav, lastPageInNav + 1));
   }, [currPage, lastPage]);
 
   return { pageList };

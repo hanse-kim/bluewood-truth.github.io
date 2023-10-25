@@ -1,12 +1,13 @@
 import React from 'react';
-import { getTagUrl } from 'src/utils/common';
+import { routes } from 'src/_common/constants/routes';
 import { TagButtonGroupWrapper, TagButtonWrapper } from './styled';
+import { CustomLink } from '../customLink';
 
 export const TagButton = ({ tag }: { tag: string }) => {
   return (
-    <a href={getTagUrl(tag)}>
+    <CustomLink to={routes.tag(tag)}>
       <TagButtonWrapper>{tag}</TagButtonWrapper>
-    </a>
+    </CustomLink>
   );
 };
 

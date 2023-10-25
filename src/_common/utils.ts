@@ -1,30 +1,5 @@
 import _ from 'lodash';
 
-const noUrl = '#';
-
-export const getPostUrl = (slug?: string) => {
-  return slug ? `/post/${slug}` : noUrl;
-};
-
-export const getTagUrl = (tag?: string) => {
-  return tag ? `/tag/${_.kebabCase(tag)}` : noUrl;
-};
-
-export const range = (start: number, end?: number) => {
-  if (!end) {
-    end = start;
-    start = 0;
-  }
-
-  if (end <= start) {
-    return [];
-  }
-
-  const length = end - start;
-
-  return new Array(length).fill(0).map((_, i) => i + start);
-};
-
 export const parseUrlSearchParams = (searchParams: string) => {
   if (searchParams.startsWith('?')) {
     searchParams = searchParams.slice(1);

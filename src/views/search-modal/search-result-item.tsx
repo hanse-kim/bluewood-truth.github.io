@@ -1,7 +1,7 @@
 import React from 'react';
+import { routes } from 'src/_common/constants/routes';
 import { ArrowIcon } from 'src/components/icon';
 import { type MdxNode } from 'src/types';
-import { getPostUrl } from 'src/utils/common';
 import { Styled } from './styled';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 export const SearchResultItem = ({ searchResult }: Props) => {
   return (
     <Styled.SearchResultItem>
-      <Styled.SearchResultLink to={getPostUrl(searchResult.slug)}>
+      <Styled.SearchResultLink to={routes.post(searchResult.slug)}>
         <Styled.SearchResultInfo>
           <Styled.SearchResultItemTags>
             {searchResult.frontmatter.tags.map((tag, index) => (

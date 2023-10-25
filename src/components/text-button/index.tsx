@@ -1,5 +1,5 @@
-import { Link } from 'gatsby';
-import React, { useMemo } from 'react';
+import React from 'react';
+import { CustomLink } from '../customLink';
 import { TextButtonWrapper, Underline } from './styled';
 interface Props {
   to?: string;
@@ -9,19 +9,12 @@ interface Props {
 }
 
 export const TextButton = ({ to, onClick, children, disabled }: Props) => {
-  const buttonElement = useMemo(
-    () => (
+  return (
+    <CustomLink to={to}>
       <TextButtonWrapper onClick={onClick} disabled={disabled}>
         {children}
         <Underline />
       </TextButtonWrapper>
-    ),
-    [children, disabled, onClick],
+    </CustomLink>
   );
-
-  if (to) {
-    return <Link to={to}>{buttonElement}</Link>;
-  }
-
-  return buttonElement;
 };
