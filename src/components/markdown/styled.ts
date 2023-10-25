@@ -1,6 +1,5 @@
-import {css} from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import {Link} from 'gatsby';
 
 export const HeadingWrapper = styled.hgroup`
   width: 100%;
@@ -49,7 +48,7 @@ export const Ol = styled.ol`
 `;
 
 export const ListItemWrapper = styled.li`
-&:not(:first-of-type) {
+  &:not(:first-of-type) {
     margin-top: var(--font-size-sm);
   }
 `;

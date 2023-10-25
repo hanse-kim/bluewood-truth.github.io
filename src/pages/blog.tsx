@@ -1,13 +1,12 @@
+import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
-import _ from 'lodash';
-import {graphql, PageProps} from 'gatsby';
-import {Layout} from 'src/views/layout';
-import {MdxNode} from 'src/types';
-import {PostList} from 'src/views/postList';
-import {usePagination} from 'src/hooks/usePagination';
-import {PageNav} from 'src/views/pageNav';
-import {HeadingTitle} from 'src/components/typography';
-import {parseUrlSearchParams} from 'src/utils/common';
+import { HeadingTitle } from 'src/components/typography';
+import { usePagination } from 'src/hooks/use-pagination';
+import { type MdxNode } from 'src/types';
+import { parseUrlSearchParams } from 'src/utils/common';
+import { Layout } from 'src/views/layout';
+import { PageNav } from 'src/views/page-nav';
+import { PostList } from 'src/views/post-list';
 
 interface DataType {
   allMdx: {
@@ -17,7 +16,7 @@ interface DataType {
 
 export const pageQuery = graphql`
   {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
       nodes {
         id
         slug
@@ -33,14 +32,11 @@ export const pageQuery = graphql`
   }
 `;
 
-const BlogPage = ({data: {allMdx}, location}: PageProps<DataType>) => {
-  const {paginatedData, currPage, lastPage, setPage} = usePagination(
-    allMdx.nodes,
-    {
-      initialPage: parseUrlSearchParams(location.search)['page'],
-      withRouting: true,
-    }
-  );
+const BlogPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
+  const { paginatedData, currPage, lastPage, setPage } = usePagination(allMdx.nodes, {
+    initialPage: parseUrlSearchParams(location.search).page,
+    withRouting: true,
+  });
 
   return (
     <Layout>

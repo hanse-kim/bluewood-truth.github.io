@@ -1,15 +1,15 @@
 import React from 'react';
-import {graphql, PageProps} from 'gatsby';
-import {Layout} from 'src/views/layout';
-import {HeadingTitle} from 'src/components/typography';
-import {TagList} from 'src/views/tagList';
+import { graphql, type PageProps } from 'gatsby';
+import { Layout } from 'src/views/layout';
+import { HeadingTitle } from 'src/components/typography';
+import { TagList } from 'src/views/tag-list';
 
 interface DataType {
   tagsGroup: {
-    tags: {
+    tags: Array<{
       value: string;
       totalCount: number;
-    }[];
+    }>;
   };
 }
 
@@ -26,7 +26,7 @@ export const pageQuery = graphql`
 
 const TagsPage = ({
   data: {
-    tagsGroup: {tags},
+    tagsGroup: { tags },
   },
 }: PageProps<DataType>) => (
   <Layout>

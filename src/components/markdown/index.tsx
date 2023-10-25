@@ -16,7 +16,7 @@ interface Props {
   children?: React.ReactNode | string;
 }
 
-export const Paragraph = ({children}: Props) => {
+export const Paragraph = ({ children }: Props) => {
   if (typeof children === 'string') {
     return (
       <div>
@@ -30,7 +30,7 @@ export const Paragraph = ({children}: Props) => {
   return <p>{children}</p>;
 };
 
-export const Heading1 = ({children}: Props) => {
+export const Heading1 = ({ children }: Props) => {
   return (
     <HeadingWrapper>
       <H1>{children}</H1>
@@ -38,7 +38,7 @@ export const Heading1 = ({children}: Props) => {
   );
 };
 
-export const Heading2 = ({children}: Props) => {
+export const Heading2 = ({ children }: Props) => {
   return (
     <HeadingWrapper>
       <H2>{children}</H2>
@@ -57,8 +57,7 @@ export const OrderedList = Ol;
 export const ListItem = ({ children }: Props) => {
   if (
     typeof children === 'string' ||
-    (Array.isArray(children) &&
-      children.some((child) => typeof child === 'string'))
+    (Array.isArray(children) && children.some((child) => typeof child === 'string'))
   ) {
     children = <div>{children}</div>;
   }
@@ -70,8 +69,8 @@ export const ListItem = ({ children }: Props) => {
   );
 };
 
-export {Strong, Anchor, Code, Image} from './styled';
+export { Strong, Anchor, Code, Image } from './styled';
 
-export const Blockquote = ({children}: Props) => {
+export const Blockquote = ({ children }: Props) => {
   return <QuoteWrapper>{children}</QuoteWrapper>;
 };

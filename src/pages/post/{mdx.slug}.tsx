@@ -1,8 +1,8 @@
 import React from 'react';
-import {graphql, PageProps} from 'gatsby';
-import {Layout} from 'src/views/layout';
-import {MdxNode} from 'src/types';
-import {PostLayout} from 'src/views/postLayout';
+import { graphql, type PageProps } from 'gatsby';
+import { Layout } from 'src/views/layout';
+import { type MdxNode } from 'src/types';
+import { PostLayout } from 'src/views/post-layout';
 
 interface DataType {
   mdx: MdxNode;
@@ -10,7 +10,7 @@ interface DataType {
 
 export const pageQuery = graphql`
   query ($id: String) {
-    mdx(id: {eq: $id}) {
+    mdx(id: { eq: $id }) {
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
@@ -22,12 +22,12 @@ export const pageQuery = graphql`
 `;
 
 const PostPage = ({
-  data: {mdx},
+  data: { mdx },
   location,
-}: PageProps<DataType, object, {referrer: string}>) => {
+}: PageProps<DataType, object, { referrer: string }>) => {
   return (
     <Layout title={mdx.frontmatter.title}>
-      <PostLayout backUrl={location.state?.referrer || '/blog'} post={mdx} />
+      <PostLayout backUrl={location.state?.referrer ?? '/blog'} post={mdx} />
     </Layout>
   );
 };

@@ -16,16 +16,23 @@ export const range = (start: number, end?: number) => {
     start = 0;
   }
 
-  if (end <= start) return [];
+  if (end <= start) {
+    return [];
+  }
 
   const length = end - start;
+
   return new Array(length).fill(0).map((_, i) => i + start);
 };
 
 export const parseUrlSearchParams = (searchParams: string) => {
-  if (searchParams.startsWith('?')) searchParams = searchParams.slice(1);
+  if (searchParams.startsWith('?')) {
+    searchParams = searchParams.slice(1);
+  }
   const tokens = searchParams.split('&');
-  if (searchParams.length === 0) return {};
+  if (searchParams.length === 0) {
+    return {};
+  }
   const result: Record<string, any> = {};
 
   tokens.forEach((token) => {
@@ -36,29 +43,29 @@ export const parseUrlSearchParams = (searchParams: string) => {
   return result;
 };
 
-export const getStorageItem = <T = any>(
-  key: string,
-  storage = localStorage
-): T => {
+export const getStorageItem = <T = any>(key: string, storage = localStorage): T => {
   return JSON.parse(`${storage.getItem(key)}`);
 };
 
-export const setStorageItem = (
-  key: string,
-  data: any,
-  storage = localStorage
-) => {
+export const setStorageItem = (key: string, data: unknown, storage = localStorage) => {
   storage.setItem(key, JSON.stringify(data));
 };
 
 export const getProperty = (
   query: string | string[],
-  obj: any,
-  separator = '.'
+  obj: Record<string, any>,
+  separator = '.',
 ): any => {
-  if (typeof query === 'string') query = query.split(separator);
+  if (typeof query === 'string') {
+    query = query.split(separator);
+  }
+
   const nextKey = query.shift();
-  if (!nextKey || !obj) return obj;
+
+  if (!nextKey || !obj) {
+    return obj;
+  }
+
   return getProperty(query, obj[nextKey]);
 };
 

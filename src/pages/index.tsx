@@ -1,8 +1,8 @@
-import {useEffect} from 'react';
-import {useRouter} from 'src/hooks/useRouter';
+import { useEffect } from 'react';
+import { useRouter } from 'src/hooks/use-router';
 
 const IndexPage = () => {
-  const {redirect} = useRouter();
+  const { redirect } = useRouter();
 
   useEffect(() => {
     redirect('/blog');

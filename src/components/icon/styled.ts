@@ -8,8 +8,7 @@ export const IconWrapper = styled.span<IconProps>`
   display: flex;
   width: fit-content;
   height: fit-content;
-  color: ${(props) =>
-    props.useCurrentColor ? undefined : 'var(--color-main)'};
+  color: ${(props) => (props.useCurrentColor ? undefined : 'var(--color-main)')};
 `;
 
 export const IconButtonWrapper = styled.button`

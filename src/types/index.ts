@@ -1,4 +1,4 @@
-import {Node} from 'gatsby';
+import { type Node } from 'gatsby';
 
 export interface SiteNode extends Node {
   siteMetadata: {

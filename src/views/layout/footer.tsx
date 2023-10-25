@@ -1,5 +1,5 @@
 import React from 'react';
-import {Styled} from './styled';
+import { Styled } from './styled';
 
 interface Props {
   githubId: string;
@@ -7,11 +7,10 @@ interface Props {
   publishYear: string;
 }
 
-export const Footer = ({githubId, githubUrl, publishYear}: Props) => {
+export const Footer = ({ githubId, githubUrl, publishYear }: Props) => {
   return (
     <Styled.Footer>
-      Copyright {publishYear}.
-      <Styled.FooterLink href={githubUrl}>{githubId}</Styled.FooterLink>
+      Copyright {publishYear}.<Styled.FooterLink href={githubUrl}>{githubId}</Styled.FooterLink>
       All right reserved.
     </Styled.Footer>
   );

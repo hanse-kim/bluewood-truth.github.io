@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {BREAKPOINT_TABLET} from 'src/styles/constants';
+import { BREAKPOINT_TABLET } from 'src/styles/constants';
 
 export const LogoWrapper = styled.div`
   ${BREAKPOINT_TABLET} {

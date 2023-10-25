@@ -1,5 +1,5 @@
-import {css} from '@emotion/react';
-import {BREAKPOINT_TABLET} from './constants';
+import { css } from '@emotion/react';
+import { BREAKPOINT_TABLET } from './constants';
 
 export const variables = css`
   :root {
