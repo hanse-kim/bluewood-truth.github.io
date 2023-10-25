@@ -12,7 +12,6 @@ export const Header = () => {
       <Styled.HeaderInner>
         <Logo to="/blog" />
         <Styled.Nav>
-          <TextButton to="/blog">posts</TextButton>
           <TextButton to="/tag">tags</TextButton>
           <TextButton onClick={onOpen}>search</TextButton>
         </Styled.Nav>

@@ -1,7 +1,6 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { TextButtonWrapper, Underline } from './styled';
-
 interface Props {
   to?: string;
   disabled?: boolean;
@@ -10,21 +9,19 @@ interface Props {
 }
 
 export const TextButton = ({ to, onClick, children, disabled }: Props) => {
+  const buttonElement = useMemo(
+    () => (
+      <TextButtonWrapper onClick={onClick} disabled={disabled}>
+        {children}
+        <Underline />
+      </TextButtonWrapper>
+    ),
+    [children, disabled, onClick],
+  );
+
   if (to) {
-    return (
-      <Link to={to}>
-        <TextButtonWrapper onClick={onClick} disabled={disabled}>
-          {children}
-          <Underline />
-        </TextButtonWrapper>
-      </Link>
-    );
+    return <Link to={to}>{buttonElement}</Link>;
   }
 
-  return (
-    <TextButtonWrapper onClick={onClick} disabled={disabled}>
-      {children}
-      <Underline />
-    </TextButtonWrapper>
-  );
+  return buttonElement;
 };

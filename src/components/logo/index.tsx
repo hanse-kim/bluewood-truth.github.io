@@ -1,6 +1,7 @@
-import React from 'react';
 import { Link } from 'gatsby';
-import LogoImage from 'src/images/assets/logo.svg';
+import React from 'react';
+import { useSiteMetadata } from 'src/hooks/use-site-metadata';
+import { Heading4 } from '../markdown';
 import { LogoImageWrapper, LogoWrapper } from './styled';
 
 interface Props {
@@ -8,11 +9,13 @@ interface Props {
 }
 
 export const Logo = ({ to = '/blog' }: Props) => {
+  const { title } = useSiteMetadata();
+
   return (
     <LogoWrapper>
       <Link to={to}>
         <LogoImageWrapper>
-          <LogoImage />
+          <Heading4>{title}</Heading4>
         </LogoImageWrapper>
       </Link>
     </LogoWrapper>

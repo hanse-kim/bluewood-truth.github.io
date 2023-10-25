@@ -5,6 +5,7 @@ const PostList = styled.ul`
   display: flex;
   flex-direction: column;
   row-gap: 36px;
+
   margin-bottom: 72px;
 `;
 
@@ -12,6 +13,7 @@ const PostItem = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+
   opacity: 0;
   animation: ${fadeIn} 0.5s ease;
   animation-fill-mode: forwards;

@@ -5,14 +5,17 @@ const SearchModalBox = styled.section`
   position: absolute;
   top: 120px;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: var(--z-index-modal);
-  padding: 16px;
+
   width: 100%;
   max-width: 480px;
+  padding: 16px;
+
   background-color: var(--color-bg);
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+
+  transform: translateX(-50%);
+  z-index: var(--z-index-modal);
 `;
 
 const SearchInputWrapper = styled.div`
@@ -23,7 +26,9 @@ const SearchInputWrapper = styled.div`
 
 const SearchInput = styled.input`
   flex-grow: 1;
+
   padding: 2px 4px;
+
   border: none;
 
   &::placeholder {
@@ -33,24 +38,30 @@ const SearchInput = styled.input`
 `;
 
 const SearchResultContainer = styled.ul`
-  margin-top: 10px;
-  border-top: 1px solid var(--color-border);
-  padding: 18px 0;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+
+  padding: 18px 0;
+  margin-top: 10px;
+
+  border-top: 1px solid var(--color-border);
 `;
 
 const SearchResultItem = styled.li`
-  border-radius: 8px;
   padding: 8px 16px;
+
+  border-radius: 8px;
   background-color: var(--color-bg-footer);
+
   color: var(--color-main);
   font-weight: var(--font-weight-regular);
+
+  cursor: pointer;
+
   transition:
     color 0.08s,
     background-color 0.08s;
-  cursor: pointer;
 
   &:hover {
     background-color: var(--color-main);
@@ -68,14 +79,15 @@ const SearchResultInfo = styled.div`
 `;
 
 const SearchResultItemTags = styled.span`
-  font-size: var(--font-size-xs);
   display: flex;
   column-gap: 8px;
+
+  font-size: var(--font-size-xs);
 `;
 
 const SearchResultItemTitle = styled.h3`
-  font-size: var(--font-size-xl);
   color: var(--color-text);
+  font-size: var(--font-size-xl);
 
   ${SearchResultItem}:hover & {
     color: var(--color-bg);

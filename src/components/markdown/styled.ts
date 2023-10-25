@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 export const HeadingWrapper = styled.hgroup`
   width: 100%;
+
   border-bottom: 1px solid var(--color-border);
 `;
 
@@ -73,27 +74,33 @@ export const Anchor = styled.a`
 `;
 
 export const QuoteWrapper = styled.blockquote`
-  color: var(--color-text-quote);
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   row-gap: 14px;
+
+  padding: 1rem;
+
   border: 1px dashed var(--color-border);
   border-left: 0.25rem solid var(--color-border);
+
+  color: var(--color-text-quote);
 `;
 
 export const Code = styled.code`
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  background-color: var(--color-bg-footer);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+  width: fit-content;
   padding: 0 0.25em;
   margin: 0 2px;
-  width: fit-content;
+
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-bg-footer);
+
   color: var(--color-main);
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 `;
 
 export const Image = styled.img`
-  margin: 0 auto;
   display: block;
+
+  margin: 0 auto;
 `;

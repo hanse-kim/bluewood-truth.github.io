@@ -2,11 +2,13 @@ import styled from '@emotion/styled';
 
 export const TextButtonWrapper = styled.button`
   width: fit-content;
+  padding-top: 2px;
+
   background: none;
   border: none;
-  padding-top: 2px;
-  cursor: pointer;
+
   transition: text-shadow 0.2s;
+  cursor: pointer;
 
   &:disabled {
     cursor: default;

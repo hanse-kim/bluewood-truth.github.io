@@ -5,6 +5,7 @@ const PostLayout = styled.article`
   display: flex;
   flex-direction: column;
   row-gap: 36px;
+
   animation: ${fadeIn} 0.5s ease;
 `;
 

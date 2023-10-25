@@ -2,11 +2,11 @@
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
-    title: '개발하고 기록하기',
+    title: `Hans's Tech Blog`,
     email: 'bluewood.truth@gmail.com',
-    githubUrl: 'https://github.com/bluewood-truth',
-    githubId: 'bluewood-truth',
-    publishYear: '2022',
+    githubUrl: 'https://github.com/hanse-kim',
+    githubId: 'hans',
+    publishYear: '2022-2023',
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -65,29 +65,6 @@ module.exports = {
         trackingId: `G-L03MWQBJJC`,
         head: true,
       },
-    },
-    {
-      resolve: 'gatsby-plugin-prettier-eslint',
-      options: {
-        prettier: {
-          patterns: [
-            // the pattern "**/*.{js,jsx,ts,tsx}" is not used because we will rely on `eslint --fix`
-            '**/*.{css,scss,less}',
-            '**/*.{json,json5}',
-            '**/*.{graphql}',
-            '**/*.{md,mdx}',
-            '**/*.{html}',
-            '**/*.{yaml,yml}',
-          ],
-        },
-        eslint: {
-          patterns: '**/*.{js,jsx,ts,tsx}',
-          customOptions: {
-            fix: true,
-            cache: true,
-          },
-        },
-      },
-    },
+    }
   ],
 };

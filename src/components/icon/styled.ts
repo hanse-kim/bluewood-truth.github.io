@@ -6,16 +6,20 @@ export interface IconProps {
 
 export const IconWrapper = styled.span<IconProps>`
   display: flex;
+
   width: fit-content;
   height: fit-content;
+
   color: ${(props) => (props.useCurrentColor ? undefined : 'var(--color-main)')};
 `;
 
 export const IconButtonWrapper = styled.button`
-  background-color: var(--color-bg-footer);
+  padding: 0;
+
   border: none;
   border-radius: 9999px;
-  padding: 0;
+  background-color: var(--color-bg-footer);
+
   cursor: pointer;
 
   & > ${IconWrapper} {

@@ -9,8 +9,10 @@ export const LogoWrapper = styled.div`
 
 export const LogoImageWrapper = styled.span`
   display: block;
+
   width: fit-content;
   height: fit-content;
+
   transition: transform 0.1s;
 
   &:hover {
