@@ -1,6 +1,6 @@
 import React from 'react';
 import { routes } from 'src/_common/constants/routes';
-import { CustomLink } from 'src/components/customLink';
+import { CustomLink } from 'src/components/custom-link';
 import { TagButtonGroup } from 'src/components/tag-button';
 import { HeadingSubTitle, PostDate } from 'src/components/typography';
 import { type MdxNode } from 'src/types';

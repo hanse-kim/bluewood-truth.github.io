@@ -1,7 +1,7 @@
 import React from 'react';
 import { routes } from 'src/_common/constants/routes';
 import { TagButtonGroupWrapper, TagButtonWrapper } from './styled';
-import { CustomLink } from '../customLink';
+import { CustomLink } from '../custom-link';
 
 export const TagButton = ({ tag }: { tag: string }) => {
   return (

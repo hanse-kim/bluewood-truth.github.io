@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
-import { CustomLink } from '../customLink';
+import { CustomLink } from '../custom-link';
 import { Heading4 } from '../markdown';
 import { LogoImageWrapper, LogoWrapper } from './styled';
 import { routes } from 'src/_common/constants/routes';

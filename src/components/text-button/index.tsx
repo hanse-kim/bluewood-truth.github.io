@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomLink } from '../customLink';
+import { CustomLink } from '../custom-link';
 import { TextButtonWrapper, Underline } from './styled';
 interface Props {
   to?: string;
