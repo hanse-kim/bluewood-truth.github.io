@@ -2,6 +2,7 @@
 title: "Gatsby 블로그 제작 - 페이지 생성"
 date: "2022-02-16"
 tags: ["React", "Gatsby", "GraphQL"]
+hide: true
 ---
 
 ## 개요

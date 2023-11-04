@@ -2,6 +2,7 @@
 title: "Gatsby 블로그 제작 - 검색 기능 구현"
 date: "2022-02-18"
 tags: ["Gatsby", "GraphQL"]
+hide: true
 ---
 
 ## 개요

@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
 import { graphql, type PageProps } from 'gatsby';
-import { type MdxNode } from 'src/types';
-import { Layout } from 'src/views/layout';
-import { PostList } from 'src/views/post-list';
+import React, { useMemo } from 'react';
+import { parseUrlSearchParams } from 'src/_common/utils';
 import { HeadingTitle } from 'src/components/typography';
 import { usePagination } from 'src/hooks/use-pagination';
+import { type MdxNode } from 'src/types';
+import { Layout } from 'src/views/layout';
 import { PageNav } from 'src/views/page-nav';
-import { parseUrlSearchParams } from 'src/_common/utils';
+import { PostList } from 'src/views/post-list';
 
 interface PageContextType {
   tag: string;
@@ -24,7 +24,7 @@ export const pageQuery = graphql`
     allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, hide: { eq: false } } }
     ) {
       totalCount
       edges {

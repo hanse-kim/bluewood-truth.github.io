@@ -2,6 +2,7 @@
 title: "화살표 함수(Arrow Function)"
 date: "2022-02-24"
 tags: ["JavaScript", "ES6"]
+hide: true
 ---
 
 ## 요약

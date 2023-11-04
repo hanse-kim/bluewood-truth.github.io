@@ -7,7 +7,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     redirect(routes.home);
-  });
+  }, [redirect]);
 
   return null;
 };

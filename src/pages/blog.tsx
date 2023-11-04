@@ -16,7 +16,10 @@ interface DataType {
 
 export const pageQuery = graphql`
   {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+    allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { frontmatter: { hide: { eq: false } } }
+    ) {
       nodes {
         id
         slug

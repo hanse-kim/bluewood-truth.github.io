@@ -2,6 +2,7 @@
 title: "즉시 실행 함수(IIFE)"
 date: "2022-02-26"
 tags: ["JavaScript"]
+hide: true
 ---
 
 ## 요약

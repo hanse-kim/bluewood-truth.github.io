@@ -2,6 +2,7 @@
 title: "시맨틱 마크업(Semantic Markup)"
 date: "2022-02-23"
 tags: ["웹 표준", "HTML"]
+hide: true
 ---
 
 
