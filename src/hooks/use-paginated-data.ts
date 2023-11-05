@@ -7,7 +7,7 @@ interface Options {
   withRouting?: boolean;
 }
 
-export const usePagination = <T>(
+export const usePaginatedData = <T>(
   data: T[],
   { itemsPerPage = 10, initialPage, withRouting = false }: Options = {},
 ) => {

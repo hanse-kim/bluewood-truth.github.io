@@ -14,6 +14,7 @@ export const PostList = ({ nodes, referrer }: Props) => {
       {nodes.map((node) => (
         <PostItem key={node.id} node={node} referrer={referrer} />
       ))}
+      {nodes.length === 0 && <Styled.Empty>포스트가 없습니다.</Styled.Empty>}
     </Styled.PostList>
   );
 };

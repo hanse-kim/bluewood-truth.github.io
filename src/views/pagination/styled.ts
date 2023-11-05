@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const PageNav = styled.div`
+const Pagination = styled.nav`
   display: flex;
   margin: 0 auto;
 `;
@@ -18,6 +18,6 @@ const PageButtonWrapper = styled.div`
 `;
 
 export const Styled = {
-  PageNav,
+  Pagination,
   PageButtonWrapper,
 };

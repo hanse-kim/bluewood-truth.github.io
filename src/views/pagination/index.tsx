@@ -13,17 +13,21 @@ interface Props {
 
 type NavDisplayType = 'fixed' | 'centered';
 
-export const PageNav = ({
+export const Pagination = ({
   currPage,
   lastPage,
   setPage,
   navLength = 10,
   navDisPlayType = 'fixed',
 }: Props) => {
-  const { pageList } = usePageNav(currPage, lastPage, navLength, navDisPlayType);
+  const { pageList } = usePagination(currPage, lastPage, navLength, navDisPlayType);
+
+  if (lastPage <= 1) {
+    return null;
+  }
 
   return (
-    <Styled.PageNav>
+    <Styled.Pagination>
       <PageButton label="<" page={pageList[0] - 1} setPage={setPage} disabled={pageList[0] === 1} />
       {pageList.map((page) => (
         <PageButton page={page} setPage={setPage} selected={currPage === page} key={page} />
@@ -34,11 +38,11 @@ export const PageNav = ({
         setPage={setPage}
         disabled={pageList[pageList.length - 1] === lastPage}
       />
-    </Styled.PageNav>
+    </Styled.Pagination>
   );
 };
 
-const usePageNav = (
+const usePagination = (
   currPage: number,
   lastPage: number,
   navLength: number,
@@ -63,7 +67,7 @@ const usePageNav = (
     firstPageInNav = Math.max(1, firstPageInNav);
     lastPageInNav = Math.min(lastPage, lastPageInNav);
     setPageNavList(_.range(firstPageInNav, lastPageInNav + 1));
-  }, [currPage, lastPage]);
+  }, [currPage, lastPage, navDisplayType, navLength]);
 
   return { pageList };
 };

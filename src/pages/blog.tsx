@@ -1,11 +1,11 @@
 import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
 import { HeadingTitle } from 'src/components/typography';
-import { usePagination } from 'src/hooks/use-pagination';
+import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
 import { parseUrlSearchParams } from 'src/_common/utils';
 import { Layout } from 'src/views/layout';
-import { PageNav } from 'src/views/page-nav';
+import { Pagination } from 'src/views/pagination';
 import { PostList } from 'src/views/post-list';
 
 interface DataType {
@@ -36,7 +36,7 @@ export const pageQuery = graphql`
 `;
 
 const BlogPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
-  const { paginatedData, currPage, lastPage, setPage } = usePagination(allMdx.nodes, {
+  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(allMdx.nodes, {
     initialPage: parseUrlSearchParams(location.search).page,
     withRouting: true,
   });
@@ -45,7 +45,7 @@ const BlogPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
     <Layout>
       <HeadingTitle>전체 글 (총 {allMdx.nodes.length}건)</HeadingTitle>
       <PostList nodes={paginatedData} referrer={location.href} />
-      <PageNav currPage={currPage} lastPage={lastPage} setPage={setPage} />
+      <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );
 };

@@ -2,10 +2,10 @@ import { graphql, type PageProps } from 'gatsby';
 import React, { useMemo } from 'react';
 import { parseUrlSearchParams } from 'src/_common/utils';
 import { HeadingTitle } from 'src/components/typography';
-import { usePagination } from 'src/hooks/use-pagination';
+import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
 import { Layout } from 'src/views/layout';
-import { PageNav } from 'src/views/page-nav';
+import { Pagination } from 'src/views/pagination';
 import { PostList } from 'src/views/post-list';
 
 interface PageContextType {
@@ -52,7 +52,8 @@ const TagPage = ({
   const { tag } = pageContext;
   const { edges, totalCount } = data.allMdx;
   const nodes = useMemo(() => edges.map((edge) => edge.node), [edges]);
-  const { paginatedData, currPage, lastPage, setPage } = usePagination(nodes, {
+
+  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(nodes, {
     initialPage: parseUrlSearchParams(location.search).page,
     withRouting: true,
   });
@@ -63,7 +64,7 @@ const TagPage = ({
         태그: {tag} (총 {totalCount}건)
       </HeadingTitle>
       <PostList nodes={paginatedData} referrer={location.href} />
-      <PageNav currPage={currPage} lastPage={lastPage} setPage={setPage} />
+      <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );
 };

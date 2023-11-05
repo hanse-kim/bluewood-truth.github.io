@@ -15,7 +15,7 @@ export const PageButton = ({ page, label, setPage, disabled, selected }: Props) 
     setPage(page, () => {
       window.scrollTo(0, 0);
     });
-  }, [page]);
+  }, [page, setPage]);
 
   return (
     <Styled.PageButtonWrapper onClick={clickHandler} data-selected={selected}>
