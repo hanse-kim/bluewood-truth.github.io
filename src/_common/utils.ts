@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { MdxNode } from 'src/types';
 
 export const parseUrlSearchParams = (searchParams: string) => {
   if (searchParams.startsWith('?')) {
@@ -46,4 +47,10 @@ export const getProperty = (
 
 export const escapedRegExp = (str: string, flags?: string) => {
   return new RegExp(_.escapeRegExp(str), flags);
+};
+
+export const filterHidedNodes = (posts: MdxNode[]) => {
+  return process.env.NODE_ENV === 'production'
+    ? posts.filter((post) => !post.frontmatter.hide)
+    : posts;
 };

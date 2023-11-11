@@ -15,7 +15,7 @@ interface DataType {
 
 export const pageQuery = graphql`
   query {
-    tagsGroup: allMdx(limit: 2000, filter: { frontmatter: { hide: { eq: false } } }) {
+    tagsGroup: allMdx(limit: 2000) {
       tags: group(field: { frontmatter: { tags: SELECT } }) {
         value: fieldValue
         totalCount

@@ -1,6 +1,6 @@
 import { graphql, type PageProps } from 'gatsby';
 import React, { useMemo } from 'react';
-import { parseUrlSearchParams } from 'src/_common/utils';
+import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
@@ -24,9 +24,8 @@ export const pageQuery = graphql`
     allMdx(
       limit: 2000
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { tags: { in: [$tag] }, hide: { eq: false } } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      totalCount
       edges {
         node {
           id
@@ -34,6 +33,7 @@ export const pageQuery = graphql`
             title
             date(formatString: "YYYY-MM-DD")
             tags
+            hide
           }
           excerpt(pruneLength: 200)
         }
@@ -48,8 +48,8 @@ const TagPage = ({
   location,
 }: PageProps<DataType, PageContextType, { referrer: string }>) => {
   const { tag } = pageContext;
-  const { edges, totalCount } = data.allMdx;
-  const nodes = useMemo(() => edges.map((edge) => edge.node), [edges]);
+  const { edges } = data.allMdx;
+  const nodes = useMemo(() => filterHidedNodes(edges.map((edge) => edge.node)), [edges]);
 
   const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(nodes, {
     initialPage: parseUrlSearchParams(location.search).page,
@@ -60,7 +60,7 @@ const TagPage = ({
     <Layout>
       <title>태그: {tag}</title>
       <HeadingTitle>
-        태그: {tag} (총 {totalCount}건)
+        태그: {tag} (총 {nodes.length}건)
       </HeadingTitle>
       <PostList nodes={paginatedData} referrer={location.href} />
       <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />

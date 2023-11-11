@@ -1,6 +1,6 @@
 import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
-import { parseUrlSearchParams } from 'src/_common/utils';
+import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
@@ -25,6 +25,7 @@ export const pageQuery = graphql`
           title
           date(formatString: "YYYY-MM-DD")
           tags
+          hide
         }
         excerpt(pruneLength: 200)
         fields {
@@ -36,14 +37,15 @@ export const pageQuery = graphql`
 `;
 
 const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
-  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(allMdx.nodes, {
+  const filteredNodes = filterHidedNodes(allMdx.nodes);
+  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(filteredNodes, {
     initialPage: parseUrlSearchParams(location.search).page,
     withRouting: true,
   });
 
   return (
     <Layout>
-      <HeadingTitle>전체 글 (총 {allMdx.nodes.length}건)</HeadingTitle>
+      <HeadingTitle>전체 글 (총 {filteredNodes.length}건)</HeadingTitle>
       <PostList nodes={paginatedData} referrer={location.href} />
       <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>

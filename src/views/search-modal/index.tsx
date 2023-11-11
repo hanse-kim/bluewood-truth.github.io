@@ -12,7 +12,6 @@ const query = graphql`
   {
     allMdx(
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { hide: { eq: false } } }
     ) {
       nodes {
         id

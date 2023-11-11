@@ -15,6 +15,7 @@ export interface MdxNode extends Node {
     title: string;
     date: string;
     tags: string[];
+    hide: boolean;
   };
   body: string;
   tableOfContents: TocItem[];
