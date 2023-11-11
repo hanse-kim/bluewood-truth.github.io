@@ -11,16 +11,17 @@ export interface SiteNode extends Node {
 }
 
 export interface MdxNode extends Node {
-  slug?: string;
   frontmatter: {
     title: string;
     date: string;
     tags: string[];
   };
   body: string;
-  rawBody: string;
   tableOfContents: TocItem[];
   excerpt: string;
+  fields: {
+    slug?: string;
+  };
 }
 
 export interface TocItem {

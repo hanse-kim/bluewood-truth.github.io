@@ -14,7 +14,7 @@ interface Props {
 export const PostItem = ({ node, referrer }: Props) => {
   return (
     <Styled.PostItem>
-      <CustomLink to={routes.post(node.slug)} state={{ referrer }}>
+      <CustomLink to={routes.post(node.fields.slug)} state={{ referrer }}>
         <Styled.PostItemHeader>
           <HeadingSubTitle>{node.frontmatter.title}</HeadingSubTitle>
           <PostDate>작성일: {node.frontmatter.date}</PostDate>

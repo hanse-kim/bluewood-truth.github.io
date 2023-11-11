@@ -1,9 +1,9 @@
 import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
+import { parseUrlSearchParams } from 'src/_common/utils';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
-import { parseUrlSearchParams } from 'src/_common/utils';
 import { Layout } from 'src/views/layout';
 import { Pagination } from 'src/views/pagination';
 import { PostList } from 'src/views/post-list';
@@ -17,25 +17,25 @@ interface DataType {
 export const pageQuery = graphql`
   {
     allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { hide: { eq: false } } }
+      sort: { frontmatter: { date: DESC } }
     ) {
       nodes {
         id
-        slug
         frontmatter {
           title
           date(formatString: "YYYY-MM-DD")
           tags
         }
-        rawBody
         excerpt(pruneLength: 200)
+        fields {
+          slug
+        }
       }
     }
   }
 `;
 
-const BlogPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
+const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
   const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(allMdx.nodes, {
     initialPage: parseUrlSearchParams(location.search).page,
     withRouting: true,
@@ -50,4 +50,4 @@ const BlogPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
   );
 };
 
-export default BlogPage;
+export default PostsPage;

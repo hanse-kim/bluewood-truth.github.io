@@ -16,7 +16,7 @@ IIFE내의 변수는 밖에서 접근이 불가능하기 때문에, 글로벌 �
 
 ## 즉시 실행 함수 표현식
 
-**즉시 실행 함수 표현식(IIFE, Immediately Invoked Function Expression)**이란 정의되자마자 즉시 실행되는 JavaScript 함수를 말한다. 다른 말로는 자가 실행 익명 함수(Self-Executing Anonymous Function)라고도 한다.
+<b>즉시 실행 함수 표현식(IIFE, Immediately Invoked Function Expression)</b>이란 정의되자마자 즉시 실행되는 JavaScript 함수를 말한다. 다른 말로는 자가 실행 익명 함수(Self-Executing Anonymous Function)라고도 한다.
 
 ```javascript
 (function() {

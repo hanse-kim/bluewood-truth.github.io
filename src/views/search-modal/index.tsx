@@ -11,16 +11,16 @@ import { Styled } from './styled';
 const query = graphql`
   {
     allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { hide: { eq: false } } }
     ) {
       nodes {
-        slug
+        id
+        body
         frontmatter {
           title
           tags
         }
-        rawBody
       }
     }
   }
@@ -51,7 +51,7 @@ export const SearchModal = () => {
         {results.length > 0 && (
           <Styled.SearchResultContainer>
             {results.map((result) => (
-              <SearchResultItem searchResult={result} key={result.slug} />
+              <SearchResultItem searchResult={result} key={result.id} />
             ))}
           </Styled.SearchResultContainer>
         )}
@@ -64,7 +64,7 @@ const usePostSearch = (isOpen: boolean) => {
   const { allMdx } = useStaticQuery<{ allMdx: { nodes: MdxNode[] } }>(query);
   const { results, resetResults, handleSearchInputChange } = useSearch(
     allMdx.nodes,
-    'rawBody',
+    'body',
     'slug',
     {
       cacheKey: 'search-modal',

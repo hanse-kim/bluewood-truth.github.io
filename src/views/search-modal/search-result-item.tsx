@@ -11,7 +11,7 @@ interface Props {
 export const SearchResultItem = ({ searchResult }: Props) => {
   return (
     <Styled.SearchResultItem>
-      <Styled.SearchResultLink to={routes.post(searchResult.slug)}>
+      <Styled.SearchResultLink to={routes.post(searchResult.id)}>
         <Styled.SearchResultInfo>
           <Styled.SearchResultItemTags>
             {searchResult.frontmatter.tags.map((tag, index) => (

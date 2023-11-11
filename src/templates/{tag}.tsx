@@ -23,20 +23,18 @@ export const pageQuery = graphql`
   query ($tag: String) {
     allMdx(
       limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] }, hide: { eq: false } } }
     ) {
       totalCount
       edges {
         node {
           id
-          slug
           frontmatter {
             title
             date(formatString: "YYYY-MM-DD")
             tags
           }
-          rawBody
           excerpt(pruneLength: 200)
         }
       }
@@ -60,6 +58,7 @@ const TagPage = ({
 
   return (
     <Layout>
+      <title>태그: {tag}</title>
       <HeadingTitle>
         태그: {tag} (총 {totalCount}건)
       </HeadingTitle>
