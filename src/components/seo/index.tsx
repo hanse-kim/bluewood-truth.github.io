@@ -10,7 +10,13 @@ export const SEO = ({ title }: SEOProps) => {
 
   return (
     <>
+      {/* SEO */}
       <title>{`${title ? `${title} | ` : ''}${siteMetadata.title}`}</title>
+      {/* LOAD SOURCES */}
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0"
+      />
     </>
   );
 };

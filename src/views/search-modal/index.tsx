@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { useEffect, useRef } from 'react';
-import { CrossIcon, IconButton, SearchIcon } from 'src/components/icon';
+import { Icon, IconButton } from 'src/components/icon';
 import { Overlay } from 'src/components/overlay';
 import { useModal } from 'src/contexts/modal-context';
 import { useSearch } from 'src/hooks/use-search';
@@ -10,9 +10,7 @@ import { Styled } from './styled';
 
 const query = graphql`
   {
-    allMdx(
-      sort: { frontmatter: { date: DESC } }
-    ) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
         id
         body
@@ -43,9 +41,9 @@ export const SearchModal = () => {
         }}
       >
         <Styled.SearchInputWrapper>
-          <SearchIcon />
+          <Icon>search</Icon>
           <Styled.SearchInput ref={inputRef} onChange={handleSearchInputChange} />
-          <IconButton iconElement={<CrossIcon />} onClick={onInputResetClick} />
+          <IconButton onClick={onInputResetClick}>close</IconButton>
         </Styled.SearchInputWrapper>
         {results.length > 0 && (
           <Styled.SearchResultContainer>

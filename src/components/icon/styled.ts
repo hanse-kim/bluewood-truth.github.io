@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export interface IconProps {
   useCurrentColor?: boolean;
+  children?: React.ReactNode;
 }
 
 export const IconWrapper = styled.span<IconProps>`
@@ -14,6 +15,8 @@ export const IconWrapper = styled.span<IconProps>`
 `;
 
 export const IconButtonWrapper = styled.button`
+  display: flex;
+
   padding: 0;
 
   border: none;

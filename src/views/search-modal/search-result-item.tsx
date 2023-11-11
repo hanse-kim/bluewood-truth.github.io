@@ -1,6 +1,6 @@
 import React from 'react';
 import { routes } from 'src/_common/constants/routes';
-import { ArrowIcon } from 'src/components/icon';
+import { Icon } from 'src/components/icon';
 import { type MdxNode } from 'src/types';
 import { Styled } from './styled';
 
@@ -22,7 +22,7 @@ export const SearchResultItem = ({ searchResult }: Props) => {
             {searchResult.frontmatter.title}
           </Styled.SearchResultItemTitle>
         </Styled.SearchResultInfo>
-        <ArrowIcon useCurrentColor />
+        <Icon>arrow_forward</Icon>
       </Styled.SearchResultLink>
     </Styled.SearchResultItem>
   );
