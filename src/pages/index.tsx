@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { routes } from 'src/_common/constants/routes';
+import { SEO } from 'src/components/seo';
 import { useRouter } from 'src/hooks/use-router';
+
+export const Head = () => <SEO />;
 
 const IndexPage = () => {
   const { redirect } = useRouter();

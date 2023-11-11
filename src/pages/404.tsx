@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { EmptyMessage } from 'src/components/empty-message';
+import { SEO } from 'src/components/seo';
 import { Layout } from 'src/views/layout';
+
+export const Head = () => <SEO />;
 
 const NotFoundPage = () => (
   <Layout>

@@ -1,6 +1,7 @@
 import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
 import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
+import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
@@ -16,9 +17,7 @@ interface DataType {
 
 export const pageQuery = graphql`
   {
-    allMdx(
-      sort: { frontmatter: { date: DESC } }
-    ) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
         id
         frontmatter {
@@ -35,6 +34,8 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO title="Posts" />;
 
 const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
   const filteredNodes = filterHidedNodes(allMdx.nodes);

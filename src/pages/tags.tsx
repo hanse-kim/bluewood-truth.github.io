@@ -1,7 +1,8 @@
-import React from 'react';
 import { graphql, type PageProps } from 'gatsby';
-import { Layout } from 'src/views/layout';
+import React from 'react';
+import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
+import { Layout } from 'src/views/layout';
 import { TagList } from 'src/views/tag-list';
 
 interface DataType {
@@ -23,6 +24,8 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO title="Tags" />;
 
 const TagsPage = ({
   data: {

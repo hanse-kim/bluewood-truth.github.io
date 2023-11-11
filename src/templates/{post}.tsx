@@ -1,6 +1,7 @@
 import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
 import { routes } from 'src/_common/constants/routes';
+import { SEO } from 'src/components/seo';
 import { type MdxNode } from 'src/types';
 import { Layout } from 'src/views/layout';
 import { PostLayout } from 'src/views/post-layout';
@@ -21,9 +22,7 @@ export const pageQuery = graphql`
   }
 `;
 
-export const Head = ({ data }: PageProps<DataType>) => {
-  return <title>{data.mdx.frontmatter.title}</title>;
-};
+export const Head = ({ data }: PageProps<DataType>) => <SEO title={data.mdx.frontmatter.title} />;
 
 const PostPage = ({
   data: { mdx },

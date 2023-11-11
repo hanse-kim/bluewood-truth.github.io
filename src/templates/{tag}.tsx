@@ -1,6 +1,7 @@
 import { graphql, type PageProps } from 'gatsby';
 import React, { useMemo } from 'react';
 import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
+import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
@@ -35,12 +36,19 @@ export const pageQuery = graphql`
             tags
             hide
           }
+          fields {
+            slug
+          }
           excerpt(pruneLength: 200)
         }
       }
     }
   }
 `;
+
+export const Head = ({ pageContext }: PageProps<DataType, PageContextType>) => (
+  <SEO title={`태그: ${pageContext.tag}`} />
+);
 
 const TagPage = ({
   pageContext,
@@ -58,7 +66,6 @@ const TagPage = ({
 
   return (
     <Layout>
-      <title>태그: {tag}</title>
       <HeadingTitle>
         태그: {tag} (총 {nodes.length}건)
       </HeadingTitle>
