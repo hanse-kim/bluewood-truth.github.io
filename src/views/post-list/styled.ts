@@ -9,17 +9,6 @@ const PostList = styled.ul`
   margin-bottom: 72px;
 `;
 
-const Empty = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 96px;
-
-  color: var(--color-text-footer);
-  font-size: var(--font-size-md);
-`;
-
 const PostItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -95,7 +84,6 @@ const PostItemDescription = styled.p`
 
 export const Styled = {
   PostList,
-  Empty,
   PostItem,
   PostItemHeader,
   PostItemDescription,
