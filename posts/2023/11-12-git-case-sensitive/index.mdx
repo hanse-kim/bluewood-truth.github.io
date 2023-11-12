@@ -1,0 +1,104 @@
+---
+title: 'Git 대소문자 구분'
+date: '2023-11-12'
+tags: ['TIL', 'Git']
+hide: true
+---
+
+## 요약
+
+운영체제나 파일 시스템에 따라 Git 저장소는 파일명의 대소문자를 구분하지 않기도 합니다.
+
+이 경우, 다음과 같은 방법으로 파일명의 대소문자를 변경할 수 있습니다.
+
+```shell
+git mv myfile.txt MyFile.txt
+```
+
+<br />
+
+## 상세
+
+Git의 `core.ignorecase` 설정값은 기본적으로 `false`입니다. 하지만 `git init`이나 `git clone`을 통해 저장소를 생성할 때, 운영체제나 파일 시스템에 따라 `true`로 설정되기도 합니다.
+
+대표적으로 macOS의 APFS나 Windows의 NTFS는 대소문자를 구분하지 않는 파일 시스템입니다. 따라서 `core.ignorecase` 설정은 `true`가 되어 Git에서도 대소문자를 구분하지 않습니다.
+
+그러나 이로 인해 특정 커밋에서 파일명을 변경할 때 대소문자만 변경하려고 한다면 의도대로 변경이 되지 않을 것입니다. 예를 들어 다음과 같은 작업을 수행했다고 합시다.
+
+```shell
+mkdir my-repo
+cd my-repo
+git init
+touch test.txt
+git add .
+g commit -m "add test.txt"
+```
+
+이제 이 저장소의 인덱스에는 `test.txt` 파일이 추가되었다. 인덱스는 `git ls-files` 명령어를 통해 확인할 수 있습니다.
+
+```shell
+git ls-files
+# > test.txt
+```
+
+여기서 `test.txt`를 `TEST.txt`로 변경하고 싶다면 다음과 같은 시도를 할 수 있을 것입니다.
+
+```shell
+mv test.txt TEST.txt
+ls
+# > TEST.txt
+```
+
+파일명이 성공적으로 바뀐 것처럼 보입니다. 하지만 파일 시스템에서 대소문자를 구분하지 않기 때문에 실제로 파일을 참조하는 데에는 영향이 없습니다. `rm test.txt` 명령어를 실행해보면 `TEST.txt` 파일이 삭제되는 것을 확인할 수 있습니다.
+
+```shell
+rm test.txt
+ls # TEST.txt가 삭제되어 어떤 파일도 확인할 수 없다
+
+git reset --hard HEAD # 최신 커밋 상태로 되돌려 test.txt 파일을 복구한다
+mv test.txt TEST.txt
+ls
+# > TEST.txt
+```
+
+마찬가지로 Git에서도 변경점을 인식하지 못하므로 `git commit`을 수행할 수 없습니다.
+
+```shell
+git status
+# > On branch main
+# > nothing to commit, working tree clean
+```
+
+`core.ignorecase`가 `true`인 상태에서 파일명의 대소문자를 변경하려면 `git mv` 명령어를 사용할 수 있습니다. unstaged 상태에서는 이를 변경으로 취급하지 않기 때문에 자동으로 staging area에 올라가게 됩니다.
+
+```shell
+git mv test.txt TEST.txt
+git status
+# > On branch main
+# > Changes to be committed:
+# >   (use "git restore --staged <file>..." to unstage)
+# > 	renamed:    test.txt -> TEST.txt
+g commit -m "change to TEST.txt"
+```
+
+저장소의 인덱스에서도 올바르게 변경된 것을 확인할 수 있습니다.
+
+```shell
+git ls-files
+# > TEST.txt
+```
+
+---
+
+다른 방법으로는 `core.ignorecase` 설정값을 아예 바꿔버릴 수도 있으나, 이는 예기치 못한 문제를 일으킬 수 있기 때문에 권장되지 않습니다.
+
+```shell
+git config core.ignorecase false
+```
+
+<br />
+
+## 참고
+
+- [Git - git-config Documentation](https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreignoreCase)
+- [stack overflow - Is it a good idea to set git config core.ignorecase to false?](https://stackoverflow.com/questions/58192285/is-it-a-good-idea-to-set-git-config-core-ignorecase-to-false)
