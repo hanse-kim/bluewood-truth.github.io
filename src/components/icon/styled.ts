@@ -17,13 +17,15 @@ export const IconWrapper = styled.span<IconProps>`
 export const IconButtonWrapper = styled.button`
   display: flex;
 
-  padding: 0;
+  padding: 4px;
 
   border: none;
   border-radius: 9999px;
-  background-color: var(--color-bg-footer);
+  background-color: transparent;
 
   cursor: pointer;
+
+  transition: background-color 0.2s;
 
   & > ${IconWrapper} {
     color: var(--color-text-footer);
@@ -35,5 +37,6 @@ export const IconButtonWrapper = styled.button`
 
   :active {
     transform: scale(110%);
+    background-color: var(--color-bg-footer);
   }
 `;
