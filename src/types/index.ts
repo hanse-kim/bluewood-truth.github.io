@@ -5,7 +5,7 @@ export interface SiteNode extends Node {
     title: string;
     email: string;
     githubUrl: string;
-    githubId: string;
+    githubName: string;
     publishYear: string;
   };
 }

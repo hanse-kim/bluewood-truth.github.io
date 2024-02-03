@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const Layout = ({ children }: Props) => {
-  const { githubId, githubUrl, publishYear } = useSiteMetadata();
+  const { githubName, githubUrl, publishYear } = useSiteMetadata();
 
   return (
     <Styled.Layout>
@@ -23,7 +23,7 @@ export const Layout = ({ children }: Props) => {
       <ModalProvider>
         <Header />
         <Main>{children}</Main>
-        <Footer githubId={githubId} githubUrl={githubUrl} publishYear={publishYear} />
+        <Footer githubName={githubName} githubUrl={githubUrl} publishYear={publishYear} />
         <SearchModal />
       </ModalProvider>
     </Styled.Layout>

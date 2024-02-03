@@ -7,7 +7,7 @@ const query = graphql`
       siteMetadata {
         title
         githubUrl
-        githubId
+        githubName
         email
         publishYear
       }

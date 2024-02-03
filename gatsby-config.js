@@ -2,11 +2,11 @@
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
-    title: `Hans's Tech Blog`,
-    email: 'bluewood.truth@gmail.com',
+    title: `HanseKim.dev`,
+    email: 'hansekim.dev@gmail.com',
     githubUrl: 'https://github.com/hanse-kim',
-    githubId: 'hans',
-    publishYear: '2022-2023',
+    githubName: 'Hanse Kim',
+    publishYear: '2022-2024',
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -65,6 +65,6 @@ module.exports = {
         trackingId: `G-L03MWQBJJC`,
         head: true,
       },
-    }
+    },
   ],
 };
