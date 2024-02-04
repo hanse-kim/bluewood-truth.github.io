@@ -66,11 +66,21 @@ export const Strong = styled.strong`
 `;
 
 export const Anchor = styled.a`
-  color: var(--color-main);
+  display: inline-block;
   text-decoration: underline;
+  transition: transform 0.1s;
 
-  &:visited {
-    color: purple;
+  :link {
+    color: var(--color-main);
+  }
+
+  :visited {
+    color: mediumpurple;
+  }
+
+  ::after {
+    content: '🔗';
+    font-size: 0.9em;
   }
 `;
 
