@@ -1,5 +1,10 @@
+import { resolve } from 'path';
+import remarkGfm from 'remark-gfm';
+
+const __dirname = resolve();
+
 /** @type {import('gatsby').GatsbyConfig} */
-module.exports = {
+export default {
   pathPrefix: '/',
   siteMetadata: {
     title: `HanseKim.dev`,
@@ -23,11 +28,14 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1080,
+              maxWidth: 720,
               withWebp: true,
               quality: 80,
             },
