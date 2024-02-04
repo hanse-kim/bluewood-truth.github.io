@@ -69,7 +69,7 @@ export const ListItem = ({ children }: Props) => {
   );
 };
 
-export { Strong, Anchor, Code, Image } from './styled';
+export { Strong, Anchor, Code, Image, Table } from './styled';
 
 export const Blockquote = ({ children }: Props) => {
   return <QuoteWrapper>{children}</QuoteWrapper>;

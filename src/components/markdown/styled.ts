@@ -9,6 +9,7 @@ export const HeadingWrapper = styled.hgroup`
 
 const headingCommonStyle = css`
   font-weight: var(--font-weight-regular);
+  margin-top: 0.5em;
 `;
 
 export const H1 = styled.h1`
@@ -103,4 +104,24 @@ export const Image = styled.img`
   display: block;
 
   margin: 0 auto;
+`;
+
+export const Table = styled.table`
+  border-collapse: collapse;
+  border-radius: 2px;
+  overflow: hidden;
+
+  th,
+  td {
+    padding: 4px 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  th {
+    background-color: var(--color-bg-footer);
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--color-blur);
+  }
 `;

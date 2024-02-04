@@ -13,6 +13,7 @@ import {
   OrderedList,
   Paragraph,
   Strong,
+  Table,
   UnorderedList,
 } from 'src/components/markdown';
 import { type MdxNode } from 'src/types';
@@ -39,6 +40,7 @@ const components = {
   code: Code,
   blockquote: Blockquote,
   img: Image,
+  table: Table,
 };
 
 export const PostLayout = ({ post, backUrl, children }: Props) => {

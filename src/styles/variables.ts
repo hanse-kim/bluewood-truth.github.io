@@ -16,6 +16,7 @@ export const variables = css`
     --color-text-footer: #3f4950;
     --color-text-quote: #63727e;
     --color-bg: #ffffff;
+    --color-blur: #f4f5f675;
     --color-bg-footer: #f4f5f6;
     --color-border: #e6e8ea;
 
@@ -45,6 +46,7 @@ export const variables = css`
     --color-text-footer: #c6d3dc;
     --color-text-quote: #a6bac9;
     --color-bg: #1a1e21;
+    --color-blur: #202d3a75;
     --color-bg-footer: #202d3a;
     --color-border: #2d3a47;
   }
