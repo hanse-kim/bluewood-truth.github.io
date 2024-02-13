@@ -1,7 +1,8 @@
-import { resolve } from 'path';
 import remarkGfm from 'remark-gfm';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const __dirname = resolve();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('gatsby').GatsbyConfig} */
 export default {

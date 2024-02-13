@@ -1,8 +1,8 @@
-const path = require('path');
-const _ = require('lodash');
-const { createFilePath } = require(`gatsby-source-filesystem`);
+import { resolve } from 'path';
+import _ from 'lodash';
+import { createFilePath } from 'gatsby-source-filesystem';
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+export function onCreateNode({ node, getNode, actions }) {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
     const slug = createFilePath({ node, getNode });
@@ -12,11 +12,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: slug,
     });
   }
-};
+}
 
-exports.onPostBuild = ({ reporter }) => reporter.info('Page build is done!');
+export function onPostBuild({ reporter }) {
+  return reporter.info('Page build is done!');
+}
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+export async function createPages({ graphql, actions, reporter }) {
   const { createPage } = actions;
 
   const postsQuery = await graphql(`
@@ -44,7 +46,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = postsQuery.data.allMdx.nodes;
-  const postTemplate = path.resolve(`./src/templates/{post}.tsx`);
+  const postTemplate = resolve(`./src/templates/{post}.tsx`);
 
   posts.forEach((post) => {
     if (process.env.NODE_ENV === 'production' && post.frontmatter.hide) {
@@ -78,10 +80,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   tags.forEach((tag) => {
     createPage({
       path: `/tags/${_.kebabCase(tag.value)}/`,
-      component: path.resolve('src/templates/{tag}.tsx'),
+      component: resolve('src/templates/{tag}.tsx'),
       context: {
         tag: tag.value,
       },
     });
   });
-};
+}
