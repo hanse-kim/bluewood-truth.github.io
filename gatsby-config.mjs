@@ -7,10 +7,10 @@ const __dirname = resolve();
 export default {
   pathPrefix: '/',
   siteMetadata: {
-    title: `HanseKim.dev`,
+    title: `hanse-kim.dev`,
     email: 'hansekim.dev@gmail.com',
     githubUrl: 'https://github.com/hanse-kim',
-    githubName: 'Hanse Kim',
+    githubName: 'hanse-kim',
     publishYear: '2022-2024',
   },
   plugins: [
