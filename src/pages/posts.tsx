@@ -1,5 +1,5 @@
 import { graphql, type PageProps } from 'gatsby';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
 import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
@@ -38,7 +38,7 @@ export const pageQuery = graphql`
 export const Head = (props: PageProps) => <SEO title="Posts" {...props} />;
 
 const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
-  const filteredNodes = filterHidedNodes(allMdx.nodes);
+  const filteredNodes = useMemo(() => filterHidedNodes(allMdx.nodes), [allMdx.nodes]);
   const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(filteredNodes, {
     initialPage: parseUrlSearchParams(location.search).page,
     withRouting: true,
