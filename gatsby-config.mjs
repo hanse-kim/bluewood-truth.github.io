@@ -12,7 +12,7 @@ export default {
     email: 'hansekim.dev@gmail.com',
     githubUrl: 'https://github.com/hanse-kim',
     githubName: 'hanse-kim',
-    publishYear: '2022-2024',
+    publishYear: `2022-${new Date().getFullYear()}`,
   },
   plugins: [
     'gatsby-plugin-emotion',

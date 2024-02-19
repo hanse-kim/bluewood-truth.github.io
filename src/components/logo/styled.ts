@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 import { BREAKPOINT_TABLET } from 'src/styles/constants';
 
 export const LogoWrapper = styled.div`
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+
   ${BREAKPOINT_TABLET} {
     transform: scale(80%);
   }

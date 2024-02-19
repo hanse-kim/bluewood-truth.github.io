@@ -15,7 +15,7 @@ export const TextButtonWrapper = styled.button`
   }
 
   &:hover:not(:disabled) {
-    text-shadow: 0 0 0.5px var(--color-text);
+    text-shadow: 0 0 1px var(--color-text);
   }
 `;
 
