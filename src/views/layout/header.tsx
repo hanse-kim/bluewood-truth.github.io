@@ -16,9 +16,7 @@ export const Header = () => {
         <Styled.Nav>
           {/* <TextButton to={routes.tags}>tags</TextButton>
           <TextButton onClick={onOpen}>search</TextButton> */}
-          <IconButton onClick={toggleDarkMode}>
-            {isDarkMode ? 'dark_mode' : 'light_mode'}
-          </IconButton>
+          <IconButton onClick={toggleDarkMode} iconName={isDarkMode ? 'darkMode' : 'lightMode'} />
         </Styled.Nav>
       </Styled.HeaderInner>
     </Styled.Header>

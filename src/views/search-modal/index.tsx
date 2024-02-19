@@ -41,9 +41,9 @@ export const SearchModal = () => {
         }}
       >
         <Styled.SearchInputWrapper>
-          <Icon>search</Icon>
+          <Icon iconName="search" />
           <Styled.SearchInput ref={inputRef} onChange={handleSearchInputChange} />
-          <IconButton onClick={onInputResetClick}>close</IconButton>
+          <IconButton onClick={onInputResetClick} iconName="close" />
         </Styled.SearchInputWrapper>
         {results.length > 0 && (
           <Styled.SearchResultContainer>

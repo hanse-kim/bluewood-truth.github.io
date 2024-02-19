@@ -1,17 +1,11 @@
 import styled from '@emotion/styled';
+import { IconProps } from '.';
 
-export interface IconProps {
-  useCurrentColor?: boolean;
-  children?: React.ReactNode;
-}
-
-export const IconWrapper = styled.span<IconProps>`
+export const IconWrapper = styled.span<Omit<IconProps, 'iconName'>>`
   display: flex;
 
-  width: fit-content;
-  height: fit-content;
-
-  color: ${(props) => (props.useCurrentColor ? undefined : 'var(--color-main)')};
+  width: ${(props) => `${props.size}px`};
+  height: ${(props) => `${props.size}px`};
 `;
 
 export const IconButtonWrapper = styled.button`

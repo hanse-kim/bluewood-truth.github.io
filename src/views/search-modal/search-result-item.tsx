@@ -22,7 +22,7 @@ export const SearchResultItem = ({ searchResult }: Props) => {
             {searchResult.frontmatter.title}
           </Styled.SearchResultItemTitle>
         </Styled.SearchResultInfo>
-        <Icon>arrow_forward</Icon>
+        <Icon iconName="arrowForward" />
       </Styled.SearchResultLink>
     </Styled.SearchResultItem>
   );
