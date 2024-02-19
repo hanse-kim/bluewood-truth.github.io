@@ -7,14 +7,15 @@ export const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(prev => !prev);
+    setIsDarkMode((prev) => !prev);
     setStorageItem(storageKey, !isDarkMode);
-  }
+  };
 
   useLayoutEffect(() => {
     const storedIsDarkMode = getStorageItem<boolean | null>(storageKey);
-    if (storedIsDarkMode) {
-      setIsDarkMode(true);
+
+    if (storedIsDarkMode !== null) {
+      setIsDarkMode(storedIsDarkMode);
       return;
     }
 
