@@ -3,9 +3,11 @@ import { useGithubProfile } from 'src/hooks/use-github-profile';
 import { Styled } from './styled';
 import { HeadingSubTitle } from 'src/components/typography';
 import { Icon } from 'src/components/icon';
+import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 
 export const Profile = () => {
   const { profile } = useGithubProfile();
+  const siteMetadata = useSiteMetadata();
 
   if (!profile) {
     return null;
@@ -26,9 +28,7 @@ export const Profile = () => {
           </Styled.IconLink>
         </Styled.Links>
         {!!profile.bio && <span>{profile.bio}</span>}
-        <span>
-          개발 과정에서 겪은 문제와 그것을 어떻게 해결했는지를 기록하기 위한 블로그입니다.
-        </span>
+        <span>{siteMetadata.description}</span>
       </Styled.ProfileInfo>
     </Styled.ProfileLayout>
   );

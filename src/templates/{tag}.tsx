@@ -46,8 +46,8 @@ export const pageQuery = graphql`
   }
 `;
 
-export const Head = ({ pageContext }: PageProps<DataType, PageContextType>) => (
-  <SEO title={`태그: ${pageContext.tag}`} />
+export const Head = (props: PageProps<DataType, PageContextType>) => (
+  <SEO title={`태그: ${props.pageContext.tag}`} {...props} />
 );
 
 const TagPage = ({

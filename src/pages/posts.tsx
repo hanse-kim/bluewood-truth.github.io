@@ -35,7 +35,7 @@ export const pageQuery = graphql`
   }
 `;
 
-export const Head = () => <SEO title="Posts" />;
+export const Head = (props: PageProps) => <SEO title="Posts" {...props} />;
 
 const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
   const filteredNodes = filterHidedNodes(allMdx.nodes);

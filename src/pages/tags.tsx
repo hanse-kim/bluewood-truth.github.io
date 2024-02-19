@@ -25,7 +25,7 @@ export const pageQuery = graphql`
   }
 `;
 
-export const Head = () => <SEO title="Tags" />;
+export const Head = (props: PageProps) => <SEO title="Tags" {...props} />;
 
 const TagsPage = ({
   data: {

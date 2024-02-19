@@ -22,7 +22,9 @@ export const pageQuery = graphql`
   }
 `;
 
-export const Head = ({ data }: PageProps<DataType>) => <SEO title={data.mdx.frontmatter.title} />;
+export const Head = ({ data, ...props }: PageProps<DataType>) => (
+  <SEO title={data.mdx.frontmatter.title} {...props} />
+);
 
 const PostPage = ({
   data: { mdx },

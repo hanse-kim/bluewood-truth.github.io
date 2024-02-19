@@ -3,10 +3,12 @@ import { type Node } from 'gatsby';
 export interface SiteNode extends Node {
   siteMetadata: {
     title: string;
+    description: string;
     email: string;
     githubUrl: string;
     githubName: string;
     publishYear: string;
+    blogUrl: string;
   };
 }
 
