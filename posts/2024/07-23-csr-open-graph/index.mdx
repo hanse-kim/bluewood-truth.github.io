@@ -1,0 +1,127 @@
+---
+title: 'CSR에서 동적 OG 적용하기'
+date: '2024-07-23'
+tags: ['AWS', 'Troubleshooting']
+---
+
+최근 회사에서 가볍고 빠른 성능의 사이트가 필요하다는 요구가 있어 Vite와 Svelte로 SPA를 개발하게 되었습니다. 동적 라우팅이 필요했고, 경로에 따라 백오피스에서 설정한 커스텀 페이지를 보여주는 사이트였습니다.
+
+문제는 동적 경로에 따라 OG 메타태그를 적용해야 한다는 사실이었습니다. 취업 준비를 하던 시절 "CSR = SEO가 불가능"이라고 거의 공식처럼 암기했기 때문에, 저는 당연히 불가능한 일이라고 생각했습니다.
+
+하지만 뜻밖에도 [이 문제를 해결한 포스팅](https://techblog.woowahan.com/15469/)을 알게 되었고, 이를 참고해 무사히 해결할 수 있었습니다. (감사합니다!) 비슷한 고민이 있는 분들은 해당 포스팅이 큰 도움이 되리라 생각합니다.
+
+전반적인 해결 방법은 위 포스팅을 통해서도 충분히 얻을 수 있었지만, 그럼에도 겪은 문제들과 이를 통해 알게 된 내용들을 정리했습니다.
+
+## CSR에서 동적 OG 메타태그를 적용하는 방법
+
+![cloudfront-events-that-trigger-lambda-functions.png](./cloudfront-events-that-trigger-lambda-functions.png)
+
+<span style={{textAlign: 'center', margin: '0 auto', fontStyle: 'italic', color: 'var(--color-text-footer)'}}>출처: [AWS 공식문서](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/lambda-cloudfront-trigger-events.html)</span>
+
+AWS CloudFront에서는 위와 같은 네 구간에 엣지 함수를 설정할 수 있습니다.
+
+방법을 요약하면 Viewer request 이벤트에 엣지 함수를 설정해서, 요청자가 봇인지 아닌지를 판별해 봇일 경우 **OG 메타태그만을 포함한 HTML**을 생성하여 응답으로 보내는 것입니다.
+
+즉 봇에 의한 요청일 경우 Viewer request 단계에서 바로 응답을 생성하여 OG 메타태그 HTML을 응답으로 보내고, 그 이외에 실사용자에 의한 요청일 경우 정상적으로 CloudFront 원본(제 경우에는 S3)을 거쳐 응답을 보냅니다.
+
+주의할 점은 만약 클라이언트 사이드 라우팅 방식이 hash property 기반일 경우에는 위 방식이 불가능하다는 것입니다. hash property는 서버로 전달되지 않기 때문에, 어떤 페이지를 요청하든 CloudFront 측에서는 동일한 페이지로 간주합니다. 이로 인해 페이지별로 적절한 OG 태그를 생성하는 것이 어렵습니다.
+
+저 역시 위와 같은 이슈로 인해 라우팅 라이브러리를 변경해야 했습니다.
+
+## **CloudFront Functions** vs **Lambda@Edge**
+
+둘의 차이는 위 포스팅에 잘 요약되어 있고, [공식 문서](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/edge-functions-choosing.html)에서 좀더 상세한 내용을 확인할 수 있습니다.
+
+제가 고려한 차이점은 다음과 같습니다.
+
+| | CloudFront Functions | Lambda@Edge |
+| :---: | --- | --- |
+| 특징 | 간단한 작업에 적합 | 복잡한 작업 가능 |
+| 적용 가능한 이벤트 | Viewer request/response | Viewer request/response,<br/>Origin request/response |
+| 네트워크 통신 | X | O |
+| 외부 라이브러리 사용 | X | O |
+| 비용 | 요청당 비용 청구 | 요청 및 함수 지속 시간당<br/>비용 청구 |
+
+제 경우에는 OG 태그 생성을 위해 API 콜이 필수적이었으므로 Lambda@Edge 외엔 선택지가 없었습니다.
+
+## ~~람다 계층 사용~~
+
+처음에는 Fetch API를 사용해 API 콜을 하려 했지만, `fetch` 함수가 존재하지 않는다는 에러를 만났습니다. 람다 함수는 노드 환경이고 Fetch API는 웹 브라우저가 제공하는 API이기 때문입니다.
+
+저는 그 대안으로서 Aixos를 사용하고자 했습니다. Axios의 기반이 되는 XHR 역시 브라우저 API지만, Axios는 서버 사이드에서도 동작하는 라이브러리인 만큼 노드 환경에 필요한 dependency가 갖춰져 있을 거라 생각했습니다.
+
+람다 함수에서 외부 라이브러리를 사용하는 방법은 크게 두 가지였습니다.
+
+- 외부 라이브러리를 포함하는 .zip 파일을 생성해 업로드한다.
+
+- **람다 계층(Lambda layer)** 을 추가한다.
+
+람다 계층이란 람다 함수와 별도로 외부 종속성을 관리하기 위한 기능입니다. 즉 저 두 가지 방식은 라이브러리 코드를 하나의 람다 함수 패키지에 전부 집어넣느냐, 아니면 따로 분리해서 관리하느냐 차이입니다.
+
+람다 계층을 사용하면 하나의 종속성을 여러 람다 함수에서 재사용 가능하기 때문에, 종속성을 추가할 때 일반적으로 권장하는 방법이었습니다. 따라서 저도 이 방법을 택했습니다.
+
+계층을 구성하는 방법은 간단한데, 우선 아래와 같은 형태로 구성되도록 .zip 파일을 만든 후 AWS 콘솔에서 람다 계층을 추가할 때 업로드하면 됩니다.
+
+```
+axios-layer.zip
+└ nodejs
+  └ axios
+    └ ...
+```
+
+람다 함수의 런타임 버전이 계층의 호환 런타임 버전에 포함되어야 한다는 점만 주의하면 계층 생성에서 크게 어려운 점은 없었습니다.
+
+저는 Axios 종속성을 위한 계층을 생성하고 이를 람다 함수에 추가했습니다. 그리고 **Lambda@Edge에는 계층 사용이 불가능하다**는 사실을 뒤늦게 알게 되었습니다. ([](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/lambda-at-edge-function-restrictions.html#lambda-at-edge-restrictions-features))
+
+## 네트워크 통신, 그리고 해결
+
+[노드의 HTTPS 모듈](https://nodejs.org/api/https.html)을 사용해 API 콜을 할 수 있었습니다. Lambda@Edge 문서의 함수 예제에는 없는 내용이라 구글링을 하던 중 한 AWS 포스팅에서 해당 내용을 찾게 되었습니다. ([](https://aws.amazon.com/ko/blogs/networking-and-content-delivery/leveraging-external-data-in-lambdaedge/))
+
+HTTPS 모듈은 사용 방법이 조금 복잡해서, 아래와 같이 한번 래핑해서 사용했습니다.
+
+```javascript
+const fetchData = (url) => {
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, function (res) {
+        res.setEncoding('utf8');
+
+        let rawData = '';
+
+        res.on('data', (chunk) => {
+          rawData += chunk.toString();
+        });
+
+        res.on('end', function () {
+          try {
+            const parsedData = JSON.parse(rawData);
+            resolve(parsedData);
+          } catch (e) {
+            resolve({ error: true });
+          }
+        });
+      })
+      .on('error', function (e) {
+        resolve({ error: true });
+      });
+  });
+};
+```
+
+또한 함수가 잘 동작하는지 확인하기 위해 주기적으로 테스트를 해가며 함수를 작성할 필요가 있었는데, 저는 다음과 같은 과정을 거쳐 테스트 데이터를 구했습니다.
+
+1. [Lambda@Edge 이벤트 구조](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/lambda-event-structure.html) 문서에서 일반적인 Viewer request 이벤트를 구해 테스트하고, 기본적인 함수를 구성합니다.
+
+2. [함수 예제](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-generated-response-examples)를 참고하여 Viewer request에서 바로 응답을 생성하는 함수를 작성합니다. 이때, response body는 `handler` 함수의 `event` 파라미터를 `JSON.stringify()`로 처리한 값을 넣습니다.
+
+3. 웹사이트의 CloudFront에 람다 함수를 연결합니다. 웹사이트에 접속하면 실제 Viewer request 이벤트를 본문으로 얻을 수 있습니다.
+
+위와 같은 과정을 거쳐 테스트 데이터를 얻고, 무사히 원하는 기능을 구현할 수 있었습니다.
+
+## 마치며
+
+처음에는 당연히 불가능하다고 생각한 일이었고 실제로 프론트엔드 코드 상에서 해결하기는 힘든 이슈였습니다. 그러나 인프라를 통해 해결할 수 있었고, 이러한 경험을 얻은 것을 행운이라 생각합니다.
+
+문제를 해결하기 위한 시야가 한층 더 넓어진 한편, 좁은 상식을 근거로 불가능하다고 단정지었던 제 자신을 반성할 수 있는 기회였습니다.
+
+마지막으로 이 문제를 해결하는 데 도움을 준 모든 자료와 포스팅에 감사드리며, 이 글이 비슷한 고민을 하는 분들께 유용한 참고자료가 되기를 바랍니다.
