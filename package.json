@@ -8,14 +8,14 @@
     "gatsby"
   ],
   "scripts": {
-    "dev": "yarn pull-posts &&  gatsby develop",
+    "dev": "yarn pull-posts && gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "yarn pull-posts && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
     "deploy": "gatsby build && gh-pages -d public -b deploy",
-    "pull-posts": "rm -rf .posts && git clone https://github.com/hanse-kim/hanse-kim.github.io-posts .posts",
+    "pull-posts": "rm -rf .posts && git clone https://github.com/hanse-kim/hanse-kim.github.io-posts .posts && rm -rf .posts/.git",
     "lint": "eslint ./src --ext .ts,.tsx",
     "fix": "eslint --fix ./src --ext .ts,.tsx",
     "format": "yarn prettier --write ./src"
