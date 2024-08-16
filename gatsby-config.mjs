@@ -1,8 +1,10 @@
-import remarkGfm from 'remark-gfm';
+import dotenv from 'dotenv';
 import { dirname } from 'path';
+import remarkGfm from 'remark-gfm';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: `.env` });
 
 /** @type {import('gatsby').GatsbyConfig} */
 export default {
@@ -24,7 +26,7 @@ export default {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/posts/`,
+        path: `${__dirname}/.posts/`,
       },
     },
     {
@@ -73,7 +75,7 @@ export default {
     {
       resolve: `gatsby-plugin-gtag`,
       options: {
-        trackingId: `G-L03MWQBJJC`,
+        trackingId: process.env.GA_TRACKING_ID,
         head: true,
       },
     },

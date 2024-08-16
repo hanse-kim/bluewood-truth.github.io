@@ -8,13 +8,14 @@
     "gatsby"
   ],
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "yarn pull-posts &&  gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
     "deploy": "gatsby build && gh-pages -d public -b deploy",
+    "pull-posts": "rm -rf .posts && git clone https://github.com/hanse-kim/hanse-kim.github.io-posts .posts",
     "lint": "eslint ./src --ext .ts,.tsx",
     "fix": "eslint --fix ./src --ext .ts,.tsx",
     "format": "yarn prettier --write ./src"
@@ -24,6 +25,7 @@
     "@emotion/styled": "^11.8.1",
     "@mdx-js/mdx": "3.0.0",
     "@mdx-js/react": "3.0.0",
+    "dotenv": "^16.4.5",
     "gatsby": "^5.12.9",
     "gatsby-plugin-emotion": "^8.12.0",
     "gatsby-plugin-gtag": "^1.0.13",
