@@ -9,10 +9,9 @@ const sizes = [...getRange(0, 36), 48, 60, 72, 96, 180];
 const baseFontSize = 16;
 const spacing = Object.fromEntries([
   ...sizes.map((value) => [value, `${value / baseFontSize}rem`]),
-  ['screen-width', '960px'],
-  ['header-height', '72px'],
-  ['footer-height', '120px'],
-  ['modal-width', '480px'],
+  ...['screen-width', 'header-height', 'footer-height', 'modal-width'].map(
+    (key) => [key, `var(--${key})`]
+  ),
 ]);
 
 const thicknesses = getRange(1, 8);

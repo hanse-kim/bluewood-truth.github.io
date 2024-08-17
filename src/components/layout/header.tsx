@@ -10,8 +10,8 @@ export const Header = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <header className="h-header-height border-b-1 border-solid border-border">
-      <div className="flex items-center justify-between max-w-screen-width h-full max-auto my-0 px-16">
+    <header className="transition-colors border-solid h-header-height border-b-1 border-border">
+      <div className="flex items-center justify-between h-full px-16 my-0 max-w-screen-width max-auto">
         <Logo to={routes.home} />
         <nav className="flex gap-8">
           <TextButton to={routes.about}>about</TextButton>
