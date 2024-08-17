@@ -11,7 +11,8 @@ export default {
   pathPrefix: '/',
   siteMetadata: {
     title: `hanse-kim.dev`,
-    description: '개발 과정에서 겪은 문제와 그것을 어떻게 해결했는지를 기록하기 위한 블로그입니다.',
+    description:
+      '개발 과정에서 겪은 문제와 그것을 어떻게 해결했는지를 기록하기 위한 블로그입니다.',
     email: 'hansekim.dev@gmail.com',
     githubUrl: 'https://github.com/hanse-kim',
     githubName: 'hanse-kim',
@@ -20,7 +21,6 @@ export default {
   },
   plugins: [
     'gatsby-plugin-postcss',
-    'gatsby-plugin-emotion',
     'gatsby-plugin-sharp',
     'gatsby-plugin-root-import',
     {

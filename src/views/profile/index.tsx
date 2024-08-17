@@ -1,5 +1,4 @@
 import React from 'react';
-import { HeadingSubTitle } from 'src/components/typography';
 import { useGithubProfile } from 'src/hooks/use-github-profile';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 import { IconLink } from './icon-link';
@@ -13,14 +12,14 @@ export const Profile = () => {
   }
 
   return (
-    <div className="mt-48 mx-auto flex items-center gap-24 tablet:gap-12 tablet:flex-col tablet:items-center">
+    <div className="flex items-center gap-24 mx-auto mt-48 tablet:gap-12 tablet:flex-col tablet:items-center">
       <img
-        className="w-180 h-180 border-1 border-solid border-border rounded-full object-cover"
+        className="object-cover border-solid rounded-full w-180 h-180 border-1 border-border"
         src={profile.avatar_url}
         alt={profile.name}
       />
       <div className="flex flex-col gap-8 tablet:items-center">
-        <HeadingSubTitle>{profile.name}</HeadingSubTitle>
+        <h2 className="text-28-300">{profile.name}</h2>
         <div className="flex items-center gap-16">
           <IconLink
             url="mailto:hansekim.dev@gmail.com"

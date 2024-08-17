@@ -1,6 +1,7 @@
 import { PageProps } from 'gatsby';
 import React from 'react';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
+import { prismTheme } from 'src/styles/prism-theme';
 
 type SEOProps = Partial<PageProps> & {
   title?: string;
@@ -23,6 +24,7 @@ export const SEO = ({ title, location }: SEOProps) => {
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={siteMetadata.description} />
       <meta property="og:url" content={pageUrl} />
+      <style>{prismTheme}</style>
     </>
   );
 };

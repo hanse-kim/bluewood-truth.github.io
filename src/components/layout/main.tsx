@@ -6,8 +6,8 @@ interface Props {
 
 export const Main = ({ children }: Props) => {
   return (
-    <main>
-      <div className="flex flex-col gap-36 relative max-w-screen-width h-full mx-auto my-0 px-16 pt-48 pb-96 tablet:pt-16 tablet:px-16 tablet:pb-36 tablet:gap-24">
+    <main className="flex-1">
+      <div className="relative flex flex-col h-full px-16 pt-48 mx-auto my-0 gap-36 max-w-screen-width pb-96 tablet:pt-16 tablet:px-16 tablet:pb-36 tablet:gap-24">
         {children}
       </div>
     </main>

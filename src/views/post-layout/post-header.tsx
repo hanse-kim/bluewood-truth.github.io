@@ -1,7 +1,8 @@
 import React from 'react';
 import { TagButtonGroup } from 'src/components/tag-button';
 import { TextButton } from 'src/components/text-button';
-import { HeadingTitle } from 'src/components/typography';
+import { HeadingTitle } from 'src/components/typography/heading-title';
+
 import { PostDate } from 'src/components/typography/post-date';
 
 interface Props {

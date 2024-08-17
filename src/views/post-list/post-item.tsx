@@ -2,7 +2,7 @@ import React from 'react';
 import { routes } from 'src/_common/constants/routes';
 import { CustomLink } from 'src/components/custom-link';
 import { TagButtonGroup } from 'src/components/tag-button';
-import { PostDate } from 'src/components/typography';
+import { PostDate } from 'src/components/typography/post-date';
 import { type MdxNode } from 'src/types';
 
 interface Props {
@@ -20,7 +20,7 @@ export const PostItem = ({ node, referrer }: Props) => {
         </hgroup>
       </CustomLink>
       <TagButtonGroup tags={node.frontmatter.tags} />
-      <p className="text-text-footer text-14-300 w-full line-clamp-2">
+      <p className="w-full text-text-footer text-14-300 line-clamp-2">
         {node.excerpt}
       </p>
     </li>

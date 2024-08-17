@@ -1,30 +1,28 @@
-import { css } from '@emotion/react';
-
-const getCodeBlockLanguageLabelContentStyle = ([language, label, isNotProgrammingLanguage]: [
-  string,
-  string,
-  boolean,
-]) => `
+const getCodeBlockLanguageLabelContentStyle = ([
+  language,
+  label,
+  isNotProgrammingLanguage,
+]: [string, string, boolean]) => `
  .gatsby-highlight pre.language-${language}::after {
     content: "${label ?? language}";
-    ${isNotProgrammingLanguage ? 'background-color: var(--color-text-quote)' : ''}
+    ${isNotProgrammingLanguage ? 'background-color: rgb(var(--color-text-quote))' : ''}
   }
 `;
 
-const languageList: ([string, string] | [string, string, boolean])[] = [
-  ['javascript', 'JavaScript'],
-  ['typescript', 'TypeScript'],
-  ['jsx', 'JSX'],
-  ['tsx', 'TSX'],
+const languageList: [string, string, boolean][] = [
+  ['javascript', 'JavaScript', false],
+  ['typescript', 'TypeScript', false],
+  ['jsx', 'JSX', false],
+  ['tsx', 'TSX', false],
   ['shell', 'Shell', true],
   ['text', 'Text', true],
   ['css', 'CSS', true],
   ['html', 'HTML', true],
   ['markdown', 'Markdown', true],
-  ['java', 'Java'],
+  ['java', 'Java', false],
 ];
 
-export const prismTheme = css`
+export const prismTheme = `
   /*
  Solarized Color Schemes originally by Ethan Schoonover
  http://ethanschoonover.com/solarized
@@ -90,15 +88,14 @@ green     #859900
     position: relative;
   }
 
-  :not(pre) > code[class*='language-'],
-  pre[class*='language-'] {
+  :not(pre) > code[class*='language-'] {
     background-color: #fdf6e3; /* base3 */
   }
 
   .gatsby-highlight pre[class*='language-']::after {
-    background-color: var(--color-main);
+    background-color: rgb(var(--color-main));
     border-radius: 0px 0px 4px 4px;
-    color: var(--color-bg);
+    color: rgb(var(--color-bg));
     font-size: 0.75rem;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
       monospace;
@@ -111,7 +108,7 @@ green     #859900
     top: 0;
   }
 
-  ${css(languageList.map(getCodeBlockLanguageLabelContentStyle).join('\n'))};
+  ${languageList.map(getCodeBlockLanguageLabelContentStyle).join('\n')};
 
   /* Inline code */
   :not(pre) > code[class*='language-'] {

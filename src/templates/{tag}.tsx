@@ -2,7 +2,7 @@ import { graphql, type PageProps } from 'gatsby';
 import React, { useMemo } from 'react';
 import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
 import { SEO } from 'src/components/seo';
-import { HeadingTitle } from 'src/components/typography';
+import { HeadingTitle } from 'src/components/typography/heading-title';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
 import { Layout } from 'src/components/layout';
