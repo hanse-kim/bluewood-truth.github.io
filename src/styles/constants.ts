@@ -1,1 +1,1 @@
-export const BREAKPOINT_TABLET = '@media only screen and (max-width: 767px)';
+export const BREAKPOINT_TABLET = '@media (max-width: var(--tablet-breakpoint))';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EmptyMessage } from 'src/components/empty-message';
 import { SEO } from 'src/components/seo';
-import { Layout } from 'src/views/layout';
+import { Layout } from 'src/components/layout';
 
 export const Head = () => <SEO />;
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { routes } from 'src/_common/constants/routes';
 import { SEO } from 'src/components/seo';
 import { type MdxNode } from 'src/types';
-import { Layout } from 'src/views/layout';
+import { Layout } from 'src/components/layout';
 import { PostLayout } from 'src/views/post-layout';
 
 interface DataType {

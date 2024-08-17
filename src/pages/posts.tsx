@@ -1,11 +1,11 @@
 import { graphql, type PageProps } from 'gatsby';
 import React, { useMemo } from 'react';
 import { filterHidedNodes, parseUrlSearchParams } from 'src/_common/utils';
+import { Layout } from 'src/components/layout';
 import { SEO } from 'src/components/seo';
-import { HeadingTitle } from 'src/components/typography';
+import { HeadingTitle } from 'src/components/typography/heading-title';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
-import { Layout } from 'src/views/layout';
 import { Pagination } from 'src/views/pagination';
 import { PostList } from 'src/views/post-list';
 
@@ -38,11 +38,17 @@ export const pageQuery = graphql`
 export const Head = (props: PageProps) => <SEO title="Posts" {...props} />;
 
 const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
-  const filteredNodes = useMemo(() => filterHidedNodes(allMdx.nodes), [allMdx.nodes]);
-  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(filteredNodes, {
-    initialPage: parseUrlSearchParams(location.search).page,
-    withRouting: true,
-  });
+  const filteredNodes = useMemo(
+    () => filterHidedNodes(allMdx.nodes),
+    [allMdx.nodes]
+  );
+  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(
+    filteredNodes,
+    {
+      initialPage: parseUrlSearchParams(location.search).page,
+      withRouting: true,
+    }
+  );
 
   return (
     <Layout>

@@ -5,11 +5,14 @@ const getRange = (minValue, maxValue) => {
   );
 };
 
-const sizes = getRange(1, 36);
+const sizes = [...getRange(0, 36), 48, 60, 72, 96];
 const baseFontSize = 16;
-const spacing = Object.fromEntries(
-  sizes.map((value) => [value, `${value / baseFontSize}rem`])
-);
+const spacing = Object.fromEntries([
+  ...sizes.map((value) => [value, `${value / baseFontSize}rem`]),
+  ['screen-width', '960px'],
+  ['header-height', '72px'],
+  ['footer-height', '120px'],
+]);
 
 const thicknesses = getRange(1, 8);
 const borderWidth = Object.fromEntries(
@@ -43,6 +46,8 @@ const fontSize = Object.fromEntries(
   )
 );
 
+const screens = { tablet: { max: '767px' } };
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -52,6 +57,7 @@ module.exports = {
     borderWidth,
     outlineWidth,
     fontSize,
+    screens,
     extend: {},
   },
   plugins: [],

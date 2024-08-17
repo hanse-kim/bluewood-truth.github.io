@@ -5,7 +5,7 @@ import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
 import { usePaginatedData } from 'src/hooks/use-paginated-data';
 import { type MdxNode } from 'src/types';
-import { Layout } from 'src/views/layout';
+import { Layout } from 'src/components/layout';
 import { Pagination } from 'src/views/pagination';
 import { PostList } from 'src/views/post-list';
 
@@ -57,12 +57,18 @@ const TagPage = ({
 }: PageProps<DataType, PageContextType, { referrer: string }>) => {
   const { tag } = pageContext;
   const { edges } = data.allMdx;
-  const nodes = useMemo(() => filterHidedNodes(edges.map((edge) => edge.node)), [edges]);
+  const nodes = useMemo(
+    () => filterHidedNodes(edges.map((edge) => edge.node)),
+    [edges]
+  );
 
-  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(nodes, {
-    initialPage: parseUrlSearchParams(location.search).page,
-    withRouting: true,
-  });
+  const { paginatedData, currPage, lastPage, setPage } = usePaginatedData(
+    nodes,
+    {
+      initialPage: parseUrlSearchParams(location.search).page,
+      withRouting: true,
+    }
+  );
 
   return (
     <Layout>

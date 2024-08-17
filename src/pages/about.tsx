@@ -1,7 +1,7 @@
 import { PageProps } from 'gatsby';
 import React from 'react';
 import { SEO } from 'src/components/seo';
-import { Layout } from 'src/views/layout';
+import { Layout } from 'src/components/layout';
 import { Profile } from 'src/views/profile';
 
 export const Head = (props: PageProps) => <SEO title="About" {...props} />;

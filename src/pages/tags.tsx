@@ -2,7 +2,7 @@ import { graphql, type PageProps } from 'gatsby';
 import React from 'react';
 import { SEO } from 'src/components/seo';
 import { HeadingTitle } from 'src/components/typography';
-import { Layout } from 'src/views/layout';
+import { Layout } from 'src/components/layout';
 import { TagList } from 'src/views/tag-list';
 
 interface DataType {

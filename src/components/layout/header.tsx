@@ -2,26 +2,28 @@ import React from 'react';
 import { routes } from 'src/_common/constants/routes';
 import { IconButton } from 'src/components/icon';
 import { Logo } from 'src/components/logo';
-import { useDarkMode } from 'src/hooks/use-dark-mode';
-import { Styled } from './styled';
 import { TextButton } from 'src/components/text-button';
+import { useDarkMode } from 'src/hooks/use-dark-mode';
 
 export const Header = () => {
   // const { onOpen } = useModal('search');
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <Styled.Header>
-      <Styled.HeaderInner>
+    <header className="h-header-height border-b-1 border-solid border-border">
+      <div className="flex items-center justify-between max-w-screen-width h-full max-auto my-0 px-16">
         <Logo to={routes.home} />
-        <Styled.Nav>
+        <nav className="flex gap-8">
           <TextButton to={routes.about}>about</TextButton>
           <TextButton to={routes.posts}>posts</TextButton>
           {/* <TextButton to={routes.tags}>tags</TextButton>
           <TextButton onClick={onOpen}>search</TextButton> */}
-          <IconButton onClick={toggleDarkMode} iconName={isDarkMode ? 'darkMode' : 'lightMode'} />
-        </Styled.Nav>
-      </Styled.HeaderInner>
-    </Styled.Header>
+          <IconButton
+            onClick={toggleDarkMode}
+            iconName={isDarkMode ? 'darkMode' : 'lightMode'}
+          />
+        </nav>
+      </div>
+    </header>
   );
 };
