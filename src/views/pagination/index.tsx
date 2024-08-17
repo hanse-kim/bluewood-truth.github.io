@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { PageButton } from './page-button';
-import { Styled } from './styled';
 
 interface Props {
   currPage: number;
@@ -20,17 +19,32 @@ export const Pagination = ({
   navLength = 10,
   navDisPlayType = 'fixed',
 }: Props) => {
-  const { pageList } = usePagination(currPage, lastPage, navLength, navDisPlayType);
+  const { pageList } = usePagination(
+    currPage,
+    lastPage,
+    navLength,
+    navDisPlayType
+  );
 
   if (lastPage <= 1) {
     return null;
   }
 
   return (
-    <Styled.Pagination>
-      <PageButton label="<" page={pageList[0] - 1} setPage={setPage} disabled={pageList[0] === 1} />
+    <nav className="flex mx-auto my-0">
+      <PageButton
+        label="<"
+        page={pageList[0] - 1}
+        setPage={setPage}
+        disabled={pageList[0] === 1}
+      />
       {pageList.map((page) => (
-        <PageButton page={page} setPage={setPage} selected={currPage === page} key={page} />
+        <PageButton
+          page={page}
+          setPage={setPage}
+          selected={currPage === page}
+          key={page}
+        />
       ))}
       <PageButton
         label=">"
@@ -38,7 +52,7 @@ export const Pagination = ({
         setPage={setPage}
         disabled={pageList[pageList.length - 1] === lastPage}
       />
-    </Styled.Pagination>
+    </nav>
   );
 };
 
@@ -46,7 +60,7 @@ const usePagination = (
   currPage: number,
   lastPage: number,
   navLength: number,
-  navDisplayType: NavDisplayType,
+  navDisplayType: NavDisplayType
 ) => {
   const [pageList, setPageNavList] = useState<number[]>([]);
 

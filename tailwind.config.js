@@ -48,6 +48,8 @@ const fontSize = Object.fromEntries(
 
 const screens = { tablet: { max: '767px' } };
 
+const dropShadow = { text: '0 0 1px rgb(var(--color-text))' };
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -58,6 +60,7 @@ module.exports = {
     outlineWidth,
     fontSize,
     screens,
+    dropShadow,
     extend: {},
   },
   plugins: [],
