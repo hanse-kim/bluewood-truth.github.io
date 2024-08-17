@@ -20,6 +20,10 @@ const borderWidth = Object.fromEntries(
 );
 const outlineWidth = borderWidth;
 
+const borderRadius = Object.fromEntries(
+  getRange(1, 16).map((value) => [value, `${value}px`])
+);
+
 const cssColors = [
   'main',
   'text',
@@ -61,6 +65,7 @@ module.exports = {
     fontSize,
     screens,
     dropShadow,
+    borderRadius,
     extend: {},
   },
   plugins: [],
