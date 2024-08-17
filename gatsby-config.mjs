@@ -19,6 +19,7 @@ export default {
     publishYear: `2022-${new Date().getFullYear()}`,
   },
   plugins: [
+    'gatsby-plugin-postcss',
     'gatsby-plugin-emotion',
     'gatsby-plugin-sharp',
     'gatsby-plugin-root-import',
