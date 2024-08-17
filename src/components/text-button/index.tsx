@@ -1,6 +1,5 @@
 import React from 'react';
 import { CustomLink } from '../custom-link';
-import { Underline } from './styled';
 interface Props {
   to?: string;
   disabled?: boolean;
@@ -12,12 +11,12 @@ export const TextButton = ({ to, onClick, children, disabled }: Props) => {
   return (
     <CustomLink to={to}>
       <button
-        className="w-fit pt-2 cursor-pointer transition-shadow disabled:cursor-default hover:not(disabled):drop-shadow-text"
+        className="pt-2 cursor-pointer w-fit disabled:cursor-default hover:drop-shadow-text group"
         onClick={onClick}
         disabled={disabled}
       >
         {children}
-        <Underline />
+        <div className="w-full h-1 mx-auto mt-1 transition-transform scale-x-0 bg-text group-hover:scale-x-100" />
       </button>
     </CustomLink>
   );

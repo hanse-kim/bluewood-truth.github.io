@@ -8,7 +8,6 @@ import {
   MailSvg,
   SearchSvg,
 } from './assets';
-import { IconButtonWrapper, IconWrapper } from './styled';
 
 const iconMap = {
   arrowForward: ArrowForwardSvg,
@@ -20,7 +19,7 @@ const iconMap = {
   search: SearchSvg,
 };
 
-type IconName = keyof typeof iconMap;
+export type IconName = keyof typeof iconMap;
 
 export interface IconProps {
   size?: 20 | 24 | 40;
@@ -29,9 +28,13 @@ export interface IconProps {
 
 export const Icon = ({ iconName, size = 24, ...props }: IconProps) => {
   return (
-    <IconWrapper className="material-symbols-rounded" size={size} {...props}>
+    <span
+      className="flex"
+      style={{ width: `${size}px`, height: `${size}px` }}
+      {...props}
+    >
       {iconMap[iconName]}
-    </IconWrapper>
+    </span>
   );
 };
 
@@ -41,8 +44,11 @@ interface IconButtonProps extends IconProps {
 
 export const IconButton = ({ onClick, ...props }: IconButtonProps) => {
   return (
-    <IconButtonWrapper onClick={onClick}>
+    <button
+      className="flex p-4 transition-colors bg-transparent rounded-full text-text-footer hover:scale-105 active:scale-110 active:bg-bg-footer"
+      onClick={onClick}
+    >
       <Icon {...props} />
-    </IconButtonWrapper>
+    </button>
   );
 };

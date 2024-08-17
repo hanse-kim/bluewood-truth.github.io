@@ -2,7 +2,6 @@ import { Global } from '@emotion/react';
 import React from 'react';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 import { globalStyles } from 'src/styles/global';
-import { SearchModal } from 'src/views/search-modal';
 import { ModalProvider } from '../../contexts/modal-context';
 import { Footer } from './footer';
 import { Header } from './header';
@@ -27,7 +26,7 @@ export const Layout = ({ children }: Props) => {
           githubUrl={githubUrl}
           publishYear={publishYear}
         />
-        <SearchModal />
+        {/* <SearchModal /> */}
       </ModalProvider>
     </div>
   );

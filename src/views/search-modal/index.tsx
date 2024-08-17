@@ -6,7 +6,6 @@ import { useModal } from 'src/contexts/modal-context';
 import { useSearch } from 'src/hooks/use-search';
 import { type MdxNode } from 'src/types';
 import { SearchResultItem } from './search-result-item';
-import { Styled } from './styled';
 
 const query = graphql`
   {
@@ -35,24 +34,29 @@ export const SearchModal = () => {
 
   return (
     <Overlay onClick={onClose}>
-      <Styled.SearchModalBox
+      <section
+        className="absolute w-full p-16 -translate-x-1/2 top-120 left-1/2 max-w-modal-width bg-bg rounded-8 drop-shadow-modal z-modal"
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <Styled.SearchInputWrapper>
+        <div className="flex items-center gap-10">
           <Icon iconName="search" />
-          <Styled.SearchInput ref={inputRef} onChange={handleSearchInputChange} />
+          <input
+            className="flex-1 px-4 py-2 placeholder:text-14-300 placeholder:text-text-quote"
+            ref={inputRef}
+            onChange={handleSearchInputChange}
+          />
           <IconButton onClick={onInputResetClick} iconName="close" />
-        </Styled.SearchInputWrapper>
+        </div>
         {results.length > 0 && (
-          <Styled.SearchResultContainer>
+          <ul className="flex flex-col gap-10 mt-10 border-solid py-18 border-t-1 border-border">
             {results.map((result) => (
               <SearchResultItem searchResult={result} key={result.id} />
             ))}
-          </Styled.SearchResultContainer>
+          </ul>
         )}
-      </Styled.SearchModalBox>
+      </section>
     </Overlay>
   );
 };
@@ -65,7 +69,7 @@ const usePostSearch = (isOpen: boolean) => {
     'slug',
     {
       cacheKey: 'search-modal',
-    },
+    }
   );
 
   useEffect(() => {
@@ -88,7 +92,10 @@ const useInputReset = () => {
   return { inputRef, onInputResetClick };
 };
 
-const useAutoFocus = (isOpen: boolean, inputRef: React.RefObject<HTMLInputElement>) => {
+const useAutoFocus = (
+  isOpen: boolean,
+  inputRef: React.RefObject<HTMLInputElement>
+) => {
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();

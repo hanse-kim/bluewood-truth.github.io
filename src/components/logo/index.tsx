@@ -2,7 +2,6 @@ import React from 'react';
 import { routes } from 'src/_common/constants/routes';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 import { CustomLink } from '../custom-link';
-import { LogoImageWrapper, LogoWrapper } from './styled';
 
 interface Props {
   to?: string;
@@ -12,10 +11,12 @@ export const Logo = ({ to = routes.home }: Props) => {
   const { title } = useSiteMetadata();
 
   return (
-    <LogoWrapper>
+    <div className="text-20-400 tablet:scale-[80%]">
       <CustomLink to={to}>
-        <LogoImageWrapper>{title}</LogoImageWrapper>
+        <span className="transition-transform w-fit h-fit hover:scale-105 active:scale-110">
+          {title}
+        </span>
       </CustomLink>
-    </LogoWrapper>
+    </div>
   );
 };

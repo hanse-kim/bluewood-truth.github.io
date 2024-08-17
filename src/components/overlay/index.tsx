@@ -1,5 +1,4 @@
 import React, { type ReactNode, useEffect } from 'react';
-import { OverlayWrapper } from './styled';
 
 interface Props {
   children?: ReactNode;
@@ -15,5 +14,9 @@ export const Overlay = ({ children, onClick }: Props) => {
     };
   });
 
-  return <OverlayWrapper onClick={onClick}>{children}</OverlayWrapper>;
+  return (
+    <div className="fixed inset-0 bg-overlay z-overlay" onClick={onClick}>
+      {children}
+    </div>
+  );
 };

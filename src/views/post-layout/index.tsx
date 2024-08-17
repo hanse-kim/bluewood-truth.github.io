@@ -18,7 +18,6 @@ import {
 } from 'src/components/markdown';
 import { type MdxNode } from 'src/types';
 import { PostHeader } from './post-header';
-import { Styled } from './styled';
 
 interface Props {
   backUrl: string;
@@ -45,11 +44,11 @@ const components = {
 
 export const PostLayout = ({ post, backUrl, children }: Props) => {
   return (
-    <Styled.PostLayout>
+    <article className="flex flex-col gap-36">
       <PostHeader backUrl={backUrl} {...post.frontmatter} />
-      <Styled.PostContent>
+      <div className="flex flex-col gap-16">
         <MDXProvider components={components}>{children}</MDXProvider>
-      </Styled.PostContent>
-    </Styled.PostLayout>
+      </div>
+    </article>
   );
 };
