@@ -20,8 +20,6 @@ export const variables = css`
     --color-bg-footer: #f4f5f6;
     --color-border: #e6e8ea;
 
-    --color-overlay: rgba(0, 0, 0, 0.5);
-
     --font-weight-thin: 100;
     --font-weight-light: 300;
     --font-weight-regular: 400;

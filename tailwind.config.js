@@ -1,7 +1,57 @@
+const getRange = (minValue, maxValue) => {
+  return Array.from(
+    { length: maxValue - minValue + 1 },
+    (_, i) => i + minValue
+  );
+};
+
+const sizes = getRange(1, 36);
+const baseFontSize = 16;
+const spacing = Object.fromEntries(
+  sizes.map((value) => [value, `${value / baseFontSize}rem`])
+);
+
+const thicknesses = getRange(1, 8);
+const borderWidth = Object.fromEntries(
+  thicknesses.map((value) => [value, `${value}px`])
+);
+const outlineWidth = borderWidth;
+
+const cssColors = [
+  'main',
+  'text',
+  'text-footer',
+  'text-quote',
+  'bg',
+  'blur',
+  'bg-footer',
+  'border',
+  'overlay',
+];
+const colors = Object.fromEntries(
+  cssColors.map((key) => [key, `rgb(var(--color-${key}) / <alpha-value>)`])
+);
+
+const fontSizes = getRange(10, 36);
+const fontWeights = [100, 300, 400, 500];
+const fontSize = Object.fromEntries(
+  fontSizes.flatMap((fontSize) =>
+    fontWeights.map((fontWeight) => [
+      `${fontSize}-${fontWeight}`,
+      [`${fontSize / baseFontSize}rem`, { fontWeight }],
+    ])
+  )
+);
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    spacing,
+    colors,
+    borderWidth,
+    outlineWidth,
+    fontSize,
     extend: {},
   },
   plugins: [],

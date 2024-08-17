@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap');
+
+:root {
+  --color-main: 0 118 218;
+  --color-text: 26 30 33;
+  --color-text-footer: 63 73 80;
+  --color-text-quote: 99 114 126;
+  --color-bg: 255 255 255;
+  --color-blur: 244 245 246;
+  --color-bg-footer: 244 245 246;
+  --color-border: 230 232 234;
+
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  --mobile-breakpoint: 767px;
+}
+
+[data-theme='dark'] {
+  --color-main: 44 147 234;
+  --color-text: 239 243 246;
+  --color-text-footer: 198 211 220;
+  --color-text-quote: 166 186 201;
+  --color-bg: 26 30 33;
+  --color-blur: 32 45 58;
+  --color-bg-footer: 32 45 58;
+  --color-border: 45 58 71;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+@media (max-width: var(--mobile-breakpoint)) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  @apply text-text bg-bg font-light;
+  font-family: 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  transform-style: preserve-3d;
+}
+
+pre[class*='language-'] {
+  @apply bg-bg-footer border-1 border-solid border-border;
+}
+
+.caption {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  margin-bottom: -1rem;
+  transform: translateY(-1rem);
+}
