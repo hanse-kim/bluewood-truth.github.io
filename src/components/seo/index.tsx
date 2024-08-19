@@ -1,5 +1,6 @@
 import { PageProps } from 'gatsby';
 import React from 'react';
+import { isDarkModeStorageKey } from 'src/hooks/use-dark-mode';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 import { prismTheme } from 'src/styles/prism-theme';
 
@@ -31,6 +32,30 @@ export const SEO = ({ title, location }: SEOProps) => {
         rel="stylesheet"
       />
       <style>{prismTheme}</style>
+      <script>
+        {`
+          (() => {
+            const updateDocumentTheme = (isDarkMode) => {
+              document.documentElement.dataset.theme = isDarkMode ? 'dark' : 'light';
+            };
+
+            const storageKey = '${isDarkModeStorageKey}';
+            const storedIsDarkMode = JSON.parse(localStorage.getItem(storageKey) || 'null');
+            if (storedIsDarkMode !== null) {
+              updateDocumentTheme(storedIsDarkMode);
+              return;
+            }
+            
+            if (window.matchMedia) {
+              const preferredIsDarkMode = window.matchMedia(
+                '(prefers-color-scheme: dark)'
+              ).matches;
+              updateDocumentTheme(preferredIsDarkMode);
+              return;
+            }
+         })();
+        `}
+      </script>
     </>
   );
 };

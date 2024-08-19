@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { getStorageItem, setStorageItem } from 'src/_common/utils';
 
-const storageKey = 'is-dark-mode';
+export const isDarkModeStorageKey = 'is-dark-mode';
 
 export const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -9,11 +9,13 @@ export const useDarkMode = () => {
   const toggleDarkMode = () => {
     document.body.dataset.transition = 'true';
     setIsDarkMode((prev) => !prev);
-    setStorageItem(storageKey, !isDarkMode);
+    setStorageItem(isDarkModeStorageKey, !isDarkMode);
   };
 
   useLayoutEffect(() => {
-    const storedIsDarkMode = getStorageItem<boolean | null>(storageKey);
+    const storedIsDarkMode = getStorageItem<boolean | null>(
+      isDarkModeStorageKey
+    );
 
     if (storedIsDarkMode !== null) {
       setIsDarkMode(storedIsDarkMode);
@@ -21,13 +23,16 @@ export const useDarkMode = () => {
     }
 
     if (window.matchMedia) {
-      setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const preferredIsDarkMode = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches;
+      setIsDarkMode(preferredIsDarkMode);
       return;
     }
   }, []);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = isDarkMode ? 'dark' : 'light';
+    updateDocumentTheme(isDarkMode);
   }, [isDarkMode]);
 
   useEffect(() => {
@@ -43,4 +48,8 @@ export const useDarkMode = () => {
   });
 
   return { isDarkMode, toggleDarkMode };
+};
+
+export const updateDocumentTheme = (isDarkMode: boolean) => {
+  document.documentElement.dataset.theme = isDarkMode ? 'dark' : 'light';
 };
