@@ -28,7 +28,7 @@ export const PageButton = ({
       onClick={clickHandler}
       data-selected={selected}
     >
-      <TextButton disabled={selected || disabled}>{label || page}</TextButton>
+      <TextButton isDisabled={selected || disabled}>{label || page}</TextButton>
     </div>
   );
 };
