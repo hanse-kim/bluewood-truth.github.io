@@ -19,18 +19,25 @@ export const parseUrlSearchParams = (searchParams: string) => {
   return result;
 };
 
-export const getStorageItem = <T = any>(key: string, storage = localStorage): T => {
+export const getStorageItem = <T = any>(
+  key: string,
+  storage = localStorage
+): T => {
   return JSON.parse(`${storage.getItem(key)}`);
 };
 
-export const setStorageItem = (key: string, data: unknown, storage = localStorage) => {
+export const setStorageItem = (
+  key: string,
+  data: unknown,
+  storage = localStorage
+) => {
   storage.setItem(key, JSON.stringify(data));
 };
 
 export const getProperty = (
   query: string | string[],
   obj: Record<string, any>,
-  separator = '.',
+  separator = '.'
 ): any => {
   if (typeof query === 'string') {
     query = query.split(separator);

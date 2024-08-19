@@ -75,7 +75,11 @@ const TagPage = ({
       <HeadingTitle>
         태그: {tag} (총 {nodes.length}건)
       </HeadingTitle>
-      <PostList nodes={paginatedData} referrer={location.href} />
+      <PostList
+        nodes={paginatedData}
+        referrer={location.href}
+        isEmpty={nodes.length === 0}
+      />
       <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );

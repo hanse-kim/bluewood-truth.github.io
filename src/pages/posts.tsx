@@ -53,7 +53,11 @@ const PostsPage = ({ data: { allMdx }, location }: PageProps<DataType>) => {
   return (
     <Layout>
       <HeadingTitle>전체 글 (총 {filteredNodes.length}건)</HeadingTitle>
-      <PostList nodes={paginatedData} referrer={location.href} />
+      <PostList
+        nodes={paginatedData}
+        referrer={location.href}
+        isEmpty={filteredNodes.length === 0}
+      />
       <Pagination currPage={currPage} lastPage={lastPage} setPage={setPage} />
     </Layout>
   );
