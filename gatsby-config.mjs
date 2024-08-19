@@ -58,6 +58,22 @@ export default {
       },
     },
     {
+      resolve: `gatsby-omni-font-loader`,
+      options: {
+        enableListener: true,
+        preconnect: [
+          `https://fonts.googleapis.com`,
+          `https://fonts.gstatic.com`,
+        ],
+        web: [
+          {
+            name: `Noto Sans KR`,
+            file: `https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap`,
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {

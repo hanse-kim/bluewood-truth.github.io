@@ -1,5 +1,6 @@
 import { PageProps } from 'gatsby';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { isDarkModeStorageKey } from 'src/hooks/use-dark-mode';
 import { useSiteMetadata } from 'src/hooks/use-site-metadata';
 import { prismTheme } from 'src/styles/prism-theme';
@@ -25,37 +26,31 @@ export const SEO = ({ title, location }: SEOProps) => {
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={siteMetadata.description} />
       <meta property="og:url" content={pageUrl} />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap"
-        rel="stylesheet"
-      />
       <style>{prismTheme}</style>
-      <script>
-        {`
-          (() => {
-            const updateDocumentTheme = (isDarkMode) => {
-              document.documentElement.dataset.theme = isDarkMode ? 'dark' : 'light';
-            };
+      <Helmet>
+        <script>
+          {`(() => {
+  const updateDocumentTheme = (isDarkMode) => {
+    document.documentElement.dataset.theme = isDarkMode ? 'dark' : 'light';
+  };
 
-            const storageKey = '${isDarkModeStorageKey}';
-            const storedIsDarkMode = JSON.parse(localStorage.getItem(storageKey) || 'null');
-            if (storedIsDarkMode !== null) {
-              updateDocumentTheme(storedIsDarkMode);
-              return;
-            }
-            
-            if (window.matchMedia) {
-              const preferredIsDarkMode = window.matchMedia(
-                '(prefers-color-scheme: dark)'
-              ).matches;
-              updateDocumentTheme(preferredIsDarkMode);
-              return;
-            }
-         })();
-        `}
-      </script>
+  const storageKey = '${isDarkModeStorageKey}';
+  const storedIsDarkMode = JSON.parse(localStorage.getItem(storageKey) || 'null');
+  if (storedIsDarkMode !== null) {
+    updateDocumentTheme(storedIsDarkMode);
+    return;
+  }
+  
+  if (window.matchMedia) {
+    const preferredIsDarkMode = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+    updateDocumentTheme(preferredIsDarkMode);
+    return;
+  }
+})();`}
+        </script>
+      </Helmet>
     </>
   );
 };
