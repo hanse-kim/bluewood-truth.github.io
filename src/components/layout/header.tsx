@@ -11,7 +11,7 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 border-solid h-header-height border-b-1 border-border bg-bg z-modal">
-      <div className="flex items-center justify-between h-full px-1 mx-auto my-0 max-w-screen-width max-auto">
+      <div className="flex items-center justify-between h-full px-16 mx-auto my-0 max-w-screen-width max-auto">
         <Logo to={routes.home} />
         <nav className="flex gap-8">
           <TextButton to={routes.about}>about</TextButton>
